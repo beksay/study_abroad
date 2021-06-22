@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/layouts/private.xhtml">
+    <ui:define name="content">
+        <h2>#{msgs.disinfection}</h2> 
+		<br/><br/>	        
+		<h:form>
+		    <h:panelGrid styleClass="form-table" columns="2">
+		    
+		        <h:outputText value="#{msgs.actNumber}" styleClass="form-table-label disp-blc"/>
+				<h:outputText value="#{disinfectionResultController.result.disinfection.inspection.actNumber}" />
+				
+				<h:outputText value="#{msgs.productVolume}" styleClass="form-table-label disp-blc"/>
+				<h:outputText value="#{disinfectionResultController.result.disinfection.productVolume}" />
+				
+				<h:outputText value="#{msgs.totalAmount}" styleClass="form-table-label disp-blc"/>
+				<h:outputText value="#{disinfectionResultController.result.disinfection.totalAmount}" />
+				
+				<h:outputText value="#{msgs.date}" styleClass="form-table-label disp-blc"/>
+				<h:outputText value="#{disinfectionResultController.result.disinfection.date}" />
+				
+		        <h:outputLabel value="#{msgs.dateFrom}" />
+		        <h:outputText value="#{disinfectionResultController.result.dateFrom}" >
+		            <f:convertDateTime pattern="dd-MM-yyyy" />
+			    </h:outputText>
+                
+                <h:outputLabel value="#{msgs.dateTo}" />
+                <h:outputText value="#{disinfectionResultController.result.dateTo}" >
+                   <f:convertDateTime pattern="dd-MM-yyyy" />
+				</h:outputText>
+	
+				<h:outputText value="#{msgs.goodsAmount}" styleClass="form-table-label disp-blc"/>
+				<h:outputText value="#{disinfectionResultController.result.goodsAmount}" />
+                 
+                <h:outputText value="#{msgs.disinfectionPlace}" styleClass="form-table-label disp-blc"/>
+                <h:outputText value="#{disinfectionResultController.result.disinfectionPlace}" />
+				
+				<h:outputText value="#{msgs.disinfectionMethod}" styleClass="form-table-label disp-blc"/>
+				<h:outputText value="#{disinfectionResultController.result.disinfectionMethod}" />
+
+			    <h:outputLabel for="chemical" value="#{msgs.chemical}" />
+			    <h:outputText value="#{disinfectionResultController.result.chemical.name}" />
+				
+				<h:outputText value="#{msgs.concentration}" styleClass="form-table-label disp-blc"/>
+				<h:outputText value="#{disinfectionResultController.result.concentration}" />
+				
+				<h:outputText value="#{msgs.temperature}" styleClass="form-table-label disp-blc"/>
+				<h:outputText value="#{disinfectionResultController.result.temperature}" />
+				
+				<h:outputText value="#{msgs.exposition}" styleClass="form-table-label disp-blc"/>
+				<h:outputText value="#{disinfectionResultController.result.exposition}" />
+				
+				<h:outputText value="#{msgs.degassing}" styleClass="form-table-label disp-blc"/>
+				<h:outputText value="#{disinfectionResultController.result.degassing}" />
+				
+				<h:outputText value="#{msgs.otherInfo}" styleClass="form-table-label disp-blc"/>
+				<h:outputText value="#{disinfectionResultController.result.otherInfo}" />
+				
+		    </h:panelGrid>	 
+		   
+		    <div class="m-top"> 
+		    	<p:commandButton value="#{msgs.back}" action="#{disinfectionResultController.cancel()}" ajax="false"  styleClass="button red m-left"/>
+		   	</div>
+		</h:form>
+			
+		<div class="clear"></div>	
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/layouts/private.xhtml">
+    <ui:define name="content">
+        <h2>#{msgs.disinfectionResultForm}</h2> 
+		<br/><br/>	        
+		<h:form id="add-card-form" prependId="false">
+		    <h:panelGrid styleClass="form-table" columns="3">
+		    
+		        <h:outputLabel value="#{msgs.dateFrom}" />
+                <p:calendar value="#{disinfectionResultController.result.dateFrom}" id="dateFrom"  showOn="button" pattern="dd-MM-yyyy HH:mm"  
+                   required="true" requiredMessage="#{msgs.thisFieldIsRequired}"/> 
+                <p:message for="dateFrom" />	 
+                
+                <h:outputLabel value="#{msgs.dateTo}" />
+                <p:calendar value="#{disinfectionResultController.result.dateTo}" id="dateTo"  showOn="button" pattern="dd-MM-yyyy HH:mm"  
+                  required="true" requiredMessage="#{msgs.thisFieldIsRequired}"/> 
+                <p:message for="dateTo" />	 
+	
+				<h:outputText value="#{msgs.goodsAmount}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{disinfectionResultController.result.goodsAmount}" id="goodsAmount" maxlength="150" style="width:300px;" required="true"/>
+				<p:message for="goodsAmount" /> 
+                 
+                <h:outputText value="#{msgs.disinfectionPlace}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{disinfectionResultController.result.disinfectionPlace}" id="disinfectionPlace" maxlength="150" style="width:300px;" />
+				<p:message for="disinfectionPlace" />   
+				
+				<h:outputText value="#{msgs.disinfectionMethod}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{disinfectionResultController.result.disinfectionMethod}" id="disinfectionMethod" maxlength="150" style="width:300px;" />
+				<p:message for="disinfectionMethod" />   
+
+			    <h:outputLabel for="chemical" value="#{msgs.chemical}" />
+				<h:selectOneMenu id="chemical" value="#{disinfectionResultController.result.chemical}" effect="fold"
+					editable="true" style="width:180px" converter="cachedConverter" >
+					<f:selectItem itemLabel="#{msgs.selectValue}" />
+					<f:selectItems value="#{disinfectionResultController.chemicalList}" var="cs"
+						itemLabel="#{cs.name}" itemValue="#{cs}" />
+				</h:selectOneMenu>
+				<h:message for="chemical" display="icon" style="color:red;" />
+				
+				<h:outputText value="#{msgs.concentration}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{disinfectionResultController.result.concentration}" id="concentration" maxlength="150" style="width:300px;" />
+				<p:message for="concentration" />
+				
+				<h:outputText value="#{msgs.temperature}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{disinfectionResultController.result.temperature}" id="temperature" maxlength="150" style="width:300px;" />
+				<p:message for="temperature" />
+				
+				<h:outputText value="#{msgs.exposition}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{disinfectionResultController.result.exposition}" id="exposition" maxlength="150" style="width:300px;" />
+				<p:message for="exposition" />
+				
+				<h:outputText value="#{msgs.degassing}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{disinfectionResultController.result.degassing}" id="degassing" maxlength="150" style="width:300px;" />
+				<p:message for="degassing" />
+				
+				<h:outputText value="#{msgs.otherInfo}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{disinfectionResultController.result.otherInfo}" id="otherInfo" maxlength="150" style="width:300px;" />
+				<p:message for="otherInfo" />
+				
+		    </h:panelGrid>	 
+		   
+		    <div class="m-top"> 
+		    	<p:commandButton value="#{msgs.save}" action="#{disinfectionResultController.save()}" styleClass="button light-blue" ajax="false"/>
+		    	<p:commandButton value="#{msgs.cancel}" action="#{disinfectionResultController.cancel()}" immediate="true" styleClass="button red m-left"/>
+		   	</div>
+		</h:form>
+			
+		<div class="clear"></div>	
+    </ui:define>
+</ui:composition>

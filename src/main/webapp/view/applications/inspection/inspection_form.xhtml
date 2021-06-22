@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/layouts/private.xhtml">
+    <ui:define name="content">
+        <h2>#{msgs.inspectionForm}</h2> 
+		<br/><br/>	        
+		<h:form id="add-card-form" prependId="false">
+		    <h:panelGrid styleClass="form-table" columns="3">
+	
+				<h:outputText value="#{msgs.actNumber}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{inspectionController.inspection.actNumber}" id="actNumber" maxlength="150" style="width:300px;" disabled="true"/>
+				<p:message for="actNumber" /> 
+				
+				<h:outputLabel value="#{msgs.actDate}" />
+                <p:calendar value="#{inspectionController.inspection.actDate}" id="actDate"  showOn="button" pattern="dd-MM-yyyy"  disabled="true"/> 
+                <p:message for="actDate" />	  
+                
+                <h:outputText value="#{msgs.vehicleNumber}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{inspectionController.inspection.vehicleNumber}" id="vehicleNumber" maxlength="150" style="width:300px;" />
+				<p:message for="vehicleNumber" />   
+				
+				<h:panelGroup>
+	                <h:outputLabel value="#{msgs.transportType}" />
+	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
+                </h:panelGroup>
+				<p:selectOneMenu id="transportType" value="#{inspectionController.inspection.transportType}" effect="fold"
+					 converter="transportTypeConverter" required="true" requiredMessage="#{msgs.thisFieldIsRequired}">
+					<f:selectItem itemLabel="#{msgs.selectValue}" />
+					<f:selectItems value="#{inspectionController.transportTypeList}" var="cs"
+						itemLabel="#{cs.name}" itemValue="#{cs}" />
+				     <p:ajax event="itemSelect" process="@this" update="transportationMethod" />
+				</p:selectOneMenu>
+				<h:message for="transportType" display="icon" style="color:red;" />
+
+				<h:outputLabel for="transportationMethod" value="#{msgs.transportationMethod}" />
+				<h:inputText id="transportationMethod" value="#{inspectionController.inspection.transportType.transportationMethod.name}" disabled="true"/>
+				<h:message for="transportationMethod" display="icon" style="color:red;" /> 
+				
+				<h:outputText value="#{msgs.transporter}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{inspectionController.inspection.transporter}" id="transporter" maxlength="150" style="width:300px;" />
+				<p:message for="transporter" />  
+				
+				<h:panelGroup>
+	                <h:outputLabel value="#{msgs.entryPoint}" />
+	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
+                </h:panelGroup>
+				<p:selectCheckboxMenu  value="#{inspectionController.inspection.entryPoints}" id="entryPoint" 
+					multiple="true" converter="entryPointConverter" filter="true" filterMatchMode="contains" required="true" requiredMessage="#{msgs.thisFieldIsRequired}">
+					<f:selectItems value="#{inspectionController.entryPointList}" var="entity" itemLabel="#{entity.name}" itemValue="#{entity}"/>
+		    	</p:selectCheckboxMenu>
+				<h:message for="entryPoint" display="icon" style="color:red;" />
+				
+				<h:outputText value="#{msgs.owner}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{inspectionController.inspection.owner}" id="owner" maxlength="150" style="width:300px;" />
+				<p:message for="owner" />
+				
+				<h:panelGroup>
+	                <h:outputLabel value="#{msgs.marking}" />
+	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
+                </h:panelGroup>
+				<p:selectOneMenu id="marking" value="#{inspectionController.inspection.marking}" effect="fold"
+					 converter="cachedConverter" required="true" requiredMessage="#{msgs.thisFieldIsRequired}">
+					<f:selectItem itemLabel="#{msgs.selectValue}" />
+					<f:selectItems value="#{inspectionController.markingList}" var="cs"
+						itemLabel="#{cs.name}" itemValue="#{cs}" />
+				</p:selectOneMenu>
+				<h:message for="marking" display="icon" style="color:red;" />
+				
+		    </h:panelGrid>	 
+		   
+		    <div class="m-top"> 
+		    	<p:commandButton value="#{msgs.save}" action="#{inspectionController.save()}" styleClass="button light-blue" ajax="false"/>
+		    	<p:commandButton value="#{msgs.cancel}" action="#{inspectionController.cancel()}" immediate="true" styleClass="button red m-left"/>
+		   	</div>
+		</h:form>
+			
+		<div class="clear"></div>	
+    </ui:define>
+</ui:composition>

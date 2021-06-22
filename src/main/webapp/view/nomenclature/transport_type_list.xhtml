@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/templates/layouts/private.xhtml">
+ 	<ui:define name="content">
+		<h2>#{msgs.transportType}</h2> 
+
+		<h:form id ="filter-form">		
+	        <p:inputText value="#{transportTypeList.searchString}" id="watermark"  >	
+	        	  <p:ajax listener="#{transportTypeList.filterData()}" event="keyup" update="form"/>	               
+	        </p:inputText>
+	        <p:watermark for="watermark" value="Поиск" />
+
+			<p:commandButton ajax="true" update="form" value="#{msgs.search}"  style="display:none;"
+			    actionListener="#{transportTypeList.filterData()}" styleClass="button green" />
+			    
+			<h:commandLink value="#{msgs.add}" action="#{transportTypeController.add()}" styleClass="button green f-right"/>   
+		</h:form>
+
+		<h:form id ="form">
+			<p:dataTable var="entity" value="#{transportTypeList.model}" paginator="true" rows="20" lazy="true" rowKey="#{entity.id}" rowIndexVar="index" tableStyleClass="display-table"
+	   			id="table" selectionMode="single" emptyMessage="#{msgs.noRecordsFound}" 
+	   			rowsPerPageTemplate="10,20,30,40,50" paginatorPosition="bottom" pageLinks="10"
+	   			currentPageReportTemplate="Всего : #{transportTypeList.model.rowCount} из #{transportTypeList.model.totalCount}  &#160;&#160;| #{msgs.amountPerPage}"
+	            paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport} {RowsPerPageDropdown}"
+	            selection="#{transportTypeList.transportType}"
+	            first="#{transportTypeList.first}" >
+				<p:ajax event="page" listener="#{transportTypeList.onPageChange}"/>  
+	            <p:column headerText="№">
+			        <h:outputText value="#{index+1}" />
+			    </p:column>
+	
+			    <p:column headerText="#{msgs.name}">
+			        <h:outputText value="#{entity.name}" />
+			    </p:column>
+
+			    <p:column headerText="#{msgs.transportationMethod}">
+			        <h:outputText value="#{entity.transportationMethod.name}" />
+			    </p:column>
+			    
+			    <p:column headerText="#{msgs.operation}" exportable="false" style="width:100px;">
+                    <h:commandButton action="#{transportTypeController.edit(entity)}"  value="#{msgs.edit}" styleClass="btn-icon edit" title="#{msgs.edit}" />	
+                    <h:commandButton action="#{transportTypeController.delete(entity)}"  value="#{msgs.delete}" styleClass="btn-icon delete" title="#{msgs.delete}" />	 
+			    </p:column>
+			</p:dataTable>
+		</h:form>
+		<p:blockUI block="form:table" trigger="form:table" >
+			#{msgs.loading}<br />
+		    <p:graphicImage library="img" name="ajaxloadingbar.gif"/>
+		</p:blockUI>	
+
+		<div class="clear"></div>			
+				
+	</ui:define>	
+	
+</ui:composition>

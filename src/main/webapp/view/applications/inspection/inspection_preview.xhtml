@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/templates/layouts/private.xhtml">
+ 	<ui:define name="content">
+		<h2>#{msgs.appPreview} </h2>
+		<h:form id ="filter-form">	 
+		     <h:panelGrid columns="2">
+		       <h:outputText value="#{msgs.actNumber} : " />
+		       <h:outputText value="#{inspectionController.inspection.actNumber}" />
+		       <h:outputText value="#{msgs.actDate} : " />
+		       <h:outputText value="#{inspectionController.inspection.actDate}" />
+		       <h:outputText value="#{msgs.vehicleNumber} : " />
+		       <h:outputText value="#{inspectionController.inspection.vehicleNumber}" />
+		       <h:outputText value="#{msgs.transportType} : " />
+		       <h:outputText value="#{inspectionController.inspection.transportType.name}" />
+		       <h:outputText value="#{msgs.transportationMethod} : " />
+		       <h:outputText value="#{inspectionController.inspection.transportType.transportationMethod.name}" />
+		       <h:outputText value="#{msgs.transporter} : " />
+		       <h:outputText value="#{inspectionController.inspection.transporter}" />
+		       <h:outputText value="#{msgs.entryPoint} : " />
+		       <p:dataList var="car" value="#{inspectionController.inspection.entryPoints}">
+		           <h:outputText value="#{car.name}" />
+		       </p:dataList>
+		       <h:outputText value="#{msgs.owner} : " />
+		       <h:outputText value="#{inspectionController.inspection.owner}" />
+		       <h:outputText value="#{msgs.marking} : " />
+		       <h:outputText value="#{inspectionController.inspection.marking.name}" />
+		     </h:panelGrid>
+		</h:form> 
+		<br/> 
+		<h:form id ="form">	 
+			<h3>#{msgs.mainData} </h3> 
+			<br/>
+			<h:panelGrid styleClass="form-table" columns="2">
+				<h:outputText value="#{msgs.appNumber}"/>
+				<h:outputText value="#{conversationApp.applications.number}"/>
+				
+				<h:outputLabel value="#{msgs.dateCreated}" />
+				<h:outputText value="#{conversationApp.applications.dateCreated}">
+				   <f:convertDateTime pattern="dd-MM-yyyy" />
+			    </h:outputText>
+                
+                <h:outputLabel value="#{msgs.appType}" />
+                <h:outputText value="#{enums[conversationApp.applications.type]}"/>
+				
+				<h:outputLabel value="#{msgs.applicant}" />
+				<h:outputText value="#{enums[conversationApp.applications.applicant]}"/>
+
+			    <h:outputLabel value="#{msgs.legalForm}" />
+			    <h:outputText value="#{conversationApp.applications.legalForm.name}"/>
+				
+				<h:outputText value="#{msgs.organizationInn}" />
+				<h:outputText value="#{conversationApp.applications.inn}"/>
+				
+				<h:outputText value="#{msgs.okpo}"/>
+				<h:outputText value="#{conversationApp.applications.okpo}"/>
+				
+				<h:outputText value="#{msgs.companyName}"/>
+				<h:outputText value="#{conversationApp.applications.companyName}"/>
+				
+				<h:outputText value="#{msgs.directorName}"/>
+				<h:outputText value="#{conversationApp.applications.directorName}"/>
+				
+				<h:outputText value="#{msgs.currentAddress}"/>
+				<h:outputText value="#{conversationApp.applications.currentAddress}"/>
+				
+				<h:outputText value="#{msgs.contacts}"/>
+				<h:outputText value="#{conversationApp.applications.contact}"/>
+				
+				<h:outputText value="#{msgs.email}"/>
+				<h:outputText value="#{conversationApp.applications.email}"/>
+		    </h:panelGrid>
+		    <br/>   
+		    <h:panelGrid columns="2">
+		      <h:panelGrid>
+			    <h3>#{msgs.exporters} </h3> 
+				<br/>
+				<h:panelGrid styleClass="form-table" columns="2">
+					<h:outputLabel value="#{msgs.legalForm}" />
+					<h:outputText value="#{conversationApp.exporters.legalForm.name}"/>
+					
+					<h:outputText value="#{msgs.organizationInn}" />
+					<h:outputText value="#{conversationApp.exporters.inn}"/>
+					
+					<h:outputText value="#{msgs.okpo}"/>
+					<h:outputText value="#{conversationApp.exporters.okpo}"/>
+					
+					<h:outputText value="#{msgs.companyName}"/>
+					<h:outputText value="#{conversationApp.exporters.companyName}"/>
+					
+					<h:outputText value="#{msgs.directorName}"/>
+					<h:outputText value="#{conversationApp.exporters.directorName}"/>
+					
+					<h:outputText value="#{msgs.legalAddress}"/>
+					<h:outputText value="#{conversationApp.exporters.legalAddress}"/>
+					
+					<h:outputLabel value="#{msgs.country}" />
+					<h:outputText value="#{conversationApp.exporters.country.name}"/>
+					
+					<h:outputText value="#{msgs.currentAddress}"/>
+					<h:outputText value="#{conversationApp.exporters.currentAddress}"/>
+					
+					<h:outputText value="#{msgs.contacts}"/>
+					<h:outputText value="#{conversationApp.exporters.contact}"/>
+					
+					<h:outputText value="#{msgs.email}"/>
+					<h:outputText value="#{conversationApp.exporters.email}"/>
+			    </h:panelGrid>
+		       </h:panelGrid>
+		       <h:panelGrid>
+			    <h3>#{msgs.importers} </h3> 
+				<br/>
+				<h:panelGrid styleClass="form-table" columns="2">
+					<h:outputLabel value="#{msgs.legalForm}" />
+					<h:outputText value="#{conversationApp.importers.legalForm.name}"/>
+					
+					<h:outputText value="#{msgs.organizationInn}" />
+					<h:outputText value="#{conversationApp.importers.inn}"/>
+					
+					<h:outputText value="#{msgs.okpo}"/>
+					<h:outputText value="#{conversationApp.importers.okpo}"/>
+					
+					<h:outputText value="#{msgs.companyName}"/>
+					<h:outputText value="#{conversationApp.importers.companyName}"/>
+					
+					<h:outputText value="#{msgs.directorName}"/>
+					<h:outputText value="#{conversationApp.importers.directorName}"/>
+					
+					<h:outputText value="#{msgs.legalAddress}"/>
+					<h:outputText value="#{conversationApp.importers.legalAddress}"/>
+					
+					<h:outputLabel value="#{msgs.country}" />
+					<h:outputText value="#{conversationApp.importers.country.name}"/>
+					
+					<h:outputText value="#{msgs.currentAddress}"/>
+					<h:outputText value="#{conversationApp.importers.currentAddress}"/>
+					
+					<h:outputText value="#{msgs.contacts}"/>
+					<h:outputText value="#{conversationApp.importers.contact}"/>
+					
+					<h:outputText value="#{msgs.email}"/>
+					<h:outputText value="#{conversationApp.importers.email}"/>
+			    </h:panelGrid>
+		       </h:panelGrid>
+		    </h:panelGrid>
+		    <br/>   
+		    <h:panelGrid columns="2">
+		      <h:panelGrid>
+			    <h3>#{msgs.transportations} </h3> 
+				<br/>
+				<h:panelGrid styleClass="form-table" columns="2">
+					<h:outputLabel value="#{msgs.departurePoint}" />
+					<h:outputText value="#{conversationApp.transportations.departurePoint.name}"/>
+					
+					<h:outputLabel value="#{msgs.address}" rendered="#{conversationApp.transportations.departurePoint.id ne 3929}"/>
+					<h:outputText value="#{conversationApp.transportations.addressDept}" rendered="#{conversationApp.transportations.departurePoint.id ne 3929}"/>
+					
+					<h:outputLabel value="#{msgs.senderAddress}" rendered="#{conversationApp.transportations.departurePoint.id eq 3929}"/>
+					<h:outputText value="#{conversationApp.transportations.addressDeparture.name}" rendered="#{conversationApp.transportations.departurePoint.id eq 3929}"/>
+					
+					<h:outputLabel value="#{msgs.destinationPoint}" />
+					<h:outputText value="#{conversationApp.transportations.destinationPoint.name}"/>
+					
+					<h:outputLabel value="#{msgs.address}" rendered="#{conversationApp.transportations.destinationPoint.id ne 3929}"/>
+					<h:outputText value="#{conversationApp.transportations.addressDest}" rendered="#{conversationApp.transportations.destinationPoint.id ne 3929}"/>
+					
+					<h:outputLabel value="#{msgs.senderAddress}" rendered="#{conversationApp.transportations.destinationPoint.id eq 3929}"/>
+					<h:outputText value="#{conversationApp.transportations.addressDestination.name}" rendered="#{conversationApp.transportations.destinationPoint.id eq 3929}"/>
+			    
+			        <h:outputText value="#{msgs.transporter}"/>
+			        <h:outputText value="#{conversationApp.transportations.transporter}"/>
+			        
+			        <h:outputLabel value="#{msgs.transportType}" />
+			        <h:outputText value="#{conversationApp.transportations.transportType.name}"/>
+			    
+			        <h:outputLabel value="#{msgs.transportationMethod}" />
+			        <h:outputText value="#{conversationApp.transportations.transportType.transportationMethod.name}"/>
+					
+					<h:outputText value="#{msgs.tripNumber}"/>
+					<h:outputText value="#{conversationApp.transportations.tripNumber}"/>
+					
+					<h:outputText value="#{msgs.sealNumber}"/>
+					<h:outputText value="#{conversationApp.transportations.sealNumber}"/>
+					
+					<h:outputLabel value="#{msgs.countryExport}" />
+					<h:outputText value="#{conversationApp.transportations.countryExport.name}"/>
+					
+					<h:outputLabel value="#{msgs.countryImport}" />
+					<h:outputText value="#{conversationApp.transportations.countryImport.name}"/>
+					
+					<h:outputLabel value="#{msgs.countryTransit}" />
+					<h:outputText value="#{conversationApp.transportations.countryTransit.name}"/>
+			    </h:panelGrid>
+		       </h:panelGrid>
+		       <h:panelGrid>
+			    <h3>#{msgs.additionalInfo} </h3> 
+				<br/>
+				<h:panelGrid styleClass="form-table" columns="2">
+					<h:outputText value="#{msgs.note}"/>
+					<h:outputText value="#{conversationApp.additionalInfo.note}"/>
+			    </h:panelGrid>
+		       </h:panelGrid>
+		    </h:panelGrid>
+            <br/>
+		    <h3>#{msgs.goods} </h3> 
+		    <p:dataTable var="entity" value="#{goodsController.getGoodsList(conversationApp.applications)}" paginator="false" rowIndexVar="index"
+		     	lazy="false" emptyMessage="#{msgs.noRecordsFound}" sortOrder="DESCENDING">       
+		         <p:column headerText="#{msgs.number}" width="50">
+		        	<h:outputText value="#{index+1}" />
+		         </p:column> 
+		         <p:column headerText="#{msgs.products}">
+			        <h:outputText value="#{entity.products.name}" />
+		         </p:column>
+		         <p:column headerText="#{msgs.productDesc}">
+			        <h:outputText value="#{entity.description}" />
+		         </p:column>
+		         <p:column headerText="#{msgs.countryBy}">
+			        <h:outputText value="#{entity.country.name}" /><br />
+			        <h:outputText value="#{entity.oblast.name}" rendered="#{entity.country.id eq 3929}"/>
+		         </p:column>	
+		          <p:column headerText="#{msgs.weight}">
+			        <h:outputText value="#{entity.weight}" />
+		         </p:column>
+		          <p:column headerText="#{msgs.measurementUnit}">
+			        <h:outputText value="#{entity.measurementUnit.name}" />
+		         </p:column>
+		         <p:column headerText="#{msgs.packages}">
+					<h:outputText value="#{entity.packages}" />
+					<h:outputText value="#{entity.packagesExtra}" />
+				</p:column>
+				<p:column headerText="#{msgs.packageType}">
+					<h:outputText value="#{entity.packageTypes.name}" />
+					<h:outputText value="#{entity.packageTypesExtra.name}" />
+				</p:column>
+	         </p:dataTable>
+		     <br/>
+		    <h3>#{msgs.documents} </h3> 
+		    <p:dataTable var="entity" value="#{documentsController.getDocumentsList(conversationApp.applications)}" paginator="false" rowIndexVar="index"
+		     	lazy="false" emptyMessage="#{msgs.noRecordsFound}" sortOrder="DESCENDING">       
+		         <p:column headerText="#{msgs.number}" width="50">
+		        	<h:outputText value="#{index+1}" />
+		         </p:column> 
+		         <p:column headerText="#{msgs.name}">
+			        <h:outputText value="#{entity.name}" />
+		         </p:column>
+		         <p:column headerText="#{msgs.docBy}">
+			        <h:outputText value="#{entity.description}" />
+		         </p:column>
+		         <p:column headerText="#{msgs.docNumber}">
+			        <h:outputText value="#{entity.number}" />
+		         </p:column>	
+		          <p:column headerText="#{msgs.issueDate}">
+			        <h:outputText value="#{entity.issueDate}">
+			            <f:convertDateTime pattern="dd-MM-yyyy" />
+					 </h:outputText>
+		         </p:column>
+	         </p:dataTable>
+		     <div class="m-top">
+		        <p:commandButton value="#{msgs.acceptExpertises}" action="#{expertisesController.acceptExpertises(inspectionController.inspection)}" styleClass="button light-blue" ajax="false"
+		    	    rendered="#{inspectionController.inspection.expertisesStatus eq null}"/> 
+		    	<p:commandButton value="#{msgs.acceptDisinfection}" action="#{disinfectionController.acceptDisinfection(inspectionController.inspection)}" styleClass="button light-blue" ajax="false"
+		    	    rendered="#{inspectionController.inspection.disinfectionStatus eq null}"/> 
+		    	    <p:commandButton  
+					action="#{iSelectViewReport.generateIns(inspectionController.inspection.id)}"
+					process="@this" icon="fa fa-print" immediate="true"
+					value="#{msgs.download}" ajax="false"
+					style="width:200px; margin-right: 10px;" />
+		   	</div> 
+		</h:form>		
+	</ui:define>	
+</ui:composition>

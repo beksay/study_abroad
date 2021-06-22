@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/templates/layouts/private.xhtml">
+ 	<ui:define name="content">
+		<h2>#{msgs.accountInfo} </h2> 
+
+		<h:form id ="filter-form">	
+		 <h:panelGrid styleClass="form-center" columns="2">
+		    <h:outputText value="#{msgs.username}" styleClass="form-table-label disp-blc"/>
+			<h:inputText value="#{userController.loginUtil.currentUser.username}" style="width:300px;" disabled="true" />
+			
+			<h:outputText value="#{msgs.inn}" styleClass="form-table-label disp-blc"/>
+			<h:inputText value="#{userController.loginUtil.currentUser.owner.inn}" style="width:300px;" disabled="true" />
+			
+			<h:outputText value="#{msgs.workName}" styleClass="form-table-label disp-blc"/>
+			<h:inputText value="#{userController.loginUtil.currentUser.owner.fullName}" style="width:300px;" disabled="true" />
+			
+			<h:outputText value="#{msgs.printName}" styleClass="form-table-label disp-blc"/>
+			<h:inputText value="#{userController.loginUtil.currentUser.owner.fullName}" style="width:300px;" disabled="true" />
+			
+			<h:outputText value="#{msgs.okpo}" styleClass="form-table-label disp-blc"/>
+			<h:inputText value="#{userController.loginUtil.currentUser.owner.okpo}" style="width:300px;" disabled="true" />
+			
+			<h:outputText value="#{msgs.stateCEA}" styleClass="form-table-label disp-blc"/>
+			<h:inputText value="#{userController.loginUtil.currentUser.owner.stateCEA.name}" style="width:300px;" disabled="true" />
+			
+			<h:outputText value="#{msgs.esfCode}" styleClass="form-table-label disp-blc"/>
+			<h:inputText value="#{userController.loginUtil.currentUser.owner.stiOrganization.code}" style="width:300px;" disabled="true" />
+			
+	     </h:panelGrid>		
+			
+		</h:form>
+	</ui:define>	
+	
+</ui:composition>

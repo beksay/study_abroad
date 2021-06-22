@@ -1,0 +1,1599 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://tunduk-seccurity-infocom.x-road.fi/producer" xmlns:xrd="http://x-road.eu/xsd/xroad.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:id="http://x-road.eu/xsd/identifiers" name="InfocomService" targetNamespace="http://tunduk-seccurity-infocom.x-road.fi/producer">
+    <wsdl:types>
+        <xsd:schema elementFormDefault="qualified" targetNamespace="http://tunduk-seccurity-infocom.x-road.fi/producer">
+            <!-- Import X-Road schema -->
+            <xsd:import id="xrd" namespace="http://x-road.eu/xsd/xroad.xsd" schemaLocation="http://x-road.eu/xsd/xroad.xsd"/>
+
+            <xsd:element name="passportDataForInfosystema">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="request">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="pin" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Pin
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Pin</xrd:title>
+                                                <xrd:title xml:lang="ru">Пин</xrd:title>
+                                                <xrd:title xml:lang="kg">Пин</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="passportDataForInfosystemaResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="request">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="pin" nillable="true" type="xsd:string"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                        <xsd:element name="response">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="pin" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Pin
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Pin</xrd:title>
+                                                <xrd:title xml:lang="ru">Пин</xrd:title>
+                                                <xrd:title xml:lang="kg">Пин</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="surname" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Surname
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Surname</xrd:title>
+                                                <xrd:title xml:lang="ru">Фамилия</xrd:title>
+                                                <xrd:title xml:lang="kg">Фамилия</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="name" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Name
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Name</xrd:title>
+                                                <xrd:title xml:lang="ru">Имя</xrd:title>
+                                                <xrd:title xml:lang="kg">Имя</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="patronymic" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                patronymic
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">patronymic</xrd:title>
+                                                <xrd:title xml:lang="ru">Отчество</xrd:title>
+                                                <xrd:title xml:lang="kg">Отчество</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="gender" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                gender
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">gender</xrd:title>
+                                                <xrd:title xml:lang="ru">Пол</xrd:title>
+                                                <xrd:title xml:lang="kg">Пол</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="nationality" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                nationality
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">nationality</xrd:title>
+                                                <xrd:title xml:lang="ru">Национальность</xrd:title>
+                                                <xrd:title xml:lang="kg">Национальность</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="dateOfBirth" type="xsd:dateTime">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                dateOfBirth
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">dateOfBirth</xrd:title>
+                                                <xrd:title xml:lang="ru">Дата рождения</xrd:title>
+                                                <xrd:title xml:lang="kg">Дата рождения</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="passportSeries" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                passportSeries
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">passportSeries</xrd:title>
+                                                <xrd:title xml:lang="ru">Серия паспорта</xrd:title>
+                                                <xrd:title xml:lang="kg">Серия паспорта</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="passportNumber" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                passportNumber
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">passportNumber</xrd:title>
+                                                <xrd:title xml:lang="ru">Номер паспорта</xrd:title>
+                                                <xrd:title xml:lang="kg">Номер паспорта</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="issuedDate" type="xsd:dateTime">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                issuedDate
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">issuedDate</xrd:title>
+                                                <xrd:title xml:lang="ru">Дата выдачи</xrd:title>
+                                                <xrd:title xml:lang="kg">Дата выдачи</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="passportAuthority" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                passportAuthority
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">passportAuthority</xrd:title>
+                                                <xrd:title xml:lang="ru">Орган выдавший документ</xrd:title>
+                                                <xrd:title xml:lang="kg">Орган выдавший документ</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="expiredDate" type="xsd:dateTime">
+                                        <xsd:annotation>
+                                            <xsd:documentation>passportDataForInfosystema
+                                                expiredDate
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">expiredDate</xrd:title>
+                                                <xrd:title xml:lang="ru">Дата окончания</xrd:title>
+                                                <xrd:title xml:lang="kg">Дата окончания</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="address" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                address
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Address</xrd:title>
+                                                <xrd:title xml:lang="ru">Адрес</xrd:title>
+                                                <xrd:title xml:lang="kg">Адрес</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="addressLocalityCode" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                addressLocalityCode
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">addressLocalityCode</xrd:title>
+                                                <xrd:title xml:lang="ru">Код населенного пункта</xrd:title>
+                                                <xrd:title xml:lang="kg">Код населенного пункта</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="nameAC" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                nameAC
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">nameAC</xrd:title>
+                                                <xrd:title xml:lang="ru">Имя AC</xrd:title>
+                                                <xrd:title xml:lang="kg">Имя AC</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="surnameAC" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                surnameAC
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">surnameAC</xrd:title>
+                                                <xrd:title xml:lang="ru">Фамилия AC</xrd:title>
+                                                <xrd:title xml:lang="kg">Фамилия AC</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="patronymicAC" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                patronymicAC
+                                            </xsd:documentation>
+                                            <xsd:appinfo>passportDataForInfosystema
+                                                <xrd:title xml:lang="en">patronymicAC</xrd:title>
+                                                <xrd:title xml:lang="ru">Отчество AC</xrd:title>
+                                                <xrd:title xml:lang="kg">Отчество AC</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="passportNumberAC" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                passportNumberAC
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">passportNumberAC</xrd:title>
+                                                <xrd:title xml:lang="ru">Номер паспорта AC</xrd:title>
+                                                <xrd:title xml:lang="kg">Номер паспорта AC</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="passportSeriesAC" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                passportSeriesAC
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">passportSeriesAC</xrd:title>
+                                                <xrd:title xml:lang="ru">Серия паспорта AC</xrd:title>
+                                                <xrd:title xml:lang="kg">Серия паспорта AC</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="issuedDateAC" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                issuedDateAC
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">issuedDateAC</xrd:title>
+                                                <xrd:title xml:lang="ru">Дата выдачи AC</xrd:title>
+                                                <xrd:title xml:lang="kg">Дата выдачи AC</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="expiredDateAC" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                expiredDateAC
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">expiredDateAC</xrd:title>
+                                                <xrd:title xml:lang="ru">Дата окончания AC</xrd:title>
+                                                <xrd:title xml:lang="kg">Дата окончания AC</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="addressAC" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                addressAC
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">addressAC</xrd:title>
+                                                <xrd:title xml:lang="ru">Адрес AC</xrd:title>
+                                                <xrd:title xml:lang="kg">Адрес AC</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="addressLocalityCodeAC" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                addressLocalityCodeAC
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">addressLocalityCodeAC</xrd:title>
+                                                <xrd:title xml:lang="ru">Код населенного пункта AC</xrd:title>
+                                                <xrd:title xml:lang="kg">Код населенного пункта AC</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="issuedDateANInvalid" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                issuedDateANInvalid
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">issuedDateANInvalid</xrd:title>
+                                                <xrd:title xml:lang="ru">Дата выдачи AN недействительный</xrd:title>
+                                                <xrd:title xml:lang="kg">Дата выдачи AN недействительный</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="addressANInvalid" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                addressANInvalid
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">addressANInvalid</xrd:title>
+                                                <xrd:title xml:lang="ru">Адреса AN недействительный</xrd:title>
+                                                <xrd:title xml:lang="kg">Адреса AN недействительный</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="passportStatus">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="request">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="pin" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Pin
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Pin</xrd:title>
+                                                <xrd:title xml:lang="ru">Пин</xrd:title>
+                                                <xrd:title xml:lang="kg">Пин</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="series" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Series
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Series</xrd:title>
+                                                <xrd:title xml:lang="ru">Серия паспорта</xrd:title>
+                                                <xrd:title xml:lang="kg">Серия паспорта</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="number" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Number
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Number</xrd:title>
+                                                <xrd:title xml:lang="ru">Номер паспорта</xrd:title>
+                                                <xrd:title xml:lang="kg">Номер паспорта</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="passportStatusResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="request">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="pin" nillable="true" type="xsd:string"/>
+                                    <xsd:element name="series" nillable="true" type="xsd:string"/>
+                                    <xsd:element name="number" nillable="true" type="xsd:string"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                        <xsd:element name="response">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="status" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Status
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Passport status</xrd:title>
+                                                <xrd:title xml:lang="ru">Статус действительности паспорта</xrd:title>
+                                                <xrd:title xml:lang="kg">Статус действительности паспорта</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="testPassportDataByPSN">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="request">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="pin" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Pin
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Pin</xrd:title>
+                                                <xrd:title xml:lang="ru">Пин</xrd:title>
+                                                <xrd:title xml:lang="kg">Пин</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="series" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Series
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Series</xrd:title>
+                                                <xrd:title xml:lang="ru">Серия</xrd:title>
+                                                <xrd:title xml:lang="kg">Серия</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="number" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Number
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Number</xrd:title>
+                                                <xrd:title xml:lang="ru">Номер</xrd:title>
+                                                <xrd:title xml:lang="kg">Номер</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="testPassportDataByPSNResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="request">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="pin" nillable="true" type="xsd:string"/>
+                                    <xsd:element name="series" nillable="true" type="xsd:string"/>
+                                    <xsd:element name="number" nillable="true" type="xsd:string"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                        <xsd:element name="response">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="pin" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Pin
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Pin</xrd:title>
+                                                <xrd:title xml:lang="ru">Пин</xrd:title>
+                                                <xrd:title xml:lang="kg">Пин</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="surname" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Surname
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Surname</xrd:title>
+                                                <xrd:title xml:lang="ru">Фамилия</xrd:title>
+                                                <xrd:title xml:lang="kg">Фамилия</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="name" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Name
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Name</xrd:title>
+                                                <xrd:title xml:lang="ru">Имя</xrd:title>
+                                                <xrd:title xml:lang="kg">Имя</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="patronymic" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                patronymic
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">patronymic</xrd:title>
+                                                <xrd:title xml:lang="ru">Отчество</xrd:title>
+                                                <xrd:title xml:lang="kg">Отчество</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="nationality" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                nationality
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">nationality</xrd:title>
+                                                <xrd:title xml:lang="ru">Национальность</xrd:title>
+                                                <xrd:title xml:lang="kg">Национальность</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="dateOfBirth" type="xsd:dateTime">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                dateOfBirth
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">dateOfBirth</xrd:title>
+                                                <xrd:title xml:lang="ru">Дата рождения</xrd:title>
+                                                <xrd:title xml:lang="kg">Дата рождения</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="passportSeries" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                passportSeries
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">passportSeries</xrd:title>
+                                                <xrd:title xml:lang="ru">Серия паспорта</xrd:title>
+                                                <xrd:title xml:lang="kg">Серия паспорта</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="passportNumber" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                passportNumber
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">passportNumber</xrd:title>
+                                                <xrd:title xml:lang="ru">Номер паспорта</xrd:title>
+                                                <xrd:title xml:lang="kg">Номер паспорта</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="voidStatus" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                voidStatus:
+                                                0 - Действительный;
+                                                1 - Не действительный;
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">voidStatus</xrd:title>
+                                                <xrd:title xml:lang="ru">Статус действительности</xrd:title>
+                                                <xrd:title xml:lang="kg">Статус действительности</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="issuedDate" type="xsd:dateTime">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                issuedDate
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">issuedDate</xrd:title>
+                                                <xrd:title xml:lang="ru">Дата выдачи</xrd:title>
+                                                <xrd:title xml:lang="kg">Дата выдачи</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="passportAuthority" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                passportAuthority
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">passportAuthority</xrd:title>
+                                                <xrd:title xml:lang="ru">Орган выдавший документ</xrd:title>
+                                                <xrd:title xml:lang="kg">Орган выдавший документ</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="expiredDate" type="xsd:dateTime">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                expiredDate
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">expiredDate</xrd:title>
+                                                <xrd:title xml:lang="ru">Дата окончания</xrd:title>
+                                                <xrd:title xml:lang="kg">Дата окончания</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="passportDataByPSN">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="request">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="pin" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Pin
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Pin</xrd:title>
+                                                <xrd:title xml:lang="ru">Пин</xrd:title>
+                                                <xrd:title xml:lang="kg">Пин</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="series" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Series
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Series</xrd:title>
+                                                <xrd:title xml:lang="ru">Серия</xrd:title>
+                                                <xrd:title xml:lang="kg">Серия</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="number" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Number
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Number</xrd:title>
+                                                <xrd:title xml:lang="ru">Номер</xrd:title>
+                                                <xrd:title xml:lang="kg">Номер</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="passportDataByPSNResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="request">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="pin" nillable="true" type="xsd:string"/>
+                                    <xsd:element name="series" nillable="true" type="xsd:string"/>
+                                    <xsd:element name="number" nillable="true" type="xsd:string"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                        <xsd:element name="response">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="pin" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Pin
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Pin</xrd:title>
+                                                <xrd:title xml:lang="ru">Пин</xrd:title>
+                                                <xrd:title xml:lang="kg">Пин</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="surname" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Surname
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Surname</xrd:title>
+                                                <xrd:title xml:lang="ru">Фамилия</xrd:title>
+                                                <xrd:title xml:lang="kg">Фамилия</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="name" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Name
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Name</xrd:title>
+                                                <xrd:title xml:lang="ru">Имя</xrd:title>
+                                                <xrd:title xml:lang="kg">Имя</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="patronymic" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                patronymic
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">patronymic</xrd:title>
+                                                <xrd:title xml:lang="ru">Отчество</xrd:title>
+                                                <xrd:title xml:lang="kg">Отчество</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="nationality" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                nationality
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">nationality</xrd:title>
+                                                <xrd:title xml:lang="ru">Национальность</xrd:title>
+                                                <xrd:title xml:lang="kg">Национальность</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="dateOfBirth" type="xsd:dateTime">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                dateOfBirth
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">dateOfBirth</xrd:title>
+                                                <xrd:title xml:lang="ru">Дата рождения</xrd:title>
+                                                <xrd:title xml:lang="kg">Дата рождения</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="passportSeries" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                passportSeries
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">passportSeries</xrd:title>
+                                                <xrd:title xml:lang="ru">Серия паспорта</xrd:title>
+                                                <xrd:title xml:lang="kg">Серия паспорта</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="passportNumber" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                passportNumber
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">passportNumber</xrd:title>
+                                                <xrd:title xml:lang="ru">Номер паспорта</xrd:title>
+                                                <xrd:title xml:lang="kg">Номер паспорта</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="voidStatus" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                voidStatus:
+                                                0 - Действительный;
+                                                1 - Не действительный;
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">voidStatus</xrd:title>
+                                                <xrd:title xml:lang="ru">Статус действительности</xrd:title>
+                                                <xrd:title xml:lang="kg">Статус действительности</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="issuedDate" type="xsd:dateTime">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                issuedDate
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">issuedDate</xrd:title>
+                                                <xrd:title xml:lang="ru">Дата выдачи</xrd:title>
+                                                <xrd:title xml:lang="kg">Дата выдачи</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="passportAuthority" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                passportAuthority
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">passportAuthority</xrd:title>
+                                                <xrd:title xml:lang="ru">Орган выдавший документ</xrd:title>
+                                                <xrd:title xml:lang="kg">Орган выдавший документ</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="expiredDate" type="xsd:dateTime">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                expiredDate
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">expiredDate</xrd:title>
+                                                <xrd:title xml:lang="ru">Дата окончания</xrd:title>
+                                                <xrd:title xml:lang="kg">Дата окончания</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="voidMotiv" nillable="true" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                voidMotiv
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">voidMotiv</xrd:title>
+                                                <xrd:title xml:lang="ru">Мотив документа</xrd:title>
+                                                <xrd:title xml:lang="kg">Мотив документ</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="familyStatus" type="xsd:string" nillable="true">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                FamilyStatus - семейное положение из Паспорта:
+                                                - 0 - Состоит в браке;
+                                                - 1 - В браке не состоял(а);
+                                                - 2 - Разведен(а);
+                                                - 3 - Вдовец/вдова;
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Family status</xrd:title>
+                                                <xrd:title xml:lang="ru">Семейное положение</xrd:title>
+                                                <xrd:title xml:lang="kg">Семейное положение</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="gender" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                gender
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">gender</xrd:title>
+                                                <xrd:title xml:lang="ru">Пол</xrd:title>
+                                                <xrd:title xml:lang="kg">Пол</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="addressRegion" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                addressRegion
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">addressRegion</xrd:title>
+                                                <xrd:title xml:lang="ru">Область</xrd:title>
+                                                <xrd:title xml:lang="kg">Область</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="addressLocality" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                addressLocality
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">addressLocality</xrd:title>
+                                                <xrd:title xml:lang="ru">Район/Село</xrd:title>
+                                                <xrd:title xml:lang="kg">Район/Село</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="addressStreet" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                addressStreet
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">addressStreet</xrd:title>
+                                                <xrd:title xml:lang="ru">Улица</xrd:title>
+                                                <xrd:title xml:lang="kg">Улица</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="addressHouse" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                addressHouse
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">addressHouse</xrd:title>
+                                                <xrd:title xml:lang="ru">Дом</xrd:title>
+                                                <xrd:title xml:lang="kg">Дом</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="addressBuilding" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                addressBuilding
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">addressBuilding</xrd:title>
+                                                <xrd:title xml:lang="ru">Здание</xrd:title>
+                                                <xrd:title xml:lang="kg">Здание</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="addressApartment" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                addressApartment
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">addressApartment</xrd:title>
+                                                <xrd:title xml:lang="ru">Квартира</xrd:title>
+                                                <xrd:title xml:lang="kg">Квартира</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="testBankPinService">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="request">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="clientid" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Clientid - логин
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Login</xrd:title>
+                                                <xrd:title xml:lang="ru">Логин</xrd:title>
+                                                <xrd:title xml:lang="kg">Логин</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="secret" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Secret - пароль
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Password</xrd:title>
+                                                <xrd:title xml:lang="ru">Пароль</xrd:title>
+                                                <xrd:title xml:lang="kg">Пароль</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="pin" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Pin
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Pin</xrd:title>
+                                                <xrd:title xml:lang="ru">Пин</xrd:title>
+                                                <xrd:title xml:lang="kg">Пин</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="series" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Series
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Series</xrd:title>
+                                                <xrd:title xml:lang="ru">Серия</xrd:title>
+                                                <xrd:title xml:lang="kg">Серия</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="number" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Number
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Number</xrd:title>
+                                                <xrd:title xml:lang="ru">Номер</xrd:title>
+                                                <xrd:title xml:lang="kg">Номер</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="testBankPinServiceResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="request">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="clientid" nillable="true" type="xsd:string"/>
+                                    <xsd:element name="secret" nillable="true" type="xsd:string"/>
+                                    <xsd:element name="pin" nillable="true" type="xsd:string"/>
+                                    <xsd:element name="series" nillable="true" type="xsd:string"/>
+                                    <xsd:element name="number" nillable="true" type="xsd:string"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                        <xsd:element name="response">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="pin" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Pin
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Pin</xrd:title>
+                                                <xrd:title xml:lang="ru">Пин</xrd:title>
+                                                <xrd:title xml:lang="kg">Пин</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="surname" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Surname
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Surname</xrd:title>
+                                                <xrd:title xml:lang="ru">Фамилия</xrd:title>
+                                                <xrd:title xml:lang="kg">Фамилия</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="name" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Name
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Name</xrd:title>
+                                                <xrd:title xml:lang="ru">Имя</xrd:title>
+                                                <xrd:title xml:lang="kg">Имя</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="patronymic" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                patronymic
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Patronymic</xrd:title>
+                                                <xrd:title xml:lang="ru">Отчество</xrd:title>
+                                                <xrd:title xml:lang="kg">Отчество</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="maritalStatus" type="xsd:string" nillable="true">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                MaritalStatus - семейное положение из ЗАГС:
+                                                - Состоит в браке;
+                                                - В браке не состоял(а);
+                                                - Разведен(а);
+                                                - Вдовец/вдова;
+                                                - null;
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Marital status</xrd:title>
+                                                <xrd:title xml:lang="ru">Семейное положение</xrd:title>
+                                                <xrd:title xml:lang="kg">Семейное положение</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="familyStatus" type="xsd:string" nillable="true">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                FamilyStatus - семейное положение из Паспорта:
+                                                - 0 - Состоит в браке;
+                                                - 1 - В браке не состоял(а);
+                                                - 2 - Разведен(а);
+                                                - 3 - Вдовец/вдова;
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Family status</xrd:title>
+                                                <xrd:title xml:lang="ru">Семейное положение</xrd:title>
+                                                <xrd:title xml:lang="kg">Семейное положение</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="gender" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                gender
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">gender</xrd:title>
+                                                <xrd:title xml:lang="ru">Пол</xrd:title>
+                                                <xrd:title xml:lang="kg">Пол</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="dateOfBirth" type="xsd:dateTime">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                dateOfBirth
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">dateOfBirth</xrd:title>
+                                                <xrd:title xml:lang="ru">Дата рождения</xrd:title>
+                                                <xrd:title xml:lang="kg">Дата рождения</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="passportSeries" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                passportSeries
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">passportSeries</xrd:title>
+                                                <xrd:title xml:lang="ru">Серия паспорта</xrd:title>
+                                                <xrd:title xml:lang="kg">Серия паспорта</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="passportNumber" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                passportNumber
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">passportNumber</xrd:title>
+                                                <xrd:title xml:lang="ru">Номер паспорта</xrd:title>
+                                                <xrd:title xml:lang="kg">Номер паспорта</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="voidStatus" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                voidStatus:
+                                                0 - Действительный;
+                                                1 - Не действительный;
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">voidStatus</xrd:title>
+                                                <xrd:title xml:lang="ru">Статус действительности</xrd:title>
+                                                <xrd:title xml:lang="kg">Статус действительности</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="issuedDate" type="xsd:dateTime">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                issuedDate
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">issuedDate</xrd:title>
+                                                <xrd:title xml:lang="ru">Дата выдачи</xrd:title>
+                                                <xrd:title xml:lang="kg">Дата выдачи</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="passportAuthority" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                passportAuthority
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">passportAuthority</xrd:title>
+                                                <xrd:title xml:lang="ru">Орган выдавший документ</xrd:title>
+                                                <xrd:title xml:lang="kg">Орган выдавший документ</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="expiredDate" type="xsd:dateTime">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                expiredDate
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">expiredDate</xrd:title>
+                                                <xrd:title xml:lang="ru">Дата окончания</xrd:title>
+                                                <xrd:title xml:lang="kg">Дата окончания</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="message" type="xsd:string" nillable="true">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Message - Адрес из Адресно-Справочного Бюро
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Address</xrd:title>
+                                                <xrd:title xml:lang="ru">Адрес</xrd:title>
+                                                <xrd:title xml:lang="kg">Адрес</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="passportLastPhotoByPin">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="request">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="pin" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:appinfo>
+                                                <xrd:title>Пин</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="passportLastPhotoByPinResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="request">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="pin" nillable="true" type="xsd:string"/>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                        <xsd:element name="response">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="photo" type="xsd:base64Binary">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Photo format base64
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title>Last passport photo</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="error" type="xsd:boolean">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                false - no error;
+                                                true - error during request;
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Error</xrd:title>
+                                                <xrd:title xml:lang="ru">Ошибка - запрос не отработал</xrd:title>
+                                                <xrd:title xml:lang="kg">Ошибка - запрос не отработал</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                    <xsd:element name="errorMessage" type="xsd:string">
+                                        <xsd:annotation>
+                                            <xsd:documentation>
+                                                Error message
+                                            </xsd:documentation>
+                                            <xsd:appinfo>
+                                                <xrd:title xml:lang="en">Error message</xrd:title>
+                                                <xrd:title xml:lang="ru">Сообшение ошибки</xrd:title>
+                                                <xrd:title xml:lang="kg">Сообшение ошибки</xrd:title>
+                                            </xsd:appinfo>
+                                        </xsd:annotation>
+                                    </xsd:element>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="requestheader">
+        <wsdl:part name="client" element="xrd:client"/>
+        <wsdl:part name="service" element="xrd:service"/>
+        <wsdl:part name="userId" element="xrd:userId"/>
+        <wsdl:part name="id" element="xrd:id"/>
+        <wsdl:part name="issue" element="xrd:issue"/>
+        <wsdl:part name="protocolVersion" element="xrd:protocolVersion"/>
+    </wsdl:message>
+
+    <wsdl:message name="passportDataForInfosystema">
+        <wsdl:part name="body" element="tns:passportDataForInfosystema"/>
+    </wsdl:message>
+    <wsdl:message name="passportDataForInfosystemaResponse">
+        <wsdl:part name="body" element="tns:passportDataForInfosystemaResponse"/>
+    </wsdl:message>
+    <wsdl:message name="passportStatus">
+        <wsdl:part name="body" element="tns:passportStatus"/>
+    </wsdl:message>
+    <wsdl:message name="passportStatusResponse">
+        <wsdl:part name="body" element="tns:passportStatusResponse"/>
+    </wsdl:message>
+    <wsdl:message name="testPassportDataByPSN">
+        <wsdl:part name="body" element="tns:testPassportDataByPSN"/>
+    </wsdl:message>
+    <wsdl:message name="testPassportDataByPSNResponse">
+        <wsdl:part name="body" element="tns:testPassportDataByPSNResponse"/>
+    </wsdl:message>
+    <wsdl:message name="passportDataByPSN">
+        <wsdl:part name="body" element="tns:passportDataByPSN"/>
+    </wsdl:message>
+    <wsdl:message name="passportDataByPSNResponse">
+        <wsdl:part name="body" element="tns:passportDataByPSNResponse"/>
+    </wsdl:message>
+    <wsdl:message name="testBankPinService">
+        <wsdl:part name="body" element="tns:testBankPinService"/>
+    </wsdl:message>
+    <wsdl:message name="testBankPinServiceResponse">
+        <wsdl:part name="body" element="tns:testBankPinServiceResponse"/>
+    </wsdl:message>
+    <wsdl:message name="passportLastPhotoByPin">
+        <wsdl:part name="body" element="tns:passportLastPhotoByPin"/>
+    </wsdl:message>
+    <wsdl:message name="passportLastPhotoByPinResponse">
+        <wsdl:part name="body" element="tns:passportLastPhotoByPinResponse"/>
+    </wsdl:message>
+
+    <wsdl:portType name="InfocomServicePortType">
+        <wsdl:operation name="passportDataForInfosystema">
+            <xsd:documentation>
+                <xrd:title xml:lang="en">Passport data by pin</xrd:title>
+                <xrd:title xml:lang="ru">Паспортные данные по Пин</xrd:title>
+                <xrd:title xml:lang="kg">Паспортные данные по Пин</xrd:title>
+            </xsd:documentation>
+            <wsdl:input message="tns:passportDataForInfosystema"/>
+            <wsdl:output message="tns:passportDataForInfosystemaResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="passportStatus">
+            <xsd:documentation>
+                <xrd:title xml:lang="en">Passport status by pin, series and number</xrd:title>
+                <xrd:title xml:lang="ru">Статус действительности паспорта по Пин, серия и номер</xrd:title>
+                <xrd:title xml:lang="kg">Статус действительности паспорта по Пин, серия и номер</xrd:title>
+            </xsd:documentation>
+            <wsdl:input message="tns:passportStatus"/>
+            <wsdl:output message="tns:passportStatusResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="testPassportDataByPSN">
+            <xsd:documentation>
+                <xrd:title xml:lang="en">Passport data by pin</xrd:title>
+                <xrd:title xml:lang="ru">Паспортные данные по Пин</xrd:title>
+                <xrd:title xml:lang="kg">Паспортные данные по Пин</xrd:title>
+            </xsd:documentation>
+            <wsdl:input message="tns:testPassportDataByPSN"/>
+            <wsdl:output message="tns:testPassportDataByPSNResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="passportDataByPSN">
+            <xsd:documentation>
+                <xrd:title xml:lang="en">Passport data by pin, series and number</xrd:title>
+                <xrd:title xml:lang="ru">Паспортные данные по Пин, серии и номеру</xrd:title>
+                <xrd:title xml:lang="kg">Паспортные данные по Пин, серии и номеру</xrd:title>
+            </xsd:documentation>
+            <wsdl:input message="tns:passportDataByPSN"/>
+            <wsdl:output message="tns:passportDataByPSNResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="testBankPinService">
+            <xsd:documentation>
+                <xrd:title xml:lang="en">Test bank pin service</xrd:title>
+                <xrd:title xml:lang="ru">Тестовый пин сервис для банков</xrd:title>
+                <xrd:title xml:lang="kg">Тестовый пин сервис для банков</xrd:title>
+            </xsd:documentation>
+            <wsdl:input message="tns:testBankPinService"/>
+            <wsdl:output message="tns:testBankPinServiceResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="passportLastPhotoByPin">
+            <xsd:documentation>
+                <xrd:title xml:lang="en">Passport last photo by pin</xrd:title>
+                <xrd:title xml:lang="ru">Последняя фото из паспорта по пину</xrd:title>
+                <xrd:title xml:lang="kg">Последняя фото из паспорта по пину</xrd:title>
+            </xsd:documentation>
+            <wsdl:input message="tns:passportLastPhotoByPin"/>
+            <wsdl:output message="tns:passportLastPhotoByPinResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="InfocomServiceBinding" type="tns:InfocomServicePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="passportDataForInfosystema">
+            <soap:operation soapAction="" style="document"/>
+            <xrd:version>v1</xrd:version>
+
+            <wsdl:input>
+                <soap:body parts="body" use="literal"/>
+                <soap:header message="tns:requestheader" part="client" use="literal"/>
+                <soap:header message="tns:requestheader" part="service" use="literal"/>
+                <soap:header message="tns:requestheader" part="userId" use="literal"/>
+                <soap:header message="tns:requestheader" part="id" use="literal"/>
+                <soap:header message="tns:requestheader" part="issue" use="literal"/>
+                <soap:header message="tns:requestheader" part="protocolVersion" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="body" use="literal"/>
+                <soap:header message="tns:requestheader" part="client" use="literal"/>
+                <soap:header message="tns:requestheader" part="service" use="literal"/>
+                <soap:header message="tns:requestheader" part="userId" use="literal"/>
+                <soap:header message="tns:requestheader" part="id" use="literal"/>
+                <soap:header message="tns:requestheader" part="issue" use="literal"/>
+                <soap:header message="tns:requestheader" part="protocolVersion" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="passportStatus">
+            <soap:operation soapAction="" style="document"/>
+            <xrd:version>v1</xrd:version>
+            <wsdl:input>
+                <soap:body parts="body" use="literal"/>
+                <soap:header message="tns:requestheader" part="client" use="literal"/>
+                <soap:header message="tns:requestheader" part="service" use="literal"/>
+                <soap:header message="tns:requestheader" part="userId" use="literal"/>
+                <soap:header message="tns:requestheader" part="id" use="literal"/>
+                <soap:header message="tns:requestheader" part="issue" use="literal"/>
+                <soap:header message="tns:requestheader" part="protocolVersion" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="body" use="literal"/>
+                <soap:header message="tns:requestheader" part="client" use="literal"/>
+                <soap:header message="tns:requestheader" part="service" use="literal"/>
+                <soap:header message="tns:requestheader" part="userId" use="literal"/>
+                <soap:header message="tns:requestheader" part="id" use="literal"/>
+                <soap:header message="tns:requestheader" part="issue" use="literal"/>
+                <soap:header message="tns:requestheader" part="protocolVersion" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="testPassportDataByPSN">
+            <soap:operation soapAction="" style="document"/>
+            <xrd:version>v1</xrd:version>
+
+            <wsdl:input>
+                <soap:body parts="body" use="literal"/>
+                <soap:header message="tns:requestheader" part="client" use="literal"/>
+                <soap:header message="tns:requestheader" part="service" use="literal"/>
+                <soap:header message="tns:requestheader" part="userId" use="literal"/>
+                <soap:header message="tns:requestheader" part="id" use="literal"/>
+                <soap:header message="tns:requestheader" part="issue" use="literal"/>
+                <soap:header message="tns:requestheader" part="protocolVersion" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="body" use="literal"/>
+                <soap:header message="tns:requestheader" part="client" use="literal"/>
+                <soap:header message="tns:requestheader" part="service" use="literal"/>
+                <soap:header message="tns:requestheader" part="userId" use="literal"/>
+                <soap:header message="tns:requestheader" part="id" use="literal"/>
+                <soap:header message="tns:requestheader" part="issue" use="literal"/>
+                <soap:header message="tns:requestheader" part="protocolVersion" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="passportDataByPSN">
+            <soap:operation soapAction="" style="document"/>
+            <xrd:version>v1</xrd:version>
+
+            <wsdl:input>
+                <soap:body parts="body" use="literal"/>
+                <soap:header message="tns:requestheader" part="client" use="literal"/>
+                <soap:header message="tns:requestheader" part="service" use="literal"/>
+                <soap:header message="tns:requestheader" part="userId" use="literal"/>
+                <soap:header message="tns:requestheader" part="id" use="literal"/>
+                <soap:header message="tns:requestheader" part="issue" use="literal"/>
+                <soap:header message="tns:requestheader" part="protocolVersion" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="body" use="literal"/>
+                <soap:header message="tns:requestheader" part="client" use="literal"/>
+                <soap:header message="tns:requestheader" part="service" use="literal"/>
+                <soap:header message="tns:requestheader" part="userId" use="literal"/>
+                <soap:header message="tns:requestheader" part="id" use="literal"/>
+                <soap:header message="tns:requestheader" part="issue" use="literal"/>
+                <soap:header message="tns:requestheader" part="protocolVersion" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="testBankPinService">
+            <soap:operation soapAction="" style="document"/>
+            <xrd:version>v1</xrd:version>
+
+            <wsdl:input>
+                <soap:body parts="body" use="literal"/>
+                <soap:header message="tns:requestheader" part="client" use="literal"/>
+                <soap:header message="tns:requestheader" part="service" use="literal"/>
+                <soap:header message="tns:requestheader" part="userId" use="literal"/>
+                <soap:header message="tns:requestheader" part="id" use="literal"/>
+                <soap:header message="tns:requestheader" part="issue" use="literal"/>
+                <soap:header message="tns:requestheader" part="protocolVersion" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="body" use="literal"/>
+                <soap:header message="tns:requestheader" part="client" use="literal"/>
+                <soap:header message="tns:requestheader" part="service" use="literal"/>
+                <soap:header message="tns:requestheader" part="userId" use="literal"/>
+                <soap:header message="tns:requestheader" part="id" use="literal"/>
+                <soap:header message="tns:requestheader" part="issue" use="literal"/>
+                <soap:header message="tns:requestheader" part="protocolVersion" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+        <wsdl:operation name="passportLastPhotoByPin">
+            <soap:operation soapAction="" style="document"/>
+            <xrd:version>v1</xrd:version>
+
+            <wsdl:input>
+                <soap:body parts="body" use="literal"/>
+                <soap:header message="tns:requestheader" part="client" use="literal"/>
+                <soap:header message="tns:requestheader" part="service" use="literal"/>
+                <soap:header message="tns:requestheader" part="userId" use="literal"/>
+                <soap:header message="tns:requestheader" part="id" use="literal"/>
+                <soap:header message="tns:requestheader" part="issue" use="literal"/>
+                <soap:header message="tns:requestheader" part="protocolVersion" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="body" use="literal"/>
+                <soap:header message="tns:requestheader" part="client" use="literal"/>
+                <soap:header message="tns:requestheader" part="service" use="literal"/>
+                <soap:header message="tns:requestheader" part="userId" use="literal"/>
+                <soap:header message="tns:requestheader" part="id" use="literal"/>
+                <soap:header message="tns:requestheader" part="issue" use="literal"/>
+                <soap:header message="tns:requestheader" part="protocolVersion" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+
+    </wsdl:binding>
+    <wsdl:service name="InfocomService">
+        <wsdl:port binding="tns:InfocomServiceBinding" name="InfocomServicePort">
+            <soap:address location="http://ss.tunduk"/>
+            <xrd:title xml:lang="en">Passpport Infocom Services</xrd:title>
+            <xrd:title xml:lang="ru">Паспорт Сервисы Инфоком</xrd:title>
+            <xrd:title xml:lang="kg">Паспорт Сервисы Инфоком</xrd:title>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

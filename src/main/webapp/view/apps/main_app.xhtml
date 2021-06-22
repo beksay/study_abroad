@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/layouts/base.xhtml">
+    <ui:define name="content">
+     <div class="form-app">
+      <h2>#{msgs.appDetailForm}</h2> 
+		<br/><br/>	        
+		<h:form id="add-card-form" prependId="false">
+			<h:panelGroup id="messages">
+				<p:growl globalOnly="true" />
+			</h:panelGroup>
+		     
+		     <p:dataTable var="car" value="#{applicationsController.modules}">
+				    <p:column headerText="№" width="70">
+				        <h:outputText value="#{car.index}" /> 
+				    </p:column>
+				    
+				    <p:column headerText="#{msgs.stageName}">
+				        <h:commandLink value="Экспортер" action="#{exporterController.edit(car)}" rendered="#{car.index eq 1}" 
+				           style="color: #{car.status eq 'NEW' ? 'black' : 'green'} "/>
+				        <h:commandLink value="Импортер" action="#{importerController.edit(car)}" rendered="#{car.index eq 2}" 
+				           style="color: #{car.status eq 'NEW' ? 'black' : 'green'} "/>
+				        <h:commandLink value="Транспортировка" action="#{transportationController.edit(car)}" rendered="#{car.index eq 3}" 
+				           style="color: #{car.status eq 'NEW' ? 'black' : 'green'} "/>
+				        <h:commandLink value="Описание продукции" action="#{goodsController.edit(car)}" rendered="#{car.index eq 4}"
+				           style="color: #{car.status eq 'NEW' ? 'black' : 'green'} " />
+				        <h:commandLink value="Документы" action="#{documentsController.edit(car)}" rendered="#{car.index eq 5}" 
+				           style="color: #{car.status eq 'NEW' ? 'black' : 'green'} "/>
+				        <h:commandLink value="Дополнительная информация" action="#{additionalInfoController.edit(car)}" rendered="#{car.index eq 6}" 
+				           style="color: #{car.status eq 'NEW' ? 'black' : 'green'} "/>
+				    </p:column>
+				 
+				    <p:column headerText="#{msgs.status}" width="150">
+				    	<em class="fa #{car.status eq 'NEW' ? 'fa-circle-thin' : 'fa-check-square'}"></em>
+				    </p:column>
+				    
+				</p:dataTable>
+				
+				<div class="m-top"> 
+			    	<p:commandButton value="#{msgs.sendApp}"  styleClass="button light-blue" 
+			    	   action="#{applicationsController.sendApp()}" rendered="#{applicationsController.checkForFilled(conversationApp.applications)}"/>
+			    	<p:commandButton value="#{msgs.back}" action="#{applicationsController.back()}" immediate="true" styleClass="button red m-left"/>
+			    	<p:commandButton value="#{msgs.cancel}" action="#{applicationsController.cancel()}" immediate="true" styleClass="button red m-left"/>
+			   	</div>
+		    
+		</h:form>	
+		<div class="clear"></div>	  
+		</div>
+    </ui:define>
+</ui:composition>

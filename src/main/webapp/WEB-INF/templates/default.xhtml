@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" lang="en">
+
+<ui:insert name="metadata" />
+
+<h:head>
+	<meta http-equiv="content-type"
+		content="application/xhtml+xml; charset=utf-8" />
+	<meta http-equiv="pragma" content="no-cache" />
+
+	<title><ui:insert name="title">
+			<h:outputText value="#{msgs.title}" />
+		</ui:insert></title>
+
+	<ui:insert name="favicon">
+		<link rel="shortcut icon" type="image/x-icon"
+			href="#{request.contextPath}/javax.faces.resource/favicon.ico.xhtml?ln=img" />
+	</ui:insert>
+
+	<h:outputStylesheet library="css" name="reset.css" />
+	<h:outputStylesheet library="css" name="text.css" />
+	<h:outputStylesheet library="css" name="ui-util.css" />
+	<h:outputStylesheet library="css" name="grid.css" />
+	<h:outputStylesheet library="css" name="map.css" />
+
+	<ui:insert name="head">
+		<h:outputStylesheet library="css" name="styles.css" />
+	</ui:insert>
+
+	<ui:insert name="additional-head" />
+</h:head>
+<h:body>
+
+	<ui:insert name="content">
+		<div>
+			<h1>Access blocked default</h1>
+		</div>
+	</ui:insert>
+
+	<ui:insert name="js" />
+	<ui:insert name="add-js" />
+</h:body>
+</html>

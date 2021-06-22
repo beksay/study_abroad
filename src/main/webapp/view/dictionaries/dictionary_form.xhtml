@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/templates/layouts/private.xhtml">
+ 	<ui:define name="content">
+ 		
+		<h2>#{dictionaryTypeController.dictionaryType.name} </h2> 
+		<br/><br/>	        
+		<h:form id="add-card-form" prependId="false">
+			<h:panelGroup id="messages">
+				<p:growl globalOnly="true" />
+			</h:panelGroup>
+		    <h:panelGrid styleClass="form-table" columns="3">
+		    	
+				<h:outputText value="#{msgs.code}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{dictionaryController.dictionary.code}" id="code" maxlength="150" style="width:300px;"  required="true"
+					requiredMessage="#{msgs.thisFieldIsRequired}"/>
+				<p:message for="code" />
+				
+				<h:outputText value="#{msgs.name}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{dictionaryController.dictionary.name}" id="name" maxlength="150" style="width:300px;"  required="true"
+					requiredMessage="#{msgs.thisFieldIsRequired}"/>
+				<p:message for="name" />
+				
+				<h:outputText value="#{msgs.enName}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{dictionaryController.dictionary.enName}" maxlength="150" id="enName"  style="width:300px;" />
+				<p:message for="enName" />
+				
+				<h:outputText value="#{msgs.kgName}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{dictionaryController.dictionary.kgName}" maxlength="150" id="kgName"  style="width:300px;" />
+				<p:message for="kgName" />
+				
+				<h:outputText value="#{msgs.symbol}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{dictionaryController.dictionary.symbol}" maxlength="150" id="symbol"  style="width:300px;" />
+				<p:message for="symbol" />
+				
+				<h:outputLabel for="parent" value="#{msgs.parent}" />
+				<p:autoComplete id="parent" dropdown="true" var="type" scrollHeight="455"
+				itemValue="#{type}" itemLabel="#{type.name}" size="33" value="#{dictionaryController.dictionary.parent}"
+				converter="cachedConverter" completeMethod="#{dictionaryController.getParentList}">
+				</p:autoComplete>
+				<h:message for="parent" display="icon" style="color:red;" />
+				
+				<h:outputLabel value="#{msgs.active}" />
+				<p:selectBooleanCheckbox value="#{dictionaryController.dictionary.active}">
+		        </p:selectBooleanCheckbox>
+		        <h:outputText />
+				
+		    </h:panelGrid>	
+		   
+		    <div class="m-top">
+		    	<h:commandButton value="#{msgs.save}" action="#{dictionaryController.save()}" styleClass="button light-blue"/>
+		    	<h:commandButton value="#{msgs.cancel}" action="#{dictionaryController.cancel()}" immediate="true" styleClass="button red m-left"/>
+		   	</div>
+		    
+		</h:form>
+			
+		<div class="clear"></div>	
+				
+	</ui:define>	
+</ui:composition>

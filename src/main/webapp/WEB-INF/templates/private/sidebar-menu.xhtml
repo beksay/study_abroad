@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+
+<ui:composition>
+			
+	<h:form class="clearfix">
+	
+		<h:form>
+		    <div class="logo-title">
+		        <h:commandLink action="#{userController.home()}">
+		            <h1 style="color:white">ISelect</h1>
+				</h:commandLink>
+			</div>
+	    </h:form>
+             	
+	    <div class="user clearfix">
+	        <div class="user-icon f-left"></div>
+	        <div class="user-name f-left">
+	        	#{userController.loginUtil.currentUser.username}	          	
+	        </div>
+	        <div class="user-menu">
+	            <div class="menu">
+	              	<ul>				        
+					     <li>
+					         <h:commandLink action="#{passwordChanger.change()}" value="#{msgs.changePassword}" />
+					     </li>
+					     <li>
+					         <h:commandLink value="#{msgs.logout}" action="#{userController.logout()}" />
+					     </li>
+					   </ul>
+	            </div>
+	        </div>	       
+	    </div>
+ 
+	    <h:panelGroup >   	
+			<div class="seperator"></div>
+			<br/>
+			<p:panelMenu styleClass="m-left menu-header" >
+		        <p:submenu label="#{msgs.dictionaries}"  expanded="false" styleClass="menu-submenu" 
+		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}">
+		       		<p:menuitem value="#{msgs.dictionaries}" outcome="/view/dictionaries/dict_type_list.xhtml"  icon="fa fa-book" styleClass="menu-item" />
+		        </p:submenu>
+		        <p:submenu label="#{msgs.nomenclature}"  expanded="false" styleClass="menu-submenu"
+		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin') or loginUtil.userHasRole(loginUtil.currentUser,'inspector')}">
+		            <p:menuitem value="#{msgs.organization}" outcome="/view/nomenclature/organization_list.xhtml"  icon="fa fa-book" styleClass="menu-item" 
+		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin') or loginUtil.userHasRole(loginUtil.currentUser,'inspector')}"/>
+		            <p:menuitem value="#{msgs.entryPoint}" outcome="/view/nomenclature/entry_point_list.xhtml"  icon="fa fa-book" styleClass="menu-item" 
+		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}"/>
+		            <p:menuitem value="#{msgs.quarantineObject}" outcome="/view/nomenclature/quarantine_object_list.xhtml"  icon="fa fa-book" styleClass="menu-item" 
+		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}"/>
+		            <p:menuitem value="#{msgs.violationOfLaw}" outcome="/view/nomenclature/violation_of_law_list.xhtml"  icon="fa fa-book" styleClass="menu-item" 
+		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}"/>
+		            <p:menuitem value="#{msgs.transportType}" outcome="/view/nomenclature/transport_type_list.xhtml"  icon="fa fa-book" styleClass="menu-item" 
+		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}"/>
+		            <p:menuitem value="#{msgs.products}" outcome="/view/nomenclature/products_list.xhtml"  icon="fa fa-book" styleClass="menu-item" 
+		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}"/>
+		        </p:submenu>
+		        <p:submenu label="#{msgs.users}"  expanded="false" styleClass="menu-submenu"
+		             rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}">
+		            <p:menuitem value="#{msgs.subdivision}" outcome="/view/subdivision/subdivision_tree.xhtml"  icon="fa fa-book" styleClass="menu-item" />
+		            <p:menuitem value="#{msgs.users}" outcome="/view/user/list.xhtml"  icon="fa fa-book" styleClass="menu-item" />
+		        </p:submenu>
+		        <p:submenu label="#{msgs.documents}"  expanded="false" styleClass="menu-submenu"
+		               rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'inspector') or loginUtil.userHasRole(loginUtil.currentUser,'disinfection') or loginUtil.userHasRole(loginUtil.currentUser,'expertise')}">
+		       		<p:menuitem value="#{msgs.applications}" outcome="/view/applications/applications_journal.xhtml"  icon="fa fa-book" styleClass="menu-item" 
+		       		   rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'inspector')}"/>
+		       		<p:menuitem value="#{msgs.inspection}" outcome="/view/applications/inspection/inspection_journal.xhtml"  icon="fa fa-book" styleClass="menu-item" 
+		       		   rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'inspector')}"/>
+		       		<p:menuitem value="#{msgs.disinfection}" outcome="/view/applications/disinfection/disinfection_journal.xhtml"  icon="fa fa-book" styleClass="menu-item" 
+		       		   rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'disinfection')}"/>
+		       		<p:menuitem value="#{msgs.expertises}" outcome="/view/applications/expertises/expertises_journal.xhtml"  icon="fa fa-book" styleClass="menu-item" 
+		       		   rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'expertise')}"/>
+		       		<p:menuitem value="#{msgs.certificate}" outcome="/view/applications/certificate/certificate_journal.xhtml"  icon="fa fa-book" styleClass="menu-item" 
+		       		   rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'inspector')}"/>
+		        </p:submenu>
+		         <p:submenu label="#{msgs.phytosanitaryInspection}"  expanded="false" styleClass="menu-submenu"
+		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'inspector')}">
+		       		<p:menuitem value="#{msgs.noStorageFacilitiesCard}" outcome="/view/no_storage/no_storage_list.xhtml"  icon="fa fa-book" styleClass="menu-item" />
+		       		<p:menuitem value="#{msgs.storageFacilitiesCard}" outcome="/view/storage/storage_list.xhtml"  icon="fa fa-book" styleClass="menu-item" />
+		        </p:submenu>
+		          <p:submenu label="#{msgs.zoneQuarantineFacilities}"  expanded="false" styleClass="menu-submenu"
+		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'inspector')}">
+		          	<p:menuitem value="#{msgs.objectList}" outcome="/view/map/map_list.xhtml"  icon="fa fa-book" styleClass="menu-item" />
+		       		<p:menuitem value="#{msgs.map}" outcome="/view/map/map_view.xhtml"  icon="fa fa-book" styleClass="menu-item" />
+		        </p:submenu>
+		    </p:panelMenu>	
+	     </h:panelGroup>
+	    
+	</h:form>
+	<br/>
+	<div class="seperator"></div>
+</ui:composition>
+
+</html>

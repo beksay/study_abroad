@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+<ui:composition template="base.xhtml">
+
+	<ui:define name="outer-wrap-header">
+	</ui:define>
+
+	<ui:define name="outer-wrap-nav"/>
+
+    <ui:define name="outer-wrap-content">
+
+        <div id="wrap-private-content">
+        <input type="checkbox" checked="checked" id="nav-toggle" ></input>
+            <div id="sidebar-menu">
+            	<ui:insert name="sidebar-menu">
+                	<ui:include src="../private/sidebar-menu.xhtml"/>
+                </ui:insert>                
+            </div>
+             <div id="private-content">
+            	
+            	<div id="content" class="private" >
+                	<ui:insert name="content"/>
+                </div>
+            </div>
+        </div>
+
+    </ui:define>
+
+	<ui:define name="outer-wrap-footer"/>
+	
+
+
+</ui:composition>
+
+</html>

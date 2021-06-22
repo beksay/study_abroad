@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/templates/layouts/private.xhtml">
+    <ui:define name="additional-head">
+-        <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=8453d835-3c9f-452f-977f-cea31785f278" type="text/javascript"></script>
+-        <script src="https://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
+-    </ui:define>
+ 	<ui:define name="content">
+		
+	    <h1>MAPS</h1>
+		<div id="map"></div>
+		
+		<script  type="text/javascript">
+			ymaps.ready(init);
+	
+			function init () {
+			    // Создание экземпляра карты.
+			    var myMap = new ymaps.Map('map', {
+			            center: [61.766513, 34.344165],
+			            zoom: 12
+			        }, {
+			            searchControlProvider: 'yandex#search'
+			        });
+	
+			    // Загрузка YMapsML-файла.
+			    ymaps.geoXml.load('data.xml')
+			        .then(function (res) {
+			            // Добавление геообъектов на карту.
+			            myMap.geoObjects.add(res.geoObjects);
+			           // Вызывается в случае неудачной загрузки YMapsML-файла.
+			        }, function (error){
+			            alert('Ошибка: ' + error);
+			        });
+			}
+		</script>	
+	</ui:define>	
+</ui:composition>

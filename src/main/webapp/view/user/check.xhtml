@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/layouts/base.xhtml">
+    
+    <ui:define name="content">
+        <div class="main-login">
+            <div class="container">
+				<h:form id="login-form" prependId="false">
+					<h1>Проверка счёт-фактуры</h1>
+                    <p:growl id="messages" escape="false" autoUpdate="true"/>
+                    <p:inputText id="number" value="#{checkBean.invoiceNumber}" placeholder="#{msgs.invoiceNumber}" required="true" requiredMessage="#{msgs.invoiceNumber} - #{msgs.thisFieldIsRequired}"/>
+	                <p:inputNumber id="amount" value="#{checkBean.totalAmount}" placeholder="#{msgs.amount}" required="true" requiredMessage="#{msgs.amount} - #{msgs.thisFieldIsRequired}" decimalPlaces="2"/>	                
+	                <p:commandButton value="Проверить счет-фактуру" action="#{checkBean.check()}" update="@form"/>
+                </h:form>                
+            </div>
+        </div>
+    </ui:define>
+    
+</ui:composition>

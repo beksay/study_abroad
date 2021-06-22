@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/layouts/private.xhtml">
+    <ui:define name="content">
+        <h2>#{msgs.declineForm}</h2> 
+		<br/><br/>	        
+		<h:form id="add-card-form" prependId="false">
+		    <h:panelGrid styleClass="form-table" columns="3">
+	
+				    <h:outputLabel value="#{msgs.note}" />			
+					<p:inputTextarea value="#{conversationApp.applications.note}" id="notes" rows="7" cols="50" required="true" requiredMessage="#{msgs.thisFieldIsRequired}" />
+					<h:message for="notes" display="icon" style="color:red;" />
+				
+		    </h:panelGrid>	 
+		   
+		    <div class="m-top"> 
+		    	<p:commandButton value="#{msgs.save}" action="#{applicationsController.declineApp()}" styleClass="button light-blue" ajax="false"/>
+		    	<p:commandButton value="#{msgs.cancel}" action="#{applicationsController.cancel()}" immediate="true" styleClass="button red m-left"/>
+		   	</div>
+		</h:form>
+			
+		<div class="clear"></div>	
+    </ui:define>
+</ui:composition>

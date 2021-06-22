@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:leaf="http://java.sun.com/jsf/composite/jsf2leaf"
+	template="/WEB-INF/templates/layouts/private.xhtml">
+	<ui:define name="content">
+		<h2>#{msgs.objectList}</h2>
+
+		<h:form id="form">
+			<h:panelGrid columns="6">
+
+				<h:panelGrid columns="1">
+					<h:outputLabel value="#{msgs.qObject}" />
+					<h:inputText id="object"
+						value="#{conversationMap.mapZone.quarantineObject}"
+						style="width: 270px;" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="1">
+					<h:outputLabel value="#{msgs.latitude}" />
+					<h:inputText id="lat" value="#{conversationMap.mapZone.latitude}"
+						style="width: 270px;" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="1">
+					<h:outputLabel value="#{msgs.longitude}" />
+					<h:inputText id="lng" value="#{conversationMap.mapZone.longitude}"
+						style="width: 270px;" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="1">
+					<h:outputLabel value="#{msgs.dangerZone}" />
+					<h:inputText id="danger"
+						value="#{conversationMap.mapZone.dangerRadius}"
+						style="width: 270px;" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="1">
+					<h:outputLabel value="#{msgs.warningZone}" />
+					<h:inputText id="warning"
+						value="#{conversationMap.mapZone.warningRadius}"
+						style="width: 270px;" />
+				</h:panelGrid>
+			</h:panelGrid>
+
+			<br />
+
+			<p:commandButton value="#{msgs.save}"
+				action="#{mapController.save()}" styleClass="button green f-left" />
+			<p:commandButton value="#{msgs.cancel}"
+				action="#{mapController.cancel()}" styleClass="button red f-left"
+				immediate="true" />
+
+			<br />
+			<br />
+
+			<div id="map"></div>
+
+			<link rel="stylesheet"
+				href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+			<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+			<script src="https://libs.cartocdn.com/carto.js/v4.2.0/carto.min.js"></script>
+			<h:outputScript library="js" name="map.js" rendered="#{conversationMap.mapZone.id eq null}"/>
+			<h:outputScript library="js" name="map_edit.js" rendered="#{conversationMap.mapZone.id ne null}"/>
+		</h:form>
+	</ui:define>
+</ui:composition>

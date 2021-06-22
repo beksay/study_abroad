@@ -1,0 +1,46 @@
+
+var sessionServerUrl = " https://sessionserver.onoi.kg";
+var appName = "EsfApp";
+var apiKey = "142CF319-BD63-4B4C-A4E3-28F2430E477B";
+
+function initSmartId() {
+  window.SmartId.initialize(sessionServerUrl, appName, newQrCode => {
+      document.querySelectorAll('[id="qrCode"]')[0].src = newQrCode;
+    },
+
+    authorizationData => {
+      UpdateUi();
+    }, () => {
+      Exit(true);
+    }, news => {
+      if (news.newsType === "pushMessage") {
+        alert("Новое сообщение: " + news.message);
+      }
+
+      if (news.newsType === "authorizationConfirmed") {
+        alert("Авторизация подтверждена фотографией");
+      }
+
+    }, apiKey);
+}
+
+function UpdateUi() {
+  if (window.SmartId.isAuthorized() && window.SmartId.getAuthorizationData()) {
+    let authorizationData = window.SmartId.getAuthorizationData();
+    let dta = {
+      sessionId: authorizationData.sessionId,
+      userInn: authorizationData.inn
+    };
+    window.onoiSuccessCallback(dta);
+  } else {
+    $("#qrCodeBlock").show();
+    $("#userInfo").hide();
+  }
+}
+
+function Exit(closed) {
+  if (!closed) {
+    window.SmartId.closeSession();
+  }
+  UpdateUi();
+}

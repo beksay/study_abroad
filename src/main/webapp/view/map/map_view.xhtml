@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:leaf="http://java.sun.com/jsf/composite/jsf2leaf"
+	template="/WEB-INF/templates/layouts/private.xhtml">
+	<ui:define name="content">
+		<h2>#{msgs.map}</h2>
+		<h:form id="filter-form">
+
+			<p:commandButton value="#{msgs.add}"
+				action="#{noStorageController.add()}"
+				styleClass="button green f-right" />
+		</h:form>
+
+		<h:form id="form">
+			<leaf:mapAdvanced map="#{mapController.fields}" />
+		</h:form>
+		<div class="clear"></div>
+	</ui:define>
+</ui:composition>

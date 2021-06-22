@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/layouts/base.xhtml">
+    <ui:define name="content">
+    <div class="form-wrap">
+      <h:form class="form-home">
+          <h:commandLink class="home-button" action="#{applicationsController.add()}" value="#{msgs.appForm}" style="color:green"/>
+          <h:commandLink class="home-button" action="#{publicController.loginForm()}" value="#{msgs.login}" style="float:right; color:blue"/>
+      </h:form>
+    </div>   
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/templates/layouts/private.xhtml">
+ 	<ui:define name="content">
+ 		
+		<h2>#{msgs.subdivision}</h2>         
+		
+		<h:form id="dict-form" prependId="false">
+			<p:growl id="messages" showDetail="true" />
+			
+			<p:tree id="tree" value="#{subdivisionController.dictRoot}" var="dict" dynamic="true"
+				cache="true" selectionMode="single"
+				selection="#{subdivisionController.selectedNode}">
+				
+				<p:ajax event="expand" listener="#{subdivisionController.onNodeExpand}" update="messages" />
+				
+				<p:treeNode type="dict" expandedIcon="ui-icon-folder-open" collapsedIcon="ui-icon-folder-collapsed">
+					<h:outputText value="#{dict.code} - #{dict.name}" />
+				</p:treeNode>
+				
+				<p:treeNode type="withoutChildren" icon="ui-icon-document">
+					<h:outputText value="#{dict.code}  #{dict.name}" />
+				</p:treeNode>
+			</p:tree>
+			
+			<p:contextMenu for="tree">
+				<p:menuitem value="#{msgs.add}" actionListener="#{subdivisionController.onContextMenuAdd}" 
+					update="dict-info" icon="ui-icon-search" oncomplete="PF('dictDialog').show()" />
+	       		<p:menuitem value="#{msgs.edit}" actionListener="#{subdivisionController.onContextMenuEdit}" 
+	       			update="dict-info" icon="ui-icon-search" oncomplete="PF('dictDialog').show()" />
+	       		<p:menuitem value="#{msgs.delete}" actionListener="#{subdivisionController.onContextMenuDelete}" 
+	       			update="dict-info" icon="ui-icon-close" oncomplete="PF('dictDialog').show()" />
+   			</p:contextMenu>
+			
+		</h:form>
+		
+		<p:dialog id="dict-dialog" header="#{msgs.addSubdivision}" widgetVar="dictDialog" howEffect="fade"  width="550" height="350" dynamic="true" onShow="PF('statusDialogMain').hide()">
+			<h:panelGroup id="dict-info">
+				<h:form id="dict-info-form">
+					
+					<h:panelGrid columns="2">
+						
+						<h:outputText styleClass="label" value="#{msgs.parentName}" escape="false" />
+						<h:outputText value="#{subdivisionController.selectedDictionaryParent.code}" />
+						
+						<h:outputText styleClass="label" value="#{msgs.parentCode}" escape="false" />
+						<h:outputText value="#{subdivisionController.selectedDictionaryParent.name}"  />
+						
+						<h:outputText styleClass="label" value="#{msgs.newCode}" />
+						<h:inputText id="newCode" value="#{subdivisionController.selectedDictionary.code}" required="true" requiredMessage="#{msgs.thisFieldIsRequired}" disabled="#{subdivisionController.forDelete}" />
+						<h:outputText styleClass="label" value="" />
+						<h:message id="messageForNewCode" for="newCode" styleClass="error" />
+						
+						<h:outputText styleClass="label" value="#{msgs.newCodeName}" />
+						<h:inputText id="newCodeName" value="#{subdivisionController.selectedDictionary.name}" required="true" requiredMessage="#{msgs.thisFieldIsRequired}" disabled="#{subdivisionController.forDelete}" />
+						<h:outputText styleClass="label" value="" />
+						<h:message id="messageForNewCodeName" for="newCodeName" styleClass="error" />
+						
+					</h:panelGrid>
+					
+					<h:panelGroup class="btnRegBlock  f-right m-left m-right">
+						<p:commandButton value="#{msgs.save}" oncomplete="if(!args.validationFailed) PF('dictDialog').hide();" ajax="false"
+							actionListener="#{subdivisionController.saveDict()}" update="dict-info-form :dict-form:tree" rendered="#{not subdivisionController.forDelete}" />
+						
+						<p:commandButton value="#{msgs.delete}" oncomplete="if(!args.validationFailed) PF('dictDialog').hide();" ajax="false" 
+							actionListener="#{subdivisionController.deleteDict()}" update=":dict-info-form :dict-form" rendered="#{subdivisionController.forDelete}" />
+						
+						<p:commandButton value="#{msgs.cancel}" onsuccess="PF('dictDialog').hide();"/>
+					</h:panelGroup>
+					
+				</h:form>
+			</h:panelGroup>
+	    </p:dialog>
+				
+	</ui:define>	
+</ui:composition>

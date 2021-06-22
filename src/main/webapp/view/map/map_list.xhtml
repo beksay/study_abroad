@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/layouts/private.xhtml">
+	<ui:define name="content">
+		<h2>#{msgs.objectList}</h2>
+		<h:form id="filter-form">
+
+			<p:commandButton value="#{msgs.add}" action="#{mapController.add()}"
+				styleClass="button green f-right" />
+
+		</h:form>
+
+		<h:form id="form">
+			<p:dataTable var="entity" value="#{mapController.mapList}"
+				paginator="true" rows="20" lazy="true" rowKey="#{entity.id}"
+				rowIndexVar="index" tableStyleClass="display-table" id="table"
+				emptyMessage="#{msgs.noRecordsFound}"
+				rowsPerPageTemplate="10,20,30,40,50" paginatorPosition="bottom"
+				pageLinks="10" sortOrder="ASCENDING"
+				currentPageReportTemplate="Всего : #{noStorageList.model.rowCount} из #{noStorageList.model.totalCount}  &#160;&#160;| #{msgs.amountPerPage}"
+				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport} {RowsPerPageDropdown}"
+				selection="#{noStorageList.noStorage}"
+				first="#{noStorageList.first}">
+				<p:ajax event="page" listener="#{noStorageList.onPageChange}" />
+
+				<p:column headerText="№">
+					<h:outputText value="#{index+1}" />
+				</p:column>
+
+				<p:column headerText="#{msgs.qObject}">
+					<h:outputText value="#{entity.quarantineObject}" />
+				</p:column>
+
+				<p:column headerText="#{msgs.latitude}">
+					<h:outputText value="#{entity.latitude}" />
+				</p:column>
+
+				<p:column headerText="#{msgs.longitude}">
+					<h:outputText value="#{entity.longitude}" />
+				</p:column>
+
+				<p:column headerText="#{msgs.dangerZone}">
+					<h:outputText value="#{entity.dangerRadius}" />
+				</p:column>
+
+				<p:column headerText="#{msgs.warningZone}">
+					<h:outputText value="#{entity.warningRadius}" />
+				</p:column>
+
+				<p:column headerText="#{msgs.operation}" exportable="false"
+					style="width:100px;">
+					<h:commandButton action="#{mapController.edit(entity)}"
+						value="#{msgs.edit}" styleClass="btn-icon edit"
+						title="#{msgs.edit}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

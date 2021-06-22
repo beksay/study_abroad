@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/layouts/private.xhtml">
+	<ui:define name="content">
+		<h2>#{organizationViolationController.conversation.organization.name}</h2>
+		<br />
+		<br />
+		<h:form id="form">
+			<h:panelGrid columns="3">
+				<h:panelGrid columns="1">
+					<h:outputLabel for="violationName" value="#{msgs.violationName}" />
+					<p:autoComplete id="violationName" dropdown="true" var="type"
+						itemValue="#{type}" itemLabel="#{type.violationName}" size="33"
+						value="#{organizationViolationController.organizationViolation.violation}"
+						converter="cachedConverter" scrollHeight="300"
+						completeMethod="#{organizationViolationController.getViolationOfLawList}"
+						required="true" requiredMessage="#{msgs.thisFieldIsRequired}">
+					</p:autoComplete>
+					<h:message for="violationName" display="icon" style="color:red;" />
+				</h:panelGrid>
+				
+				<h:panelGrid columns="1">
+					<h:outputText value="#{msgs.validity}" styleClass="form-table-label disp-blc"/>
+					<p:calendar value="#{organizationViolationController.organizationViolation.validity}" id="validity"  showOn="button" pattern="dd-MM-yyyy"
+					  required="true" requiredMessage="#{msgs.thisFieldIsRequired}"/> 
+					<p:message for="validity" />
+				</h:panelGrid>
+			</h:panelGrid>
+
+			<div class="m-top">
+				<p:commandButton ajax="false" styleClass="add-btn" value="#{msgs.add}" actionListener="#{organizationViolationController.save()}" />
+				<p:commandButton value="#{msgs.back}" action="#{organizationViolationController.cancel()}" immediate="true"
+					styleClass="button red m-left" />
+			</div>
+
+			<p:dataTable id="detailTable" var="entity"
+				value="#{organizationViolationController.list}" paginator="false"
+				rowIndexVar="index" lazy="false"
+				emptyMessage="#{msgs.noRecordsFound}" sortOrder="DESCENDING">
+				<p:column headerText="#{msgs.number}" width="100">
+					<h:outputText value="#{index+1}" />
+				</p:column>
+				<p:column headerText="#{msgs.violationName}">
+					<h:outputText value="#{entity.violation.violationName}" />
+				</p:column>
+	            <p:column headerText="#{msgs.validity}">
+			        <h:outputText value="#{entity.validity}">
+			            <f:convertDateTime pattern="dd-MM-yyyy" />
+					 </h:outputText>
+		         </p:column>
+		         <p:column headerText="#{msgs.dateCreated}">
+			        <h:outputText value="#{entity.dateCreated}">
+			            <f:convertDateTime pattern="dd-MM-yyyy" />
+					 </h:outputText>
+		         </p:column>
+				<p:column styleClass="formeditor">
+					<h:commandButton immediate="true"
+						action="#{organizationViolationController.editData(entity)}" update="@form form"
+						styleClass="btn-icon edit" />
+					<h:commandButton immediate="true" action="#{organizationViolationController.delete(entity)}" update="@form form"
+						styleClass="btn-icon delete" />
+				</p:column>
+			</p:dataTable>
+
+		</h:form>
+
+		<div class="clear"></div>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/templates/layouts/private.xhtml">
+ 	<ui:define name="content">
+ 		
+		<h2>#{msgs.productsForm}</h2> 
+		<br/><br/>	        
+		<h:form id="add-card-form" prependId="false">
+			<h:panelGroup id="messages">
+				<p:growl globalOnly="true" />
+			</h:panelGroup>
+		    <h:panelGrid styleClass="form-table" columns="3">
+	
+				<h:outputText value="#{msgs.name}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{productsController.products.name}" id="name" maxlength="150" style="width:300px;"  required="true"
+					requiredMessage="#{msgs.thisFieldIsRequired}"/>
+				<p:message for="name" />
+				
+				<h:outputText value="#{msgs.enName}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{productsController.products.enName}" maxlength="150" id="enName"  style="width:300px;" />
+				<p:message for="enName" />
+				
+				<h:outputText value="#{msgs.kgName}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{productsController.products.kgName}" maxlength="150" id="kgName"  style="width:300px;" />
+				<p:message for="kgName" />
+				
+				<h:outputLabel for="measurementUnit" value="#{msgs.measurementUnit}" />
+				<p:autoComplete id="measurementUnit" dropdown="true" var="type" scrollHeight="455"
+				itemValue="#{type}" itemLabel="#{type.name}" size="33" value="#{productsController.products.measurementUnit}"
+				converter="cachedConverter" completeMethod="#{productsController.getMeasurementUnitList}"
+				required="true" requiredMessage="#{msgs.thisFieldIsRequired}">
+				</p:autoComplete>
+				<h:message for="measurementUnit" display="icon" style="color:red;" />
+
+			    <h:outputLabel for="tnvedEaes" value="#{msgs.tnvedEaes}" />
+				<p:autoComplete id="tnvedEaes" dropdown="true" var="type" scrollHeight="455"
+				itemValue="#{type}" itemLabel="#{type.name}" size="33" value="#{productsController.products.tnvedEaes}"
+				converter="cachedConverter2" completeMethod="#{productsController.getTnvedEaesList}"
+				required="true" requiredMessage="#{msgs.thisFieldIsRequired}">
+				</p:autoComplete>
+				<h:message for="tnvedEaes" display="icon" style="color:red;" />
+				
+				<h:outputLabel for="productType" value="#{msgs.productType}" />
+				<p:autoComplete id="productType" dropdown="true" var="type" scrollHeight="455"
+				itemValue="#{type}" itemLabel="#{type.name}" size="33" value="#{productsController.products.productType}"
+				converter="cachedConverter3" completeMethod="#{productsController.getProductTypeList}"
+				required="true" requiredMessage="#{msgs.thisFieldIsRequired}">
+				</p:autoComplete>
+				<h:message for="productType" display="icon" style="color:red;" />
+				
+				<h:outputText value="#{msgs.botanicalName}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{productsController.products.botanicalName}" maxlength="150" id="botanicalName"  style="width:300px;" />
+				<p:message for="botanicalName" />
+		    </h:panelGrid>	
+		   
+		    <div class="m-top">
+		    	<h:commandButton value="#{msgs.save}" action="#{productsController.save()}" styleClass="button light-blue"/>
+		    	<h:commandButton value="#{msgs.cancel}" action="#{productsController.cancel()}" immediate="true" styleClass="button red m-left"/>
+		   	</div>
+		    
+		</h:form>
+			
+		<div class="clear"></div>	
+				
+	</ui:define>	
+</ui:composition>

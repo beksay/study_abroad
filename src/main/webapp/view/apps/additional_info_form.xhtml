@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/layouts/base.xhtml">
+    <ui:define name="content">
+      <div class="form-app">
+        <h2>#{msgs.additionalInfoForm}</h2> 
+		<br/><br/>	         
+		<h:form id="add-card-form" prependId="false">
+		    <h:panelGrid styleClass="form-table" columns="3">
+
+				<h:panelGroup>
+	                <h:outputText value="#{msgs.note}"/>
+	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
+                </h:panelGroup>
+				<h:inputTextarea value="#{additionalInfoController.module.note}" id="note" rows="20" cols="5"
+				    maxlength="150" style="width:300px;" required="true" requiredMessage="#{msgs.thisFieldIsRequired}"/>
+				<p:message for="note" />
+
+		    </h:panelGrid>	 
+		   
+		    <div class="m-top"> 
+		    	<p:commandButton value="#{msgs.save}" action="#{additionalInfoController.save()}" styleClass="button light-blue" ajax="false"/>
+		    	<p:commandButton value="#{msgs.cancel}" action="#{additionalInfoController.cancel()}" immediate="true" styleClass="button red m-left"/>
+		   	</div>
+		    
+		</h:form>
+			
+		<div class="clear"></div>	
+	  </div>	
+    </ui:define>
+</ui:composition>
