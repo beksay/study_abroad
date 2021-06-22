@@ -38,7 +38,7 @@
 	</context-param>
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
-		<filter-class>org.infosystema.iselect.filter.CharacterEncodingFilter</filter-class>
+		<filter-class>org.infosystema.study_abroad.filter.CharacterEncodingFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>CharacterEncodingFilter</filter-name>
@@ -46,7 +46,7 @@
 	</filter-mapping>
 	<filter>
 		<filter-name>SecurityFilter</filter-name>
-		<filter-class>org.infosystema.iselect.filter.SecurityFilter</filter-class>
+		<filter-class>org.infosystema.study_abroad.filter.SecurityFilter</filter-class>
 		<init-param>
 			<param-name>public</param-name>
 			<param-value>/faces_resources|/esia-login|/reindex|/esia-auth|/view/RES_NOT_FOUND|/RES_NOT_FOUND|/index.jsp.*|/view/user/login.*|/view/user/register.*|/view/user/check.*|/check-document.*|/check-esf.*|/inspector/user/register.xhtml|/view/apps/.*|/view/home.*</param-value>

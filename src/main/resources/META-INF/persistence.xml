@@ -7,45 +7,45 @@
         http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="primary">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<jta-data-source>java:jboss/datasources/iselectDS</jta-data-source>
+		<jta-data-source>java:jboss/datasources/study_abroadDS</jta-data-source>
 		<!-- entities -->
-		<class>org.infosystema.iselect.model.Attachment</class>
-		<class>org.infosystema.iselect.model.Dictionary</class>
-		<class>org.infosystema.iselect.model.DictionaryType</class>
-		<class>org.infosystema.iselect.model.LoginLog</class>
-		<class>org.infosystema.iselect.model.RegistrationEntity</class>
-		<class>org.infosystema.iselect.model.Role</class>
-		<class>org.infosystema.iselect.model.Setting</class>
-		<class>org.infosystema.iselect.model.User</class>
-		<class>org.infosystema.iselect.model.UserLog</class>
-		<class>org.infosystema.iselect.model.nomenclature.ViolationOfLaw</class>
-		<class>org.infosystema.iselect.model.nomenclature.EntryPoint</class>
-		<class>org.infosystema.iselect.model.nomenclature.Organization</class>
-		<class>org.infosystema.iselect.model.nomenclature.Products</class>
-		<class>org.infosystema.iselect.model.nomenclature.QuarantineObject</class>
-		<class>org.infosystema.iselect.model.nomenclature.TransportType</class>
-		<class>org.infosystema.iselect.model.app.AdditionalInfo</class>
-		<class>org.infosystema.iselect.model.app.Applications</class>
-		<class>org.infosystema.iselect.model.app.AppModule</class>
-		<class>org.infosystema.iselect.model.app.Documents</class>
-		<class>org.infosystema.iselect.model.app.DocumentsStep</class>
-		<class>org.infosystema.iselect.model.app.Exporters</class>
-		<class>org.infosystema.iselect.model.app.Goods</class>
-		<class>org.infosystema.iselect.model.app.GoodStep</class>
-		<class>org.infosystema.iselect.model.app.Importers</class>
-		<class>org.infosystema.iselect.model.app.Transportations</class>
-		<class>org.infosystema.iselect.model.app.NoStorage</class>
-		<class>org.infosystema.iselect.model.app.Storage</class>
-		<class>org.infosystema.iselect.model.app.Inspection</class>
-		<class>org.infosystema.iselect.model.app.Expertises</class>
-		<class>org.infosystema.iselect.model.app.Disinfection</class>
-		<class>org.infosystema.iselect.model.app.ExpertisesGoods</class>
-		<class>org.infosystema.iselect.model.app.ExpertisesResult</class>
-		<class>org.infosystema.iselect.model.app.DisinfectionResult</class>
-		<class>org.infosystema.iselect.model.Subdivision</class>
-		<class>org.infosystema.iselect.model.app.MapZone</class>
-		<class>org.infosystema.iselect.model.app.Certificate</class>
-		<class>org.infosystema.iselect.model.nomenclature.OrganizationViolation</class>
+		<class>org.infosystema.study_abroad.model.Attachment</class>
+		<class>org.infosystema.study_abroad.model.Dictionary</class>
+		<class>org.infosystema.study_abroad.model.DictionaryType</class>
+		<class>org.infosystema.study_abroad.model.LoginLog</class>
+		<class>org.infosystema.study_abroad.model.RegistrationEntity</class>
+		<class>org.infosystema.study_abroad.model.Role</class>
+		<class>org.infosystema.study_abroad.model.Setting</class>
+		<class>org.infosystema.study_abroad.model.User</class>
+		<class>org.infosystema.study_abroad.model.UserLog</class>
+		<class>org.infosystema.study_abroad.model.nomenclature.ViolationOfLaw</class>
+		<class>org.infosystema.study_abroad.model.nomenclature.EntryPoint</class>
+		<class>org.infosystema.study_abroad.model.nomenclature.Organization</class>
+		<class>org.infosystema.study_abroad.model.nomenclature.Products</class>
+		<class>org.infosystema.study_abroad.model.nomenclature.QuarantineObject</class>
+		<class>org.infosystema.study_abroad.model.nomenclature.TransportType</class>
+		<class>org.infosystema.study_abroad.model.app.AdditionalInfo</class>
+		<class>org.infosystema.study_abroad.model.app.Applications</class>
+		<class>org.infosystema.study_abroad.model.app.AppModule</class>
+		<class>org.infosystema.study_abroad.model.app.Documents</class>
+		<class>org.infosystema.study_abroad.model.app.DocumentsStep</class>
+		<class>org.infosystema.study_abroad.model.app.Exporters</class>
+		<class>org.infosystema.study_abroad.model.app.Goods</class>
+		<class>org.infosystema.study_abroad.model.app.GoodStep</class>
+		<class>org.infosystema.study_abroad.model.app.Importers</class>
+		<class>org.infosystema.study_abroad.model.app.Transportations</class>
+		<class>org.infosystema.study_abroad.model.app.NoStorage</class>
+		<class>org.infosystema.study_abroad.model.app.Storage</class>
+		<class>org.infosystema.study_abroad.model.app.Inspection</class>
+		<class>org.infosystema.study_abroad.model.app.Expertises</class>
+		<class>org.infosystema.study_abroad.model.app.Disinfection</class>
+		<class>org.infosystema.study_abroad.model.app.ExpertisesGoods</class>
+		<class>org.infosystema.study_abroad.model.app.ExpertisesResult</class>
+		<class>org.infosystema.study_abroad.model.app.DisinfectionResult</class>
+		<class>org.infosystema.study_abroad.model.Subdivision</class>
+		<class>org.infosystema.study_abroad.model.app.MapZone</class>
+		<class>org.infosystema.study_abroad.model.app.Certificate</class>
+		<class>org.infosystema.study_abroad.model.nomenclature.OrganizationViolation</class>
 
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
@@ -72,7 +72,7 @@
 			<property name="hibernate.search.default.directory_provider"
 				value="filesystem" />
 			<property name="hibernate.search.default.indexBase"
-				value="/opt/iselect/index" />
+				value="/opt/study_abroad/index" />
 			<property
 				name="hibernate.search.default.indexwriter.infostream" value="true" />
 			<property name="hibernate.search.error_handler" value="log" />
