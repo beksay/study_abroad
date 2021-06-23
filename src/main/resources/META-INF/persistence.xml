@@ -13,11 +13,8 @@
 		<class>org.infosystema.study_abroad.model.Dictionary</class>
 		<class>org.infosystema.study_abroad.model.DictionaryType</class>
 		<class>org.infosystema.study_abroad.model.LoginLog</class>
-		<class>org.infosystema.study_abroad.model.RegistrationEntity</class>
 		<class>org.infosystema.study_abroad.model.Role</class>
-		<class>org.infosystema.study_abroad.model.Setting</class>
 		<class>org.infosystema.study_abroad.model.User</class>
-		<class>org.infosystema.study_abroad.model.UserLog</class>
 		<class>org.infosystema.study_abroad.model.nomenclature.ViolationOfLaw</class>
 		<class>org.infosystema.study_abroad.model.nomenclature.EntryPoint</class>
 		<class>org.infosystema.study_abroad.model.nomenclature.Organization</class>
@@ -34,8 +31,6 @@
 		<class>org.infosystema.study_abroad.model.app.GoodStep</class>
 		<class>org.infosystema.study_abroad.model.app.Importers</class>
 		<class>org.infosystema.study_abroad.model.app.Transportations</class>
-		<class>org.infosystema.study_abroad.model.app.NoStorage</class>
-		<class>org.infosystema.study_abroad.model.app.Storage</class>
 		<class>org.infosystema.study_abroad.model.app.Inspection</class>
 		<class>org.infosystema.study_abroad.model.app.Expertises</class>
 		<class>org.infosystema.study_abroad.model.app.Disinfection</class>
@@ -43,7 +38,6 @@
 		<class>org.infosystema.study_abroad.model.app.ExpertisesResult</class>
 		<class>org.infosystema.study_abroad.model.app.DisinfectionResult</class>
 		<class>org.infosystema.study_abroad.model.Subdivision</class>
-		<class>org.infosystema.study_abroad.model.app.MapZone</class>
 		<class>org.infosystema.study_abroad.model.app.Certificate</class>
 		<class>org.infosystema.study_abroad.model.nomenclature.OrganizationViolation</class>
 

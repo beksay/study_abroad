@@ -28,8 +28,6 @@ public class Dictionary extends AbstractEntity<Integer>  {
 	private String code;
 	private String name;
 	private String enName;
-	private String kgName;
-	private String symbol;
 	private Boolean active;
 	private DictionaryType type;
 	private Dictionary parent;
@@ -67,15 +65,6 @@ public class Dictionary extends AbstractEntity<Integer>  {
 	public void setEnName(String enName) {
 		this.enName = enName;
 	}
-	
-	@Column(name="kg_name")
-	public String getKgName() {
-		return kgName;
-	}
-	
-	public void setKgName(String kgName) {
-		this.kgName = kgName;
-	}
 
 	public Boolean getActive() {
 		return active;
@@ -103,14 +92,6 @@ public class Dictionary extends AbstractEntity<Integer>  {
 	
 	public void setParent(Dictionary parent) {
 		this.parent = parent;
-	}
-
-	public String getSymbol() {
-		return symbol;
-	}
-
-	public void setSymbol(String symbol) {
-		this.symbol = symbol;
 	}
 	
 }

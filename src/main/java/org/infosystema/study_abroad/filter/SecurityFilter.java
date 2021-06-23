@@ -129,7 +129,7 @@ public class SecurityFilter implements Filter {
 	} 
 	
 	private String getLoginPage(HttpServletRequest httpServletRequest){
-		return httpServletRequest.getContextPath() + "/view/home.xhtml?faces-redirect=true";
+		return httpServletRequest.getContextPath() + "/view/user/login.xhtml?faces-redirect=true";
 	}
 	
 	private String getChangePasswordPage(HttpServletRequest httpServletRequest){

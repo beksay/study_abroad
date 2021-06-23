@@ -7,7 +7,6 @@ import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -24,15 +23,12 @@ import org.infosystema.study_abroad.beans.InequalityConstants;
 import org.infosystema.study_abroad.beans.Message;
 import org.infosystema.study_abroad.beans.SortEnum;
 import org.infosystema.study_abroad.conversiation.ConversationUser;
-import org.infosystema.study_abroad.enums.UserOperations;
 import org.infosystema.study_abroad.enums.UserStatus;
 import org.infosystema.study_abroad.model.Role;
 import org.infosystema.study_abroad.model.Subdivision;
 import org.infosystema.study_abroad.model.User;
-import org.infosystema.study_abroad.model.UserLog;
 import org.infosystema.study_abroad.service.RoleService;
 import org.infosystema.study_abroad.service.SubdivisionService;
-import org.infosystema.study_abroad.service.UserLogService;
 import org.infosystema.study_abroad.service.UserService;
 import org.infosystema.study_abroad.util.MailSender;
 import org.infosystema.study_abroad.util.PasswordBuilder;
@@ -50,8 +46,6 @@ public class UserAction implements Serializable {
 	@EJB
 	private UserService service;
 	@EJB
-	private UserLogService userLogService;
-	@EJB
 	private SubdivisionService subdivisionService;
 	@EJB
 	private RoleService roleService;
@@ -62,15 +56,11 @@ public class UserAction implements Serializable {
 
 	private User user;
 
-	private boolean isDataChanged;
-
 	@PostConstruct
 	public void init() {
 		user = conversation.getUser();
 		if (user == null)
 			user = new User();
-
-		isDataChanged = false;
 	}
 
 	public String add() {
@@ -83,20 +73,6 @@ public class UserAction implements Serializable {
 	public String edit(User user) {
 		this.user = user;
 		conversation.setUser(user);
-
-		UserLog userLog = new UserLog();
-		userLog.setOldRole(conversation.getUser().getRole());
-		userLog.setOldUsername(conversation.getUser().getUsername());
-		userLog.setOldStatus(conversation.getUser().getStatus());
-		userLog.setOldSubdivision(conversation.getUser().getSubdivision());
-		userLog.setOldCodes(conversation.getUser().getCodes());
-		userLog.setOldInn(conversation.getUser().getInn());
-		userLog.setOldFullname(conversation.getUser().getFullname());
-		userLog.setOldEmail(conversation.getUser().getEmail());
-		userLog.setOldPosition(conversation.getUser().getPosition());
-
-		conversation.setLogUser(userLog);
-
 		return form();
 	}
 
@@ -114,12 +90,8 @@ public class UserAction implements Serializable {
 
 				service.persist(user);
 				sendPassword(user);
-				logging(user);
-
 			} else {
-
 				service.merge(user);
-				loggingEdit(user);
 			}
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -127,7 +99,6 @@ public class UserAction implements Serializable {
 			e.printStackTrace();
 			return null;
 		}
-
 		conversation.setUser(null);
 		return cancel();
 	}
@@ -188,97 +159,7 @@ public class UserAction implements Serializable {
 
 		return null;
 	}
-
-	private void logging(User user) {
-
-		UserLog log = new UserLog();
-		log.setUserInfo(user);
-		log.setUserChanged(loginUtil.getCurrentUser());
-		log.setAction(UserOperations.USER_CREATED);
-		log.setDateChanged(new Date());
-		log.setOldRole(user.getRole());
-		log.setOldUsername(user.getUsername());
-		log.setOldStatus(user.getStatus());
-		log.setOldSubdivision(user.getSubdivision());
-		log.setOldCodes(user.getCodes());
-		log.setOldInn(user.getInn());
-		log.setOldFullname(user.getFullname());
-		log.setOldEmail(user.getEmail());
-		log.setOldPosition(user.getPosition());
-
-		if (log.getId() == null) {
-
-			userLogService.persist(log);
-		}
-	}
-
-	private void loggingEdit(User user) {
-
-		if (!conversation.getLogUser().getOldRole().equals(user.getRole())) {
-
-			conversation.getLogUser().setNewRole(user.getRole());
-			isDataChanged = true;
-		}
-
-		if (!conversation.getLogUser().getOldUsername().equals(user.getUsername())) {
-
-			conversation.getLogUser().setNewUsername(user.getUsername());
-			isDataChanged = true;
-		}
-
-		if (!conversation.getLogUser().getOldStatus().equals(user.getStatus())) {
-
-			conversation.getLogUser().setNewStatus(user.getStatus());
-			isDataChanged = true;
-		}
-
-		if (!conversation.getLogUser().getOldSubdivision().equals(user.getSubdivision())) {
-
-			conversation.getLogUser().setOldSubdivision(user.getSubdivision());
-			isDataChanged = true;
-		}
-
-		if (!conversation.getLogUser().getOldCodes().equals(user.getCodes())) {
-
-			conversation.getLogUser().setNewCodes(user.getCodes());
-			isDataChanged = true;
-		}
-
-		if (!conversation.getLogUser().getOldInn().equals(user.getInn())) {
-
-			conversation.getLogUser().setNewInn(user.getInn());
-			isDataChanged = true;
-		}
-
-		if (!conversation.getLogUser().getOldFullname().equals(user.getFullname())) {
-
-			conversation.getLogUser().setNewFullname(user.getFullname());
-			isDataChanged = true;
-		}
-
-		if (!conversation.getLogUser().getOldEmail().equals(user.getEmail())) {
-
-			conversation.getLogUser().setNewEmail(user.getEmail());
-			isDataChanged = true;
-		}
-
-		if (!conversation.getLogUser().getOldPosition().equals(user.getPosition())) {
-
-			conversation.getLogUser().setNewPosition(user.getPosition());
-			isDataChanged = true;
-		}
-
-		if (Boolean.TRUE.equals(isDataChanged) && conversation.getLogUser().getId() == null) {
-
-			conversation.getLogUser().setUserChanged(loginUtil.getCurrentUser());
-			conversation.getLogUser().setUserInfo(user);
-			conversation.getLogUser().setAction(UserOperations.USER_CHANGED);
-			conversation.getLogUser().setDateChanged(new Date());
-
-			userLogService.persist(conversation.getLogUser());
-		}
-	}
-
+	
 	public List<Subdivision> getSubdivisionList() {
 		List<FilterExample> examples = new ArrayList<>();
 		if (user.getRole() != null && user.getRole().getId() == 4) {
@@ -293,15 +174,6 @@ public class UserAction implements Serializable {
 		List<FilterExample> examples = new ArrayList<>();
 		examples.add(new FilterExample("id", 1, InequalityConstants.NOT_EQUAL));
 		return roleService.findByExample(0, 100, examples);
-	}
-
-	public List<UserLog> getLogList() {
-		List<FilterExample> examples = new ArrayList<>();
-		examples.add(new FilterExample("userInfo", user, InequalityConstants.EQUAL));
-
-		Long count = userLogService.countByExample(examples);
-
-		return userLogService.findByExample(0, Math.toIntExact(count), SortEnum.DESCENDING, examples, "id");
 	}
 
 	public String delete(User c) {

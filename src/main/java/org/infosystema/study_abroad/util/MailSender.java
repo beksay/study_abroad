@@ -65,14 +65,8 @@ public class MailSender {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
-		}
-		
-		
-		
-		
+		}		
 	}
-	
-	
 	
 	public void asyncSend(final org.infosystema.study_abroad.beans.Message m) {
 		service.submit(new Runnable() {
