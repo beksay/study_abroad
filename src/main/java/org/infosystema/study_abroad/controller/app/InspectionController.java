@@ -29,20 +29,18 @@ import org.infosystema.study_abroad.model.app.Exporters;
 import org.infosystema.study_abroad.model.app.Importers;
 import org.infosystema.study_abroad.model.app.Inspection;
 import org.infosystema.study_abroad.model.app.Transportations;
-import org.infosystema.study_abroad.model.nomenclature.EntryPoint;
-import org.infosystema.study_abroad.model.nomenclature.TransportType;
 import org.infosystema.study_abroad.service.AdditionalInfoService;
 import org.infosystema.study_abroad.service.ApplicationsService;
 import org.infosystema.study_abroad.service.DictionaryService;
-import org.infosystema.study_abroad.service.EntryPointService;
 import org.infosystema.study_abroad.service.ExporterService;
 import org.infosystema.study_abroad.service.ImporterService;
 import org.infosystema.study_abroad.service.InspectionService;
-import org.infosystema.study_abroad.service.TransportTypeService;
 import org.infosystema.study_abroad.service.TransportationService;
 import org.infosystema.study_abroad.util.web.LoginUtil;
 import org.infosystema.study_abroad.util.web.Messages;
 import org.primefaces.event.SelectEvent;
+
+import net.bytebuddy.build.EntryPoint;
 
 @Named
 @ConversationScoped
@@ -56,8 +54,6 @@ public class InspectionController extends Conversational {
 	@EJB
 	private DictionaryService dictService;
 	@EJB
-	private EntryPointService entryPointService;
-	@EJB
 	private ExporterService exporterService;
 	@EJB
 	private ImporterService importerService;
@@ -65,14 +61,12 @@ public class InspectionController extends Conversational {
 	private TransportationService transportationService;
 	@EJB
 	private AdditionalInfoService additionalInfoService;
-	@EJB
-	private TransportTypeService transportTypeService;
+
 	@Inject
 	private LoginUtil loginUtil;
 	@Inject
 	private ConversationApp conversation;
 	private Inspection inspection;
-	private Set<EntryPoint> entryPoints;
 
 	public InspectionController() {
 	}
@@ -88,8 +82,6 @@ public class InspectionController extends Conversational {
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, Messages.getMessage("invalidData"), null));
 			return null;
 		}
-		System.out.println("entryPoints=====" + entryPoints);
-		//inspection.setEntryPoints(entryPoints);
 		inspection.setUser(loginUtil.getCurrentUser());
 		inspection.setStatus(InspectionStatus.NEW);
 		if(inspection.getId()==null) {
@@ -151,11 +143,6 @@ public class InspectionController extends Conversational {
 			num = "0" + num;
 		}
 		inspection.setActNumber(inspection.getActNumber()+num);
-		List<Transportations> transList = transportationService.findByPropertyWithFields("applications", applications,new String[] { "entryPoints" });
-		inspection.setVehicleNumber(transList.get(0).getTripNumber());
-		inspection.setTransportType(transList.get(0).getTransportType());
-		inspection.setTransporter(transList.get(0).getTransporter());
-		inspection.setEntryPoints(new HashSet<EntryPoint>(transList.get(0).getEntryPoints()));
 	    return form();
 	}
 	
@@ -166,16 +153,6 @@ public class InspectionController extends Conversational {
         return dictService.findByExample(0, 100, examples);
     }
 	
-	public List<EntryPoint> getEntryPointList() {
-        List<FilterExample> examples=new ArrayList<>();
-        return entryPointService.findByExample(0, 100, examples);
-    }
-	
-	public List<TransportType> getTransportTypeList() {
-		List<FilterExample> examples = new ArrayList<>();
-	  return transportTypeService.findByExample(0, 100, examples);
-	}
-
 	public Inspection getInspection() {
 		return inspection;
 	}
@@ -184,11 +161,4 @@ public class InspectionController extends Conversational {
 		this.inspection = inspection;
 	}
 
-	public Set<EntryPoint> getEntryPoints() {
-		return entryPoints;
-	}
-
-	public void setEntryPoints(Set<EntryPoint> entryPoints) {
-		this.entryPoints = entryPoints;
-	}
 }

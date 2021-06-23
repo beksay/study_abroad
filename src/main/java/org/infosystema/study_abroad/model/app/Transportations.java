@@ -1,19 +1,12 @@
 package org.infosystema.study_abroad.model.app;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.infosystema.study_abroad.model.Dictionary;
-import org.infosystema.study_abroad.model.nomenclature.EntryPoint;
-import org.infosystema.study_abroad.model.nomenclature.TransportType;
 
 
 /**
@@ -32,8 +25,6 @@ public class Transportations extends AppModule{
 	private Dictionary destinationPoint;
 	private String addressDest;
 	private Dictionary addressDestination;
-	private Set<EntryPoint> entryPoints;
-	private TransportType transportType;
 	private String transporter;
 	private String tripNumber;	
 	private String sealNumber;
@@ -115,29 +106,6 @@ public class Transportations extends AppModule{
 
 	public void setCountryTransit(Dictionary countryTransit) {
 		this.countryTransit = countryTransit;
-	}
-
-	@ManyToOne
-	@JoinColumn(name="transport_type")
-	public TransportType getTransportType() {
-		return transportType;
-	}
-
-	public void setTransportType(TransportType transportType) {
-		this.transportType = transportType;
-	}
-
-	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(
-	  name = "transportation_entry_points", 
-	  joinColumns = @JoinColumn(name = "transportaion_id"), 
-	  inverseJoinColumns = @JoinColumn(name = "entry_point_id"))	
-	public Set<EntryPoint> getEntryPoints() {
-		return entryPoints;
-	}
-
-	public void setEntryPoints(Set<EntryPoint> entryPoints) {
-		this.entryPoints = entryPoints;
 	}
 
 	@ManyToOne

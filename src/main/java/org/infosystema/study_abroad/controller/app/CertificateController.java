@@ -32,7 +32,6 @@ import org.infosystema.study_abroad.model.app.Goods;
 import org.infosystema.study_abroad.model.app.Importers;
 import org.infosystema.study_abroad.model.app.Inspection;
 import org.infosystema.study_abroad.model.app.Transportations;
-import org.infosystema.study_abroad.model.nomenclature.ViolationOfLaw;
 import org.infosystema.study_abroad.service.CertificateService;
 import org.infosystema.study_abroad.service.DictionaryService;
 import org.infosystema.study_abroad.service.DocumentsService;
@@ -41,7 +40,6 @@ import org.infosystema.study_abroad.service.GoodsService;
 import org.infosystema.study_abroad.service.ImporterService;
 import org.infosystema.study_abroad.service.InspectionService;
 import org.infosystema.study_abroad.service.TransportationService;
-import org.infosystema.study_abroad.service.ViolationOfLawService;
 import org.infosystema.study_abroad.util.web.LoginUtil;
 import org.infosystema.study_abroad.util.web.Messages;
 
@@ -64,8 +62,6 @@ public class CertificateController extends Conversational {
 	private DocumentsService docService;
 	@EJB
 	private DictionaryService dictService;
-	@EJB
-	private ViolationOfLawService volService;
 	@EJB
 	private GoodsService goodsService;
 	@Inject
@@ -181,16 +177,6 @@ public class CertificateController extends Conversational {
 
 		return dictService.findByExample(0, Math.toIntExact(count), examples).stream()
 				.filter(t -> t.getName().toLowerCase().startsWith(query.toLowerCase())).collect(Collectors.toList());
-	}
-
-	public List<ViolationOfLaw> getViolationOfLawList(String query) {
-		List<FilterExample> examples = new ArrayList<>();
-
-		Long count = volService.countByExample(examples);
-
-		return volService.findByExample(0, Math.toIntExact(count), examples).stream()
-				.filter(t -> t.getViolationName().toLowerCase().startsWith(query.toLowerCase()))
-				.collect(Collectors.toList());
 	}
 
 	public List<Goods> getGoodsList(Applications applications) {

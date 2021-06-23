@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -35,16 +34,12 @@ import org.infosystema.study_abroad.model.app.Applications;
 import org.infosystema.study_abroad.model.app.Exporters;
 import org.infosystema.study_abroad.model.app.Importers;
 import org.infosystema.study_abroad.model.app.Transportations;
-import org.infosystema.study_abroad.model.nomenclature.Organization;
-import org.infosystema.study_abroad.model.nomenclature.OrganizationViolation;
 import org.infosystema.study_abroad.service.AdditionalInfoService;
 import org.infosystema.study_abroad.service.AppModuleService;
 import org.infosystema.study_abroad.service.ApplicationsService;
 import org.infosystema.study_abroad.service.DictionaryService;
 import org.infosystema.study_abroad.service.ExporterService;
 import org.infosystema.study_abroad.service.ImporterService;
-import org.infosystema.study_abroad.service.OrganizationService;
-import org.infosystema.study_abroad.service.OrganizationViolationService;
 import org.infosystema.study_abroad.service.SubdivisionService;
 import org.infosystema.study_abroad.service.TransportationService;
 import org.infosystema.study_abroad.util.PasswordBuilder;
@@ -74,10 +69,6 @@ public class ApplicationsController extends BaseAppController {
 	private AdditionalInfoService additionalInfoService;
 	@EJB
 	private SubdivisionService subdivisionService;
-	@EJB
-	private OrganizationService organizationService;
-	@EJB
-	private OrganizationViolationService violationService;
 	private UIComponent innField;
 
 	@Inject
@@ -232,50 +223,6 @@ public class ApplicationsController extends BaseAppController {
 
 	private String form() {
 		return "/view/apps/applications_form.xhtml";
-	}
-
-	public void getOrganizationInn() {
-		List<FilterExample> examples = new ArrayList<>();
-		examples.add(new FilterExample("organization.inn", conversation.getApplications().getInn(),
-				InequalityConstants.EQUAL));
-		List<OrganizationViolation> organizationViolations = violationService.findByExample(0, 100, examples);
-		if (!organizationViolations.isEmpty()) {
-			for (OrganizationViolation ov : organizationViolations) {
-				System.out.println("====ov.getValidity()====" + ov.getValidity());
-				if (ov.getValidity().after(new Date())) {
-
-					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Est' narushenie!!!",
-							"Est' narushenie!!!");
-					FacesContext context = FacesContext.getCurrentInstance();
-					context.addMessage(innField.getClientId(context), message);
-
-					return;
-				}
-			}
-		}
-
-		if (conversation.getApplications().getInn() != null && conversation.getApplications().getInn().length() > 0) {
-			List<Organization> organizations = organizationService.findByProperty("inn",
-					conversation.getApplications().getInn());
-			if (!organizations.isEmpty()) {
-				conversation.getApplications().setCompanyName(organizations.get(0).getName());
-				conversation.getApplications().setLegalForm(organizations.get(0).getLegalForm());
-				conversation.getApplications().setDirectorName(organizations.get(0).getFullname());
-				conversation.getApplications().setCountry((organizations.get(0).getWorldClassifier()));
-				conversation.getApplications().setCurrentAddress((organizations.get(0).getAddress()));
-				conversation.getApplications().setContact((organizations.get(0).getContact()));
-				conversation.getApplications().setEmail((organizations.get(0).getEmail()));
-			} else {
-				FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage("ИНН not found !!! ", "ИНН not found !!! "));
-			}
-		} else {
-			FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage("ИНН Это обязательное поле !!! ", "ИНН Это обязательное поле !!! "));
-		}
-
 	}
 
 	public List<Dictionary> getLegalFormList(String query) {

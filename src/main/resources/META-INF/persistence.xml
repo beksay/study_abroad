@@ -15,12 +15,6 @@
 		<class>org.infosystema.study_abroad.model.LoginLog</class>
 		<class>org.infosystema.study_abroad.model.Role</class>
 		<class>org.infosystema.study_abroad.model.User</class>
-		<class>org.infosystema.study_abroad.model.nomenclature.ViolationOfLaw</class>
-		<class>org.infosystema.study_abroad.model.nomenclature.EntryPoint</class>
-		<class>org.infosystema.study_abroad.model.nomenclature.Organization</class>
-		<class>org.infosystema.study_abroad.model.nomenclature.Products</class>
-		<class>org.infosystema.study_abroad.model.nomenclature.QuarantineObject</class>
-		<class>org.infosystema.study_abroad.model.nomenclature.TransportType</class>
 		<class>org.infosystema.study_abroad.model.app.AdditionalInfo</class>
 		<class>org.infosystema.study_abroad.model.app.Applications</class>
 		<class>org.infosystema.study_abroad.model.app.AppModule</class>
@@ -39,7 +33,6 @@
 		<class>org.infosystema.study_abroad.model.app.DisinfectionResult</class>
 		<class>org.infosystema.study_abroad.model.Subdivision</class>
 		<class>org.infosystema.study_abroad.model.app.Certificate</class>
-		<class>org.infosystema.study_abroad.model.nomenclature.OrganizationViolation</class>
 
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>

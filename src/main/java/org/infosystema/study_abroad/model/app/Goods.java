@@ -12,7 +12,6 @@ import javax.persistence.Table;
 
 import org.infosystema.study_abroad.model.AbstractEntity;
 import org.infosystema.study_abroad.model.Dictionary;
-import org.infosystema.study_abroad.model.nomenclature.Products;
 
 
 /**
@@ -27,7 +26,6 @@ import org.infosystema.study_abroad.model.nomenclature.Products;
 public class Goods extends AbstractEntity<Integer>  {
 	private static final long serialVersionUID = 1L;
 	private String number;
-	private Products products;
 	private String description;
 	private Dictionary country;
 	private Dictionary oblast;
@@ -45,17 +43,6 @@ public class Goods extends AbstractEntity<Integer>  {
 
 	public void setNumber(String number) {
 		this.number = number;
-	}
-
-	
-	@ManyToOne
-	@JoinColumn(name="products")
-	public Products getProducts() {
-		return products;
-	}
-
-	public void setProducts(Products products) {
-		this.products = products;
 	}
 
 	public String getDescription() {

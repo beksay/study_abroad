@@ -17,11 +17,9 @@ import org.infosystema.study_abroad.model.Dictionary;
 import org.infosystema.study_abroad.model.app.Applications;
 import org.infosystema.study_abroad.model.app.GoodStep;
 import org.infosystema.study_abroad.model.app.Goods;
-import org.infosystema.study_abroad.model.nomenclature.Products;
 import org.infosystema.study_abroad.service.DictionaryService;
 import org.infosystema.study_abroad.service.GoodsService;
 import org.infosystema.study_abroad.service.GoodsStepService;
-import org.infosystema.study_abroad.service.ProductsService;
 
 @Named
 @ConversationScoped
@@ -32,8 +30,6 @@ public class GoodsController extends Conversational {
 	private GoodsService service;
 	@EJB
 	private DictionaryService dictService;
-	@EJB
-	private ProductsService productsService;
 	@EJB
 	private GoodsStepService moduleService;
 	private GoodStep module;
@@ -100,13 +96,6 @@ public class GoodsController extends Conversational {
 		return "main_app.xhtml";
 	}
 
-	public List<Products> getProductInfoList(String query) {
-		List<FilterExample> examples = new ArrayList<>();
-
-		Long count = productsService.countByExample(examples);
-		return productsService.findByExample(0, Math.toIntExact(count), examples).stream()
-				.filter(t -> t.getName().toLowerCase().startsWith(query.toLowerCase())).collect(Collectors.toList());
-	}
 
 	public List<Dictionary> getCountryList(String query) {
 		List<FilterExample> examples = new ArrayList<>();

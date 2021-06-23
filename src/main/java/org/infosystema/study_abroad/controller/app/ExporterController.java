@@ -10,6 +10,7 @@ import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.xml.registry.infomodel.Organization;
 
 import org.infosystema.study_abroad.beans.FilterExample;
 import org.infosystema.study_abroad.beans.InequalityConstants;
@@ -17,10 +18,8 @@ import org.infosystema.study_abroad.controller.Conversational;
 import org.infosystema.study_abroad.enums.ModuleStatus;
 import org.infosystema.study_abroad.model.Dictionary;
 import org.infosystema.study_abroad.model.app.Exporters;
-import org.infosystema.study_abroad.model.nomenclature.Organization;
 import org.infosystema.study_abroad.service.DictionaryService;
 import org.infosystema.study_abroad.service.ExporterService;
-import org.infosystema.study_abroad.service.OrganizationService;
 import org.infosystema.study_abroad.util.web.Messages;
 
 @Named
@@ -32,8 +31,6 @@ public class ExporterController extends Conversational {
 	private DictionaryService dictService;
 	@EJB
 	private ExporterService moduleService;
-	@EJB
-	private OrganizationService organizationService;
 
 	private Exporters module;
 
@@ -59,29 +56,6 @@ public class ExporterController extends Conversational {
 		module = moduleService.merge(module);
 
 		return "main_app.xhtml";
-	}
-
-	public void getOrganizationInn() {
-		if (module.getInn() != null && module.getInn().length() > 0) {
-			List<Organization> organizations = organizationService.findByProperty("inn", module.getInn());
-			if (!organizations.isEmpty()) {
-				module.setCompanyName(organizations.get(0).getName());
-				module.setLegalForm(organizations.get(0).getLegalForm());
-				module.setDirectorName(organizations.get(0).getFullname());
-				module.setCountry((organizations.get(0).getWorldClassifier()));
-				module.setCurrentAddress((organizations.get(0).getAddress()));
-				module.setContact((organizations.get(0).getContact()));
-				module.setEmail((organizations.get(0).getEmail()));
-			} else {
-				FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage("ИНН not found !!! ", "ИНН not found !!! "));
-			}
-		} else {
-			FacesContext.getCurrentInstance().addMessage("form", new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					Messages.getMessage("ИНН Это обязательное поле"), null));
-		}
-
 	}
 
 	public List<Dictionary> getLegalFormList(String query) {

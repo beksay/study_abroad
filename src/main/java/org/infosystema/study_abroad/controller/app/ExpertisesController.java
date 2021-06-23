@@ -133,34 +133,6 @@ public class ExpertisesController extends Conversational {
 				.filter(t -> t.getName().toLowerCase().startsWith(query.toLowerCase())).collect(Collectors.toList());
 	}
 
-	public List<Goods> getGoodsList(String query) {
-		List<Integer> selectedPC = new ArrayList<>();
-		if (!getExpertisesGoodsList().isEmpty()) {
-			for (ExpertisesGoods goods : getExpertisesGoodsList()) {
-				selectedPC.add(goods.getGoods().getId());
-			}
-		}
-
-		List<FilterExample> examples = new ArrayList<>();
-
-		if (expertises.getInspection() != null) {
-			examples.add(new FilterExample("module.applications", expertises.getInspection().getApplications(),
-					InequalityConstants.EQUAL));
-		} else {
-
-			examples.add(new FilterExample("id", InequalityConstants.IS_NULL_SINGLE));
-		}
-
-		if (!selectedPC.isEmpty()) {
-			examples.add(new FilterExample("id", selectedPC, InequalityConstants.NOT_IN));
-		}
-
-		Long count = goodsService.countByExample(examples);
-
-		return goodsService.findByExample(0, Math.toIntExact(count), examples).stream()
-				.filter(t -> t.getProducts().getName().toLowerCase().startsWith(query.toLowerCase()))
-				.collect(Collectors.toList());
-	}
 
 	public void addTable() {
 		getExpertisesGoodsList().add(expertisesGoods);

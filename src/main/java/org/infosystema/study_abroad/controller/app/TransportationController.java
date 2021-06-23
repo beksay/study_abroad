@@ -16,12 +16,10 @@ import org.infosystema.study_abroad.controller.Conversational;
 import org.infosystema.study_abroad.enums.ModuleStatus;
 import org.infosystema.study_abroad.model.Dictionary;
 import org.infosystema.study_abroad.model.app.Transportations;
-import org.infosystema.study_abroad.model.nomenclature.EntryPoint;
-import org.infosystema.study_abroad.model.nomenclature.TransportType;
 import org.infosystema.study_abroad.service.DictionaryService;
-import org.infosystema.study_abroad.service.EntryPointService;
-import org.infosystema.study_abroad.service.TransportTypeService;
 import org.infosystema.study_abroad.service.TransportationService;
+
+import net.bytebuddy.build.EntryPoint;
 
 @Named
 @ConversationScoped
@@ -30,10 +28,6 @@ public class TransportationController extends Conversational {
 	private static final long serialVersionUID = 5959661098638400326L;
 	@EJB
 	private DictionaryService dictService;
-	@EJB
-	private EntryPointService entryPointService;
-	@EJB
-	private TransportTypeService transportTypeService;
 	@EJB
 	private TransportationService moduleService;
 
@@ -51,7 +45,6 @@ public class TransportationController extends Conversational {
 	}
 
 	public String save() {
-		module.setEntryPoints(entryPoints);
 		if (module.getId() == null) {
 			module.setStatus(ModuleStatus.NEW);
 		} else {
@@ -86,17 +79,6 @@ public class TransportationController extends Conversational {
 		Long count = dictService.countByExample(examples);
 		return dictService.findByExample(0, Math.toIntExact(count), examples).stream()
 				.filter(t -> t.getName().toLowerCase().startsWith(query.toLowerCase())).collect(Collectors.toList());
-	}
-
-	public List<TransportType> getTransportTypeList() {
-		List<FilterExample> examples = new ArrayList<>();
-		return transportTypeService.findByExample(0, 100, examples);
-	}
-
-	public List<EntryPoint> getEntryPointList() {
-		List<FilterExample> examples = new ArrayList<>();
-		examples.add(new FilterExample("id", null, InequalityConstants.IS_NOT_NULL_SINGLE));
-		return entryPointService.findByExample(0, 1000, examples);
 	}
 
 	public String cancel() {

@@ -18,7 +18,6 @@ import org.infosystema.study_abroad.enums.CertificateStatus;
 import org.infosystema.study_abroad.model.AbstractEntity;
 import org.infosystema.study_abroad.model.Dictionary;
 import org.infosystema.study_abroad.model.User;
-import org.infosystema.study_abroad.model.nomenclature.ViolationOfLaw;
 
 
 @Entity
@@ -35,7 +34,6 @@ public class Certificate extends AbstractEntity<Integer>  {
 	private String documentBy;
 	private Dictionary controlMeasures;
 	private Dictionary actActivities;
-	private ViolationOfLaw violationOfLaw;
 	private Date validity;
 	private String givenBased;
 	private User inspector;
@@ -124,16 +122,6 @@ public class Certificate extends AbstractEntity<Integer>  {
 
 	public void setActActivities(Dictionary actActivities) {
 		this.actActivities = actActivities;
-	}
-
-	@ManyToOne
-	@JoinColumn(name="violation_of_law")
-	public ViolationOfLaw getViolationOfLaw() {
-		return violationOfLaw;
-	}
-
-	public void setViolationOfLaw(ViolationOfLaw violationOfLaw) {
-		this.violationOfLaw = violationOfLaw;
 	}
 
 	public Date getValidity() {

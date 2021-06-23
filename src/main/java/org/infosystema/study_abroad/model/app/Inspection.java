@@ -1,7 +1,6 @@
 package org.infosystema.study_abroad.model.app;
 
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -9,10 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,8 +20,6 @@ import org.infosystema.study_abroad.enums.InspectionStatus;
 import org.infosystema.study_abroad.model.AbstractEntity;
 import org.infosystema.study_abroad.model.Dictionary;
 import org.infosystema.study_abroad.model.User;
-import org.infosystema.study_abroad.model.nomenclature.EntryPoint;
-import org.infosystema.study_abroad.model.nomenclature.TransportType;
 
 
 @Entity
@@ -36,7 +30,6 @@ public class Inspection extends AbstractEntity<Integer>  {
 	private String actNumber;
 	private Date actDate;
 	private String vehicleNumber;
-	private TransportType transportType;
 	private String owner;
 	private String transporter;
     private Applications applications;
@@ -44,7 +37,6 @@ public class Inspection extends AbstractEntity<Integer>  {
     private ExpertisesStatus expertisesStatus;
     private DisinfectionStatus disinfectionStatus;
     private User user;
-    private Set<EntryPoint> entryPoints;
     private Dictionary marking;
 
 	@Column(name = "act_number")
@@ -130,35 +122,12 @@ public class Inspection extends AbstractEntity<Integer>  {
 		this.disinfectionStatus = disinfectionStatus;
 	}
 
-	@ManyToOne
-	@JoinColumn(name="transport_type")
-	public TransportType getTransportType() {
-		return transportType;
-	}
-
-	public void setTransportType(TransportType transportType) {
-		this.transportType = transportType;
-	}
-
 	public String getTransporter() {
 		return transporter;
 	}
 
 	public void setTransporter(String transporter) {
 		this.transporter = transporter;
-	}
-
-	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(
-	  name = "inspection_entry_points", 
-	  joinColumns = @JoinColumn(name = "inspection_id"), 
-	  inverseJoinColumns = @JoinColumn(name = "entry_point_id"))	
-	public Set<EntryPoint> getEntryPoints() {
-		return entryPoints;
-	}
-
-	public void setEntryPoints(Set<EntryPoint> entryPoints) {
-		this.entryPoints = entryPoints;
 	}
 
 	@ManyToOne
