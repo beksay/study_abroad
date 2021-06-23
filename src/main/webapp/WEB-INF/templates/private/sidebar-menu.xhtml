@@ -12,16 +12,14 @@
 	
 		<h:form>
 		    <div class="logo-title">
-		        <h:commandLink action="#{userController.home()}">
-		            <h1 style="color:white">ISelect</h1>
-				</h:commandLink>
+		        <h1 style="color:white">Study Abroad</h1>
 			</div>
 	    </h:form>
              	
 	    <div class="user clearfix">
 	        <div class="user-icon f-left"></div>
 	        <div class="user-name f-left">
-	        	#{userController.loginUtil.currentUser.username}	          	
+	        	#{loginUtil.currentUser.email}	          	
 	        </div>
 	        <div class="user-menu">
 	            <div class="menu">
@@ -44,6 +42,7 @@
 		        <p:submenu label="#{msgs.dictionaries}"  expanded="false" styleClass="menu-submenu" 
 		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}">
 		       		<p:menuitem value="#{msgs.dictionaries}" outcome="/view/dictionaries/dict_type_list.xhtml"  icon="fa fa-book" styleClass="menu-item" />
+		       		<p:menuitem value="#{msgs.countries}" outcome="/view/dictionaries/countries_list.xhtml"  icon="fa fa-map-marker" styleClass="menu-item" />
 		        </p:submenu>
 		        <p:submenu label="#{msgs.users}"  expanded="false" styleClass="menu-submenu"
 		             rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}">

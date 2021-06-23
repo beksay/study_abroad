@@ -6,25 +6,13 @@
 	overflow: auto;
 }
 
-body .loginContainer {
-	background-image:
-		url('../javax.faces.resource/newgreen-bg.jpg.xhtml?ln=img');
-	background-position: center center;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
 .login-pas {
 	width: 100%;
 	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-image:
-		url('../javax.faces.resource/newgreen-bg.jpg.xhtml?ln=img');
+	background-image:url('../javax.faces.resource/pencil.jpg.xhtml?ln=img');
 }
 
 .full-height.p-padding.login-page.back-w {
@@ -3838,4 +3826,21 @@ p.last-modified {
 .reqField {
 	color: #ca4646;
 	font-size: 10px;
+}
+.main-side-menu {
+	width: 200px;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.main-side-menu .main-side-menu {
+	flex: 1;
+}
+
+.main-side-menu .main-side-user {
+	border-top: 1px solid #222;
+	height: 50px;
+	display: flex;
+	flex-direction: row;
 }

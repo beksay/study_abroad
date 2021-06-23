@@ -32,6 +32,9 @@
 		<class>org.infosystema.study_abroad.model.app.DisinfectionResult</class>
 		<class>org.infosystema.study_abroad.model.app.Certificate</class>
 		<class>org.infosystema.study_abroad.model.Person</class>
+		<class>org.infosystema.study_abroad.model.Countries</class>
+		<class>org.infosystema.study_abroad.model.Universities</class>
+		<class>org.infosystema.study_abroad.model.UniversityType</class>
 
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>

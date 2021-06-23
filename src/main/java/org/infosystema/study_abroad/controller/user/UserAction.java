@@ -174,6 +174,10 @@ public class UserAction implements Serializable {
 	private String form() {
 		return "/view/user/form.xhtml";
 	}
+	
+	public String home() {
+		return "/view/main.xhtml";
+	}
 
 	public User getUser() {
 		return user;

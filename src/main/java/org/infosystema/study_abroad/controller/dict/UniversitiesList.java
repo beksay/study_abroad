@@ -15,27 +15,26 @@ import javax.servlet.http.HttpSession;
 
 import org.infosystema.study_abroad.beans.FilterExample;
 import org.infosystema.study_abroad.beans.InequalityConstants;
-import org.infosystema.study_abroad.data.DictionaryDataModel;
-import org.infosystema.study_abroad.model.Dictionary;
-import org.infosystema.study_abroad.service.DictionaryService;
+import org.infosystema.study_abroad.data.UniversitiesDataModel;
+import org.infosystema.study_abroad.model.Universities;
+import org.infosystema.study_abroad.service.UniversitiesService;
 import org.primefaces.component.datatable.DataTable;
 import org.primefaces.event.data.PageEvent;
 
 @Named
 @ViewScoped
-public class DictionaryList implements Serializable {
+public class UniversitiesList implements Serializable {
 
 	private static final long serialVersionUID = 8475958315897562353L;
-	private DictionaryDataModel model;
-	private Dictionary dictionary;
+	private UniversitiesDataModel model;
+	private Universities universities;
 	private Integer first;
 	private String searchString;
 	@EJB
-	private DictionaryService service;
+	private UniversitiesService service;
 
 	@Inject
-	private DictionaryTypeController conversation;
-
+	private CountriesController conversation;
 
 	@PostConstruct
 	private void init() {
@@ -46,20 +45,20 @@ public class DictionaryList implements Serializable {
 	public void filterData() {
 
 		List<FilterExample> filters = new ArrayList<>();
-		filters.add(new FilterExample("type", conversation.getDictionaryType(), InequalityConstants.EQUAL));
+		filters.add(new FilterExample("countries", conversation.getCountries(), InequalityConstants.EQUAL));
 		if (searchString != null && searchString.length() > 0) {
-			filters.add(new FilterExample(true, "code", '%' + searchString + '%', InequalityConstants.LIKE, true));
 			filters.add(new FilterExample(true, "name", '%' + searchString + '%', InequalityConstants.LIKE, true));
+			filters.add(new FilterExample(true, "shortName", '%' + searchString + '%', InequalityConstants.LIKE, true));
 		}
-		model = new DictionaryDataModel(filters, service);
+		model = new UniversitiesDataModel(filters, service);
 
 	}
 
-	public DictionaryDataModel getModel() {
+	public UniversitiesDataModel getModel() {
 		return model;
 	}
-
-	public void setModel(DictionaryDataModel model) {
+	
+	public void setModel(UniversitiesDataModel model) {
 		this.model = model;
 	}
 
@@ -83,7 +82,7 @@ public class DictionaryList implements Serializable {
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
 				.getRequest();
 		HttpSession session = request.getSession();
-		model = (DictionaryDataModel) session.getAttribute("model");
+		model = (UniversitiesDataModel) session.getAttribute("model");
 		first = (Integer) session.getAttribute("first");
 	}
 
@@ -114,11 +113,11 @@ public class DictionaryList implements Serializable {
 		this.searchString = searchString;
 	}
 
-	public Dictionary getDictionary() {
-		return dictionary;
+	public Universities getUniversities() {
+		return universities;
 	}
 
-	public void setDictionary(Dictionary dictionary) {
-		this.dictionary = dictionary;
+	public void setUniversities(Universities universities) {
+		this.universities = universities;
 	}
 }

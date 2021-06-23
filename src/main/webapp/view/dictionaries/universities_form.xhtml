@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/templates/layouts/private.xhtml">
+ 	<ui:define name="content">
+ 		
+		<h2>#{universitiesController.controller.countries.name} </h2> 
+		<br/><br/>	        
+		<h:form id="add-card-form" prependId="false">
+			<h:panelGroup id="messages">
+				<p:growl globalOnly="true" />
+			</h:panelGroup>
+		    <h:panelGrid styleClass="form-table" columns="3">
+		    
+		        <h:outputLabel for="universityType" value="#{msgs.universityType}" />
+				<p:autoComplete id="universityType" dropdown="true" var="type" scrollHeight="455"
+				itemValue="#{type}" itemLabel="#{type.name}" size="33" value="#{universitiesController.universities.universityType}"
+				converter="cachedConverter" completeMethod="#{universitiesController.getUniversityTypeList}">
+				</p:autoComplete>
+				<h:message for="universityType" display="icon" style="color:red;" />
+				
+				<h:outputText value="#{msgs.name}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{universitiesController.universities.name}" id="name" maxlength="150" style="width:300px;"  required="true"
+					requiredMessage="#{msgs.thisFieldIsRequired}"/>
+				<p:message for="name" />
+				
+				<h:outputText value="#{msgs.shortName}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{universitiesController.universities.shortName}" maxlength="150" id="shortName"  style="width:300px;" />
+				<p:message for="shortName" />
+				
+				<h:outputText value="#{msgs.city}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{universitiesController.universities.city}" maxlength="150" id="city"  style="width:300px;" />
+				<p:message for="city" />
+				
+				<h:outputText value="#{msgs.foundYear}" styleClass="form-table-label disp-blc"/>
+				<h:inputText value="#{universitiesController.universities.foundYear}" maxlength="150" id="foundYear"  style="width:300px;" />
+				<p:message for="foundYear" />
+
+		    </h:panelGrid>	
+		   
+		    <div class="m-top">
+		    	<h:commandButton value="#{msgs.save}" action="#{universitiesController.save()}" styleClass="button light-blue"/>
+		    	<h:commandButton value="#{msgs.cancel}" action="#{universitiesController.cancel()}" immediate="true" styleClass="button red m-left"/>
+		   	</div>
+		    
+		</h:form>
+			
+		<div class="clear"></div>	
+				
+	</ui:define>	
+</ui:composition>

@@ -7,22 +7,15 @@
     template="/WEB-INF/templates/layouts/private.xhtml">
  	<ui:define name="content">
 		<h2>#{dictionaryTypeController.dictionaryType.name} </h2> 
-
 		<h:form id ="filter-form">	
-	    	 
-	    	
 	        <p:inputText value="#{dictionaryList.searchString}" id="watermark"  >	
 	        	  <p:ajax listener="#{dictionaryList.filterData()}" event="keyup" update="form"/>	               
 	        </p:inputText>
 	        <p:watermark for="watermark" value="Поиск" />
-
 			<p:commandButton ajax="true" update="form" value="#{msgs.search}"  style="display:none;"
-			    actionListener="#{dictionaryList.filterData()}" styleClass="button green" />
-			    
-			<h:commandLink value="#{msgs.add}" action="#{dictionaryController.add()}" styleClass="button green f-right"/>   
-			
+			    actionListener="#{dictionaryList.filterData()}" styleClass="button green" />	    
+			<h:commandLink value="#{msgs.add}" action="#{dictionaryController.add()}" styleClass="button green f-right"/>   		
 		</h:form>
-
 		<h:form id ="form">
 			<p:dataTable var="entity" value="#{dictionaryList.model}" paginator="true" rows="20" lazy="true" rowKey="#{entity.id}" rowIndexVar="index" tableStyleClass="display-table"
 	   			id="table" selectionMode="single" emptyMessage="#{msgs.noRecordsFound}" 
@@ -35,40 +28,31 @@
 	            <p:column headerText="№">
 			        <h:outputText value="#{index+1}" />
 			    </p:column>
-	
 			    <p:column headerText="#{msgs.code}">
 			        <h:outputText value="#{entity.code}" />
 			    </p:column>
-			    
 			    <p:column headerText="#{msgs.name}">
 			        <h:outputText value="#{entity.name}" />
 			    </p:column>
-			    
 			    <p:column headerText="#{msgs.enName}">
 			        <h:outputText value="#{entity.enName}" />
 			    </p:column>
-			    
 			    <p:column headerText="#{msgs.kgName}">
 			        <h:outputText value="#{entity.kgName}" />
 			    </p:column>
-			    
 			    <p:column headerText="#{msgs.symbol}">
 			        <h:outputText value="#{entity.symbol}" />
 			    </p:column>
-			    
 			    <p:column headerText="#{msgs.active}">
 			        <h:outputText value="#{msgs.yes}" rendered="#{entity.active==true}"/>
 			        <h:outputText value="#{msgs.no}" rendered="#{entity.active==false}"/>
 			    </p:column>
-			    
 			    <p:column headerText="#{msgs.parent}">
 			        <h:outputText value="#{entity.parent.code}" />
 			    </p:column>
-			    
 			    <p:column headerText="#{msgs.operation}" exportable="false" style="width:100px;">
                     <h:commandButton action="#{dictionaryController.edit(entity)}"  value="#{msgs.edit}" styleClass="btn-icon edit" title="#{msgs.edit}" />	 
 			    </p:column>
-			
 			</p:dataTable>
 			<h:commandLink value="#{msgs.back}" action="#{dictionaryController.back()}" styleClass="button"/>
 		</h:form>

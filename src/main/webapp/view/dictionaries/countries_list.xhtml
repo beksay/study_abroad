@@ -6,36 +6,32 @@
     xmlns:p="http://primefaces.org/ui"
     template="/WEB-INF/templates/layouts/private.xhtml">
  	<ui:define name="content">
-		<h2>#{msgs.dictionaries} </h2> 
+		<h2>#{msgs.countries} </h2> 
 		<h:form id ="filter-form">	
-		        <p:inputText value="#{dictionaryTypeList.searchString}" id="watermark"  styleClass="m-right">
-		                <p:ajax listener="#{dictionaryTypeList.filterData()}" event="keyup" update="form"/>
+		        <p:inputText value="#{countriesList.searchString}" id="watermark"  styleClass="m-right">
+		                <p:ajax listener="#{countriesList.filterData()}" event="keyup" update="form"/>
 		        </p:inputText>
 		        <p:watermark for="watermark" value="Поиск" />
 				
 				<p:commandButton ajax="true" update="form" value="#{msgs.search}" style="display:none"
-				    actionListener="#{dictionaryTypeList.filterData()}" styleClass="button green f-right" />
+				    actionListener="#{countriesList.filterData()}" styleClass="button green f-right" />
 		</h:form>
 		<h:form id ="form">
-			<p:dataTable var="entity" value="#{dictionaryTypeList.model}" paginator="true" rows="20" lazy="true" rowKey="#{entity.id}" rowIndexVar="index" tableStyleClass="display-table"
+			<p:dataTable var="entity" value="#{countriesList.model}" paginator="true" rows="20" lazy="true" rowKey="#{entity.id}" rowIndexVar="index" tableStyleClass="display-table"
 	   			id="table" selectionMode="single" emptyMessage="#{msgs.noRecordsFound}" 
 	   			rowsPerPageTemplate="10,20,30,40,50" paginatorPosition="bottom" pageLinks="10"
-	   			currentPageReportTemplate="Всего : #{dictionaryTypeList.model.rowCount} из #{dictionaryTypeList.model.totalCount}  &#160;&#160;| #{msgs.amountPerPage}"
+	   			currentPageReportTemplate="Всего : #{countriesList.model.rowCount} из #{countriesList.model.totalCount}  &#160;&#160;| #{msgs.amountPerPage}"
 	            paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport} {RowsPerPageDropdown}"
-	            selection="#{dictionaryTypeList.dictionaryType}"
-	            first="#{dictionaryTypeList.first}" >
-				<p:ajax event="page" listener="#{dictionaryTypeList.onPageChange}"/>  
-	            <p:ajax event="rowSelect" listener="#{dictionaryTypeController.onRowSelect}"/>
+	            selection="#{countriesList.countries}"
+	            first="#{countriesList.first}" >
+				<p:ajax event="page" listener="#{countriesList.onPageChange}"/>  
+	            <p:ajax event="rowSelect" listener="#{countriesController.onRowSelect}"/>
 	            <p:column headerText="№">
 			        <h:outputText value="#{index+1}" />
 			    </p:column>
 			    <p:column headerText="#{msgs.name}">
 			        <h:outputText value="#{entity.name}" />
 			    </p:column>
-			    <p:column headerText="#{msgs.shortName}">
-			        <h:outputText value="#{entity.shortName}" />
-			    </p:column>
-			
 			</p:dataTable>
 		</h:form>
 		<p:blockUI block="form:table" trigger="form:table" >
