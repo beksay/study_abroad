@@ -27,7 +27,6 @@ import org.infosystema.study_abroad.enums.Applicant;
 import org.infosystema.study_abroad.enums.ApplicationType;
 import org.infosystema.study_abroad.enums.ScopeConstants;
 import org.infosystema.study_abroad.model.Dictionary;
-import org.infosystema.study_abroad.model.Subdivision;
 import org.infosystema.study_abroad.model.app.AdditionalInfo;
 import org.infosystema.study_abroad.model.app.AppModule;
 import org.infosystema.study_abroad.model.app.Applications;
@@ -40,7 +39,6 @@ import org.infosystema.study_abroad.service.ApplicationsService;
 import org.infosystema.study_abroad.service.DictionaryService;
 import org.infosystema.study_abroad.service.ExporterService;
 import org.infosystema.study_abroad.service.ImporterService;
-import org.infosystema.study_abroad.service.SubdivisionService;
 import org.infosystema.study_abroad.service.TransportationService;
 import org.infosystema.study_abroad.util.PasswordBuilder;
 import org.infosystema.study_abroad.util.web.FacesScopeQualifier;
@@ -67,8 +65,6 @@ public class ApplicationsController extends BaseAppController {
 	private TransportationService transportationService;
 	@EJB
 	private AdditionalInfoService additionalInfoService;
-	@EJB
-	private SubdivisionService subdivisionService;
 	private UIComponent innField;
 
 	@Inject
@@ -246,12 +242,6 @@ public class ApplicationsController extends BaseAppController {
 
 	public List<ApplicationType> getAllMemberType() {
 		return Arrays.asList(ApplicationType.values());
-	}
-
-	public List<Subdivision> getSubdivisionList() {
-		List<FilterExample> examples = new ArrayList<>();
-		examples.add(new FilterExample("parent.code", Arrays.asList("1","00"), InequalityConstants.NOT_IN));
-		return subdivisionService.findByExample(0, 100, examples);
 	}
 
 	public List<Applicant> getAllApplicant() {

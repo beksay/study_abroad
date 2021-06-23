@@ -54,7 +54,6 @@ public class ApplicationsList implements Serializable {
 	public void filterData(){	
 		List<FilterExample> filters = new ArrayList<>();
 		filters.add(new FilterExample("status",Arrays.asList(AppStatus.SENDED, AppStatus.ACCEPTED,AppStatus.DECLINED) , InequalityConstants.IN));
-		filters.add(new FilterExample("subdivision", loginUtil.getCurrentUser().getSubdivision(), InequalityConstants.EQUAL));
 		if (inn != null && inn.length()>0) filters.add(new FilterExample("inn", '%' + inn + '%', InequalityConstants.LIKE));
 		if (number != null && number.length()>0) filters.add(new FilterExample("number", '%' + number + '%', InequalityConstants.LIKE));
 		if (type != null) filters.add(new FilterExample("type", type, InequalityConstants.EQUAL));

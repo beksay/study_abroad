@@ -23,14 +23,11 @@ public class User extends AbstractEntity<Integer>  {
 	private static final long serialVersionUID = 1L;
 	private String password;
 	private Role role;
-	private String username;
-	private UserStatus status;
-	private Subdivision subdivision;
-	private String codes;
-	private String inn;
-	private String fullname;
 	private String email;
-	private String position;
+	private UserStatus status;
+	private Person person;
+	private String companyName;
+	private String phone;
 	
 	public User() {
 	}
@@ -52,14 +49,15 @@ public class User extends AbstractEntity<Integer>  {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-
-	@Column(name = "user_name")
-	public String getUsername() {
-		return this.username;
+	
+	@ManyToOne
+    @JoinColumn(name="person_id")
+	public Person getPerson() {
+		return person;
 	}
-
-	public void setUsername(String username) {
-		this.username = username;
+	
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 	
 	@Enumerated(EnumType.ORDINAL)
@@ -71,40 +69,6 @@ public class User extends AbstractEntity<Integer>  {
 		this.status = status;
 	}
 
-	@ManyToOne
-    @JoinColumn(name = "subdivision_id")
-	public Subdivision getSubdivision() {
-		return subdivision;
-	}
-
-	public void setSubdivision(Subdivision subdivision) {
-		this.subdivision = subdivision;
-	}
-
-	public String getCodes() {
-		return codes;
-	}
-	
-	public void setCodes(String codes) {
-		this.codes = codes;
-	}
-
-	public String getInn() {
-		return inn;
-	}
-
-	public void setInn(String inn) {
-		this.inn = inn;
-	}
-
-	public String getFullname() {
-		return fullname;
-	}
-
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -113,12 +77,21 @@ public class User extends AbstractEntity<Integer>  {
 		this.email = email;
 	}
 
-	public String getPosition() {
-		return position;
+	@Column(name = "company_name")
+	public String getCompanyName() {
+		return companyName;
 	}
 
-	public void setPosition(String position) {
-		this.position = position;
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	

@@ -46,7 +46,7 @@ public class ExpertisesGoodsList implements Serializable {
 	
 	public void filterData(){	
 		List<FilterExample> filters = new ArrayList<>();
-		filters.add(new FilterExample("expertises.laboratory", loginUtil.getCurrentUser().getSubdivision(), InequalityConstants.EQUAL));
+		//filters.add(new FilterExample("expertises.laboratory", loginUtil.getCurrentUser().getSubdivision(), InequalityConstants.EQUAL));
 		if (searchText != null && searchText.length()>0) filters.add(new FilterExample("goods.products.name", '%' + searchText + '%', InequalityConstants.LIKE));
 		model = new ExpertisesGoodsDataModel(filters, service);	
 	}

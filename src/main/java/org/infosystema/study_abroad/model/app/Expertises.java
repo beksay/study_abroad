@@ -16,7 +16,6 @@ import javax.persistence.TemporalType;
 
 import org.infosystema.study_abroad.enums.ExpertisesStatus;
 import org.infosystema.study_abroad.model.AbstractEntity;
-import org.infosystema.study_abroad.model.Subdivision;
 
 
 @Entity
@@ -28,7 +27,6 @@ public class Expertises extends AbstractEntity<Integer>  {
 	private String samplingLocation;
 	private Inspection inspection;
 	private ExpertisesStatus status;
-	private Subdivision laboratory;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date")
@@ -68,13 +66,4 @@ public class Expertises extends AbstractEntity<Integer>  {
 		this.status = status;
 	}
 
-	@ManyToOne
-	@JoinColumn(name="laboratory")
-	public Subdivision getLaboratory() {
-		return laboratory;
-	}
-
-	public void setLaboratory(Subdivision laboratory) {
-		this.laboratory = laboratory;
-	}
 }

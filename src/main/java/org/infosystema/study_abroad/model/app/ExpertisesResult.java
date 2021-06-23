@@ -16,7 +16,6 @@ import javax.persistence.Table;
 import org.infosystema.study_abroad.enums.ResultStatus;
 import org.infosystema.study_abroad.model.AbstractEntity;
 import org.infosystema.study_abroad.model.Dictionary;
-import org.infosystema.study_abroad.model.Subdivision;
 
 
 @Entity
@@ -26,7 +25,6 @@ public class ExpertisesResult extends AbstractEntity<Integer>  {
 	private static final long serialVersionUID = 1L;
 	private ExpertisesGoods expertisesGoods;
 	private BigDecimal goodsAmount;
-	private Subdivision origin;
 	private String fromWhom;
 	private Dictionary measurementUnit;
 	private Date date;
@@ -60,16 +58,6 @@ public class ExpertisesResult extends AbstractEntity<Integer>  {
 
 	public void setGoodsAmount(BigDecimal goodsAmount) {
 		this.goodsAmount = goodsAmount;
-	}
-
-	@ManyToOne
-	@JoinColumn(name="origin_id")
-	public Subdivision getOrigin() {
-		return origin;
-	}
-	
-	public void setOrigin(Subdivision origin) {
-		this.origin = origin;
 	}
 
 	@Column(name="from_whom")

@@ -129,22 +129,22 @@ public class InspectionController extends Conversational {
 		return "/view/applications/inspection/inspection_form.xhtml";
 	}
 	
-	public String acceptApp(Applications applications) { 
-		inspection = new Inspection();
-		inspection.setApplications(applications);
-		inspection.setActDate(new Date());
-		inspection.setActNumber(loginUtil.getCurrentUser().getCodes());
-		List<FilterExample> examples = new ArrayList<>();
-		examples.add(new FilterExample("applications.subdivision", loginUtil.getCurrentUser().getSubdivision(), InequalityConstants.EQUAL));
-		examples.add(new FilterExample("applications.year", Calendar.getInstance().get(Calendar.YEAR), InequalityConstants.EQUAL));
-		Long max = service.countByExample(examples);
-		String num = max + "";
-		while (num.length() < 5) {
-			num = "0" + num;
-		}
-		inspection.setActNumber(inspection.getActNumber()+num);
-	    return form();
-	}
+//	public String acceptApp(Applications applications) { 
+//		inspection = new Inspection();
+//		inspection.setApplications(applications);
+//		inspection.setActDate(new Date());
+//		inspection.setActNumber(loginUtil.getCurrentUser().getCodes());
+//		List<FilterExample> examples = new ArrayList<>();
+//		examples.add(new FilterExample("applications.subdivision", loginUtil.getCurrentUser().getSubdivision(), InequalityConstants.EQUAL));
+//		examples.add(new FilterExample("applications.year", Calendar.getInstance().get(Calendar.YEAR), InequalityConstants.EQUAL));
+//		Long max = service.countByExample(examples);
+//		String num = max + "";
+//		while (num.length() < 5) {
+//			num = "0" + num;
+//		}
+//		inspection.setActNumber(inspection.getActNumber()+num);
+//	    return form();
+//	}
 	
 	public List<Dictionary> getMarkingList() {
         List<FilterExample> examples=new ArrayList<>();

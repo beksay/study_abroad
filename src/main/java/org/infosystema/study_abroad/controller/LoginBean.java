@@ -2,9 +2,7 @@ package org.infosystema.study_abroad.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -17,13 +15,8 @@ import javax.inject.Named;
 import org.infosystema.study_abroad.beans.FilterExample;
 import org.infosystema.study_abroad.beans.InequalityConstants;
 import org.infosystema.study_abroad.beans.SortEnum;
-import org.infosystema.study_abroad.enums.AuthType;
-import org.infosystema.study_abroad.enums.LogStatus;
 import org.infosystema.study_abroad.enums.UserStatus;
-import org.infosystema.study_abroad.model.LoginLog;
-import org.infosystema.study_abroad.model.Role;
 import org.infosystema.study_abroad.model.User;
-import org.infosystema.study_abroad.service.LoginLogService;
 import org.infosystema.study_abroad.service.UserService;
 import org.infosystema.study_abroad.util.Configuration;
 import org.infosystema.study_abroad.util.web.LoginUtil;
@@ -34,54 +27,38 @@ import org.infosystema.study_abroad.util.web.Messages;
 public class LoginBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
-	private String username, password;
-    private String random,signedData;
-
-    private String sessionId;
-    //cloud
-    private String pinCode;
-
+	private String email, password;
     @Inject
     private LoginUtil loginUtil;
-    @Inject
-    private FacesContext facesContext;
-
     @EJB
     private UserService userService;
-    @EJB
-    private LoginLogService loginLogService;
-
-    private AuthType authType;
-    private List<User> users;
-    private User user;
 
     @PostConstruct
     private void init() {
-        random = new Date().toString() + " " + this.toString();
-        random = random.trim();
+
     }
     
     public String login() throws Exception{
-    	if( username.equals("") ) {
+    	if( email.equals("") ) {
     		return null;
 		} else if ( password.equals("") ) {
 			return null;
 		}
 		
-    	System.out.println("login:" + username);
+    	System.out.println("login:" + email);
     	
 		String hashPassword = loginUtil.getHashPassword(password);
     	
     	System.out.println("password:" + password + " hash = " + hashPassword);
     	
-    	List<User> users = userService.findByProperty("username", username);
+    	List<User> users = userService.findByProperty("email", email);
     	if(users.isEmpty()){
     		FacesContext.getCurrentInstance().addMessage("login-form", new FacesMessage( FacesMessage.SEVERITY_ERROR,  Messages.getMessage("usernameIsIncorrect"), null) );
 			return null;
     	}
     	
 		List<FilterExample> examples = new ArrayList<FilterExample>();
-		examples.add(new FilterExample("username", username, InequalityConstants.EQUAL, true));	
+		examples.add(new FilterExample("email", email, InequalityConstants.EQUAL, true));	
 		examples.add(new FilterExample("password", hashPassword, InequalityConstants.EQUAL));
 		
 		List<User> userList = userService.findByExample(0, 1, SortEnum.ASCENDING, examples, "id");
@@ -110,94 +87,14 @@ public class LoginBean implements Serializable {
     	FacesContext.getCurrentInstance().getExternalContext().redirect(address);
 		return address;
     }
-    
-    public String loginUser() {
-		Optional<User> optional = Optional.of(user);
-		authType = loginUtil.getAuthType() == null ? AuthType.CLOUD : loginUtil.getAuthType();
-		
-		return checkAndAuthorize(optional);
+
+    public String getEmail() {
+		return email;
 	}
- 
-    public String loginWithPass() {
-        Optional<User> userOptional = findUserByUsernamePassword();
-        authType = AuthType.PASSWORD;
-
-        return checkAndAuthorize(userOptional);
-    }
     
- 
-
-    private Optional<User> findUserByUsernamePassword() {
-        List<FilterExample> filter = new ArrayList<>();
-        filter.add(new FilterExample("username", username, InequalityConstants.EQUAL, true));
-        filter.add(new FilterExample("password", password, InequalityConstants.EQUAL));
-
-        List<User> list = userService.findByExample(0, 1, filter);
-        
-        System.out.println("list = " + list + ", username = " + username + ", password = " + password);
-
-        if (list.isEmpty()) {
-            return Optional.empty();
-        }
-
-        return Optional.of(list.get(0));
-    }
-    
-    private String checkAndAuthorize(Optional<User> userOptional) {
-        if (!userOptional.isPresent()) {
-            facesContext.addMessage("login-form", new FacesMessage(FacesMessage.SEVERITY_ERROR, Messages.getMessage("usernameOrPasswordIncorrect"), null));
-            return null;
-        }
-
-        User user = userOptional.get();
-
-        if (user.getStatus() == null || !user.getStatus().equals(UserStatus.ACTIVE)) {
-            facesContext.addMessage("login-form", new FacesMessage(FacesMessage.SEVERITY_ERROR, Messages.getMessage("userIsNotActive"), null));
-            return "blocked?faces-redirect=true";
-        }
-
-        return authorizeUser(user);
-    }
-
-  
-
-    public String authorizeUser(User user) {
-        loginUtil.setCurrentUser(user);
-        loginUtil.setAuthType(authType);
-        loginUtil.setSessionId(sessionId);   
-        
-        LoginLog log = new LoginLog();
-		log.setDateCreated(new Date());
-		log.setStatus(LogStatus.IN);
-		log.setUser(user);
-
-		log = loginLogService.persist(log);
-        
-
-        Role role = user.getRole();
-        if (role != null) {
-            switch (org.infosystema.study_abroad.enums.Role.from(role)) {
-                case ADMIN:
-                    break;
-                case DIRECTOR:
-                    break;
-                case ACCOUNTANT:
-                    break;
-                case INSPECTOR:
-                    return "/inspector/list?faces-redirect=true";
-            }
-        }
-
-        return "/view/main?faces-redirect=true";
-    }
-
-    public String getUsername() {
-        return username;
-    }
-    
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    public void setEmail(String email) {
+		this.email = email;
+	}
 
     public String getPassword() {
         return password;
@@ -206,52 +103,4 @@ public class LoginBean implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getRandom() {
-        return random;
-    }
-
-    public void setRandom(String random) {
-        this.random = random;
-    }
-
-    public String getSignedData() {
-        return signedData;
-    }
-
-    public void setSignedData(String signedData) {
-        this.signedData = signedData;
-    }
-	
-	public String getSessionId() {
-		return sessionId;
-	}
-	
-	public void setSessionId(String sessionId) {
-		this.sessionId = sessionId;
-	}
-	
-	public String getPinCode() {
-		return pinCode;
-	}
-	
-	public void setPinCode(String pinCode) {
-		this.pinCode = pinCode;
-	}
-	
-	public List<User> getUsers() {
-		return users;
-	}
-	
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
-	
-	public User getUser() {
-		return user;
-	}
-	
-	public void setUser(User user) {
-		this.user = user;
-	}
 }

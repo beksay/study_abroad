@@ -106,54 +106,6 @@ public class CertificateController extends Conversational {
 		return list();
 	}
 
-	public String acceptCertificate(Inspection inspection) {
-		certificate = new Certificate();
-		certificate.setInspection(inspection);
-		if (inspection.getApplications().getType().equals(ApplicationType.EXPORT)) {
-			certificate.setAdditionalDeclaration(
-					"Подкарантинная продукция произведена на участках производства свободных от "
-							+ "карантинных вредных организмов в соответствии с Единым требованиями,"
-							+ " утвержденными Решением Совета ЕЭК от 30.11.2016г. №157.");
-			List<Transportations> transportations = transportationService.findByProperty("applications",
-					inspection.getApplications());
-
-			Date date = Calendar.getInstance().getTime();
-			DateFormat dateFormat = new SimpleDateFormat("ddMMyy");
-			String strDate = dateFormat.format(date);
-
-			System.out.println(strDate + "======");
-
-			if (transportations.get(0).getCountryImport().getCode() != null
-					&& loginUtil.getCurrentUser().getCodes() != null
-					&& loginUtil.getCurrentUser().getSubdivision().getCode() != null) {
-				certificate.setDocNumber(transportations.get(0).getCountryImport().getCode()
-						+ loginUtil.getCurrentUser().getSubdivision().getParent().getCode()
-						+ loginUtil.getCurrentUser().getSubdivision().getCode() + loginUtil.getCurrentUser().getCodes()
-						+ strDate);
-
-				List<FilterExample> examples = new ArrayList<>();
-				examples.add(new FilterExample("date", new Date(), InequalityConstants.EQUAL));
-				Long max = service.countByExample(examples);
-				String num = max + "";
-				while (num.length() < 3) {
-					num = "0" + num;
-				}
-				certificate.setDocNumber(certificate.getDocNumber() + num);
-			} else {
-				FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage("not found !!! ", "not found !!! "));
-				return null;
-			}
-		} else if (inspection.getApplications().getType().equals(ApplicationType.IMPORT)
-				|| inspection.getApplications().getType().equals(ApplicationType.TRANSIT)) {
-			List<Documents> docs = docService.findByProperty("module.applications", inspection.getApplications());
-			certificate.setDocNumber(docs.get(0).getNumber());
-			certificate.setDocumentBy(docs.get(0).getDescription());
-		}
-
-		return form();
-	}
 
 	public List<CertificateStatus> getAllCertificateStatus() {
 		return Arrays.asList(CertificateStatus.values());

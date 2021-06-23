@@ -33,7 +33,7 @@
 					         <h:commandLink value="#{msgs.logout}" action="#{userController.logout()}" />
 					     </li>
 					   </ul>
-	            </div>
+	            </div> 
 	        </div>	       
 	    </div>
  
@@ -45,27 +45,11 @@
 		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}">
 		       		<p:menuitem value="#{msgs.dictionaries}" outcome="/view/dictionaries/dict_type_list.xhtml"  icon="fa fa-book" styleClass="menu-item" />
 		        </p:submenu>
-		        <p:submenu label="#{msgs.nomenclature}"  expanded="false" styleClass="menu-submenu"
-		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin') or loginUtil.userHasRole(loginUtil.currentUser,'inspector')}">
-		            <p:menuitem value="#{msgs.organization}" outcome="/view/nomenclature/organization_list.xhtml"  icon="fa fa-book" styleClass="menu-item" 
-		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin') or loginUtil.userHasRole(loginUtil.currentUser,'inspector')}"/>
-		            <p:menuitem value="#{msgs.entryPoint}" outcome="/view/nomenclature/entry_point_list.xhtml"  icon="fa fa-book" styleClass="menu-item" 
-		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}"/>
-		            <p:menuitem value="#{msgs.quarantineObject}" outcome="/view/nomenclature/quarantine_object_list.xhtml"  icon="fa fa-book" styleClass="menu-item" 
-		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}"/>
-		            <p:menuitem value="#{msgs.violationOfLaw}" outcome="/view/nomenclature/violation_of_law_list.xhtml"  icon="fa fa-book" styleClass="menu-item" 
-		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}"/>
-		            <p:menuitem value="#{msgs.transportType}" outcome="/view/nomenclature/transport_type_list.xhtml"  icon="fa fa-book" styleClass="menu-item" 
-		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}"/>
-		            <p:menuitem value="#{msgs.products}" outcome="/view/nomenclature/products_list.xhtml"  icon="fa fa-book" styleClass="menu-item" 
-		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}"/>
-		        </p:submenu>
 		        <p:submenu label="#{msgs.users}"  expanded="false" styleClass="menu-submenu"
 		             rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}">
-		            <p:menuitem value="#{msgs.subdivision}" outcome="/view/subdivision/subdivision_tree.xhtml"  icon="fa fa-book" styleClass="menu-item" />
 		            <p:menuitem value="#{msgs.users}" outcome="/view/user/list.xhtml"  icon="fa fa-book" styleClass="menu-item" />
 		        </p:submenu>
-		        <p:submenu label="#{msgs.documents}"  expanded="false" styleClass="menu-submenu"
+		        <p:submenu label="#{msgs.apps}"  expanded="false" styleClass="menu-submenu"
 		               rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'inspector') or loginUtil.userHasRole(loginUtil.currentUser,'disinfection') or loginUtil.userHasRole(loginUtil.currentUser,'expertise')}">
 		       		<p:menuitem value="#{msgs.applications}" outcome="/view/applications/applications_journal.xhtml"  icon="fa fa-book" styleClass="menu-item" 
 		       		   rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'inspector')}"/>
@@ -77,16 +61,6 @@
 		       		   rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'expertise')}"/>
 		       		<p:menuitem value="#{msgs.certificate}" outcome="/view/applications/certificate/certificate_journal.xhtml"  icon="fa fa-book" styleClass="menu-item" 
 		       		   rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'inspector')}"/>
-		        </p:submenu>
-		         <p:submenu label="#{msgs.phytosanitaryInspection}"  expanded="false" styleClass="menu-submenu"
-		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'inspector')}">
-		       		<p:menuitem value="#{msgs.noStorageFacilitiesCard}" outcome="/view/no_storage/no_storage_list.xhtml"  icon="fa fa-book" styleClass="menu-item" />
-		       		<p:menuitem value="#{msgs.storageFacilitiesCard}" outcome="/view/storage/storage_list.xhtml"  icon="fa fa-book" styleClass="menu-item" />
-		        </p:submenu>
-		          <p:submenu label="#{msgs.zoneQuarantineFacilities}"  expanded="false" styleClass="menu-submenu"
-		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'inspector')}">
-		          	<p:menuitem value="#{msgs.objectList}" outcome="/view/map/map_list.xhtml"  icon="fa fa-book" styleClass="menu-item" />
-		       		<p:menuitem value="#{msgs.map}" outcome="/view/map/map_view.xhtml"  icon="fa fa-book" styleClass="menu-item" />
 		        </p:submenu>
 		    </p:panelMenu>	
 	     </h:panelGroup>

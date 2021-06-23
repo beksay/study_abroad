@@ -6,7 +6,6 @@ import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -25,10 +24,8 @@ import org.infosystema.study_abroad.beans.SortEnum;
 import org.infosystema.study_abroad.conversiation.ConversationUser;
 import org.infosystema.study_abroad.enums.UserStatus;
 import org.infosystema.study_abroad.model.Role;
-import org.infosystema.study_abroad.model.Subdivision;
 import org.infosystema.study_abroad.model.User;
 import org.infosystema.study_abroad.service.RoleService;
-import org.infosystema.study_abroad.service.SubdivisionService;
 import org.infosystema.study_abroad.service.UserService;
 import org.infosystema.study_abroad.util.MailSender;
 import org.infosystema.study_abroad.util.PasswordBuilder;
@@ -39,14 +36,9 @@ import org.infosystema.study_abroad.util.web.Messages;
 @ViewScoped
 public class UserAction implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 7782278859703355392L;
 	@EJB
 	private UserService service;
-	@EJB
-	private SubdivisionService subdivisionService;
 	@EJB
 	private RoleService roleService;
 	@Inject
@@ -105,7 +97,7 @@ public class UserAction implements Serializable {
 
 	public String sendPassword(User user) throws Exception {
 
-		List<User> users = service.findByProperty("username", user.getUsername());
+		List<User> users = service.findByProperty("email", user.getEmail());
 		if (users.isEmpty()) {
 			FacesContext.getCurrentInstance().addMessage("login-form",
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, Messages.getMessage("usernameIsIncorrect"), null));
@@ -113,7 +105,6 @@ public class UserAction implements Serializable {
 		}
 
 		List<FilterExample> examples = new ArrayList<>();
-		examples.add(new FilterExample("username", user.getUsername(), InequalityConstants.EQUAL, true));
 		examples.add(new FilterExample("email", user.getEmail(), InequalityConstants.EQUAL));
 
 		List<User> userList = service.findByExample(0, 1, SortEnum.ASCENDING, examples, "id");
@@ -140,7 +131,7 @@ public class UserAction implements Serializable {
 
 		String thePassword = builder.build();
 
-		String body = MessageFormat.format(template, user.getUsername(), user.getEmail(), theUser.getFullname(),
+		String body = MessageFormat.format(template, user.getEmail(), user.getEmail(), theUser.getEmail(),
 				thePassword);
 
 		theUser.setPassword(loginUtil.getHashPassword(thePassword));
@@ -158,16 +149,6 @@ public class UserAction implements Serializable {
 				new FacesMessage(FacesMessage.SEVERITY_INFO, Messages.getMessage("messagesSend"), null));
 
 		return null;
-	}
-	
-	public List<Subdivision> getSubdivisionList() {
-		List<FilterExample> examples = new ArrayList<>();
-		if (user.getRole() != null && user.getRole().getId() == 4) {
-			examples.add(new FilterExample("parent.code", "00", InequalityConstants.EQUAL));
-		} else {
-			examples.add(new FilterExample("parent.code", Arrays.asList("1", "00"), InequalityConstants.NOT_IN));
-		}
-		return subdivisionService.findByExample(0, 100, examples);
 	}
 
 	public List<Role> getRoleList() {

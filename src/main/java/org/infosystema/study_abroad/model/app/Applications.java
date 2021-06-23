@@ -17,7 +17,6 @@ import org.infosystema.study_abroad.enums.Applicant;
 import org.infosystema.study_abroad.enums.ApplicationType;
 import org.infosystema.study_abroad.model.AbstractEntity;
 import org.infosystema.study_abroad.model.Dictionary;
-import org.infosystema.study_abroad.model.Subdivision;
 import org.infosystema.study_abroad.model.User;
 
 
@@ -48,7 +47,6 @@ public class Applications extends AbstractEntity<Integer>  {
 	private AppStatus status;
 	private User user;
 	private String note;
-	private Subdivision subdivision;
 	private Integer year;
 
 	public String getNumber() {
@@ -180,16 +178,6 @@ public class Applications extends AbstractEntity<Integer>  {
 
 	public void setNote(String note) {
 		this.note = note;
-	}
-
-	@ManyToOne
-	@JoinColumn(name="subdivision")
-	public Subdivision getSubdivision() {
-		return subdivision;
-	}
-
-	public void setSubdivision(Subdivision subdivision) {
-		this.subdivision = subdivision;
 	}
 
 	@ManyToOne

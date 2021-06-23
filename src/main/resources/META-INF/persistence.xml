@@ -12,7 +12,6 @@
 		<class>org.infosystema.study_abroad.model.Attachment</class>
 		<class>org.infosystema.study_abroad.model.Dictionary</class>
 		<class>org.infosystema.study_abroad.model.DictionaryType</class>
-		<class>org.infosystema.study_abroad.model.LoginLog</class>
 		<class>org.infosystema.study_abroad.model.Role</class>
 		<class>org.infosystema.study_abroad.model.User</class>
 		<class>org.infosystema.study_abroad.model.app.AdditionalInfo</class>
@@ -31,8 +30,8 @@
 		<class>org.infosystema.study_abroad.model.app.ExpertisesGoods</class>
 		<class>org.infosystema.study_abroad.model.app.ExpertisesResult</class>
 		<class>org.infosystema.study_abroad.model.app.DisinfectionResult</class>
-		<class>org.infosystema.study_abroad.model.Subdivision</class>
 		<class>org.infosystema.study_abroad.model.app.Certificate</class>
+		<class>org.infosystema.study_abroad.model.Person</class>
 
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>

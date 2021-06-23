@@ -19,14 +19,12 @@ import org.infosystema.study_abroad.controller.Conversational;
 import org.infosystema.study_abroad.enums.GoodStatus;
 import org.infosystema.study_abroad.enums.ResultStatus;
 import org.infosystema.study_abroad.model.Dictionary;
-import org.infosystema.study_abroad.model.Subdivision;
 import org.infosystema.study_abroad.model.app.DisinfectionResult;
 import org.infosystema.study_abroad.model.app.ExpertisesGoods;
 import org.infosystema.study_abroad.model.app.ExpertisesResult;
 import org.infosystema.study_abroad.service.DictionaryService;
 import org.infosystema.study_abroad.service.ExpertisesGoodsService;
 import org.infosystema.study_abroad.service.ExpertisesResultService;
-import org.infosystema.study_abroad.service.SubdivisionService;
 import org.infosystema.study_abroad.util.web.Messages;
 
 @Named
@@ -40,8 +38,6 @@ public class ExpertisesResultController extends Conversational {
 	private ExpertisesGoodsService goodService;
 	@EJB
 	private DictionaryService dictService;
-	@EJB
-	private SubdivisionService subdivisionService;
 
 	private ExpertisesResult result;
 
@@ -112,16 +108,6 @@ public class ExpertisesResultController extends Conversational {
 
 	private String form() {
 		return "/view/applications/expertises/expertises_result_form.xhtml";
-	}
-
-	public List<Subdivision> getSubdivisionList(String query) {
-		List<FilterExample> examples = new ArrayList<>();
-		examples.add(new FilterExample("parent.code", Arrays.asList("1", "00"), InequalityConstants.NOT_IN));
-
-		Long count = subdivisionService.countByExample(examples);
-
-		return subdivisionService.findByExample(0, Math.toIntExact(count), examples).stream()
-				.filter(t -> t.getName().toLowerCase().startsWith(query.toLowerCase())).collect(Collectors.toList());
 	}
 
 	public ExpertisesResult getResult() {

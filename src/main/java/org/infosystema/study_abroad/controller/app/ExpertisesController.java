@@ -19,7 +19,6 @@ import org.infosystema.study_abroad.beans.InequalityConstants;
 import org.infosystema.study_abroad.controller.Conversational;
 import org.infosystema.study_abroad.enums.ExpertisesStatus;
 import org.infosystema.study_abroad.model.Dictionary;
-import org.infosystema.study_abroad.model.Subdivision;
 import org.infosystema.study_abroad.model.app.Expertises;
 import org.infosystema.study_abroad.model.app.ExpertisesGoods;
 import org.infosystema.study_abroad.model.app.Goods;
@@ -29,7 +28,6 @@ import org.infosystema.study_abroad.service.ExpertisesGoodsService;
 import org.infosystema.study_abroad.service.ExpertisesService;
 import org.infosystema.study_abroad.service.GoodsService;
 import org.infosystema.study_abroad.service.InspectionService;
-import org.infosystema.study_abroad.service.SubdivisionService;
 import org.infosystema.study_abroad.util.web.Messages;
 import org.primefaces.event.SelectEvent;
 
@@ -46,8 +44,6 @@ public class ExpertisesController extends Conversational {
 	private GoodsService goodsService;
 	@EJB
 	private ExpertisesGoodsService egService;
-	@EJB
-	private SubdivisionService subdivisionService;
 	@EJB
 	private DictionaryService dictService;
 	private Expertises expertises;
@@ -120,16 +116,6 @@ public class ExpertisesController extends Conversational {
 		Long count = dictService.countByExample(examples);
 
 		return dictService.findByExample(0, Math.toIntExact(count), examples).stream()
-				.filter(t -> t.getName().toLowerCase().startsWith(query.toLowerCase())).collect(Collectors.toList());
-	}
-
-	public List<Subdivision> getSubdivisionList(String query) {
-		List<FilterExample> examples = new ArrayList<>();
-		examples.add(new FilterExample("parent.code", Arrays.asList("00"), InequalityConstants.IN));
-
-		Long count = subdivisionService.countByExample(examples);
-
-		return subdivisionService.findByExample(0, Math.toIntExact(count), examples).stream()
 				.filter(t -> t.getName().toLowerCase().startsWith(query.toLowerCase())).collect(Collectors.toList());
 	}
 
