@@ -24,19 +24,7 @@
 				<h:inputText value="#{dictionaryController.dictionary.name}" id="name" maxlength="150" style="width:300px;"  required="true"
 					requiredMessage="#{msgs.thisFieldIsRequired}"/>
 				<p:message for="name" />
-				
-				<h:outputText value="#{msgs.enName}" styleClass="form-table-label disp-blc"/>
-				<h:inputText value="#{dictionaryController.dictionary.enName}" maxlength="150" id="enName"  style="width:300px;" />
-				<p:message for="enName" />
-				
-				<h:outputText value="#{msgs.kgName}" styleClass="form-table-label disp-blc"/>
-				<h:inputText value="#{dictionaryController.dictionary.kgName}" maxlength="150" id="kgName"  style="width:300px;" />
-				<p:message for="kgName" />
-				
-				<h:outputText value="#{msgs.symbol}" styleClass="form-table-label disp-blc"/>
-				<h:inputText value="#{dictionaryController.dictionary.symbol}" maxlength="150" id="symbol"  style="width:300px;" />
-				<p:message for="symbol" />
-				
+		
 				<h:outputLabel for="parent" value="#{msgs.parent}" />
 				<p:autoComplete id="parent" dropdown="true" var="type" scrollHeight="455"
 				itemValue="#{type}" itemLabel="#{type.name}" size="33" value="#{dictionaryController.dictionary.parent}"

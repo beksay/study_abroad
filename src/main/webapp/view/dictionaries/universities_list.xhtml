@@ -44,7 +44,8 @@
 			        <h:outputText value="#{entity.foundYear}" />
 			    </p:column>
 			    <p:column headerText="#{msgs.operation}" exportable="false" style="width:100px;">
-                    <h:commandButton action="#{universitiesController.edit(entity)}"  value="#{msgs.edit}" styleClass="btn-icon edit" title="#{msgs.edit}" />	 
+                    <h:commandButton action="#{universitiesController.edit(entity)}"  styleClass="btn-icon edit" title="#{msgs.edit}" />	
+                    <h:commandButton action="#{universitiesController.delete(entity)}"  styleClass="btn-icon remove" title="#{msgs.delete}" /> 
 			    </p:column>
 			</p:dataTable>
 			<h:commandLink value="#{msgs.back}" action="#{universitiesController.back()}" styleClass="button"/>

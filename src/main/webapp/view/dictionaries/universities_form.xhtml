@@ -7,48 +7,78 @@
     template="/WEB-INF/templates/layouts/private.xhtml">
  	<ui:define name="content">
  		
-		<h2>#{universitiesController.controller.countries.name} </h2> 
-		<br/><br/>	        
-		<h:form id="add-card-form" prependId="false">
-			<h:panelGroup id="messages">
-				<p:growl globalOnly="true" />
-			</h:panelGroup>
+		<h2>#{universitiesController.controller.countries.name} </h2>        
+		<h:form id="mainForm">
 		    <h:panelGrid styleClass="form-table" columns="3">
 		    
-		        <h:outputLabel for="universityType" value="#{msgs.universityType}" />
+		        <h:panelGroup>
+	                <h:outputText value="#{msgs.universityType}" />
+	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
+                </h:panelGroup>
 				<p:autoComplete id="universityType" dropdown="true" var="type" scrollHeight="455"
-				itemValue="#{type}" itemLabel="#{type.name}" size="33" value="#{universitiesController.universities.universityType}"
-				converter="cachedConverter" completeMethod="#{universitiesController.getUniversityTypeList}">
+					itemValue="#{type}" itemLabel="#{type.name}" size="33" value="#{universitiesController.universities.universityType}"
+					converter="cachedConverter" completeMethod="#{universitiesController.getUniversityTypeList}"
+					required="true" requiredMessage="#{msgs.thisFieldIsRequired}">
 				</p:autoComplete>
-				<h:message for="universityType" display="icon" style="color:red;" />
+				<p:message for="universityType" />
 				
-				<h:outputText value="#{msgs.name}" styleClass="form-table-label disp-blc"/>
-				<h:inputText value="#{universitiesController.universities.name}" id="name" maxlength="150" style="width:300px;"  required="true"
-					requiredMessage="#{msgs.thisFieldIsRequired}"/>
+				<h:panelGroup>
+	                <h:outputText value="#{msgs.name}" />
+	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
+                </h:panelGroup>
+				<h:inputText value="#{universitiesController.universities.name}" id="name" maxlength="150" style="width:300px;"  
+				    required="true" requiredMessage="#{msgs.thisFieldIsRequired}"/>
 				<p:message for="name" />
 				
 				<h:outputText value="#{msgs.shortName}" styleClass="form-table-label disp-blc"/>
 				<h:inputText value="#{universitiesController.universities.shortName}" maxlength="150" id="shortName"  style="width:300px;" />
 				<p:message for="shortName" />
 				
-				<h:outputText value="#{msgs.city}" styleClass="form-table-label disp-blc"/>
-				<h:inputText value="#{universitiesController.universities.city}" maxlength="150" id="city"  style="width:300px;" />
+				<h:panelGroup>
+	                <h:outputText value="#{msgs.city}" />
+	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
+                </h:panelGroup>
+				<h:inputText value="#{universitiesController.universities.city}" maxlength="150" id="city"  style="width:300px;" 
+				   required="true" requiredMessage="#{msgs.thisFieldIsRequired}"/>
 				<p:message for="city" />
 				
-				<h:outputText value="#{msgs.foundYear}" styleClass="form-table-label disp-blc"/>
-				<h:inputText value="#{universitiesController.universities.foundYear}" maxlength="150" id="foundYear"  style="width:300px;" />
+				<h:panelGroup>
+	                <h:outputText value="#{msgs.foundYear}" />
+	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
+                </h:panelGroup>
+				<h:inputText value="#{universitiesController.universities.foundYear}" maxlength="150" id="foundYear"  style="width:300px;" 
+				   required="true" requiredMessage="#{msgs.thisFieldIsRequired}"/>
 				<p:message for="foundYear" />
-
-		    </h:panelGrid>	
-		   
-		    <div class="m-top">
-		    	<h:commandButton value="#{msgs.save}" action="#{universitiesController.save()}" styleClass="button light-blue"/>
-		    	<h:commandButton value="#{msgs.cancel}" action="#{universitiesController.cancel()}" immediate="true" styleClass="button red m-left"/>
-		   	</div>
-		    
-		</h:form>
-			
-		<div class="clear"></div>	
 				
+				<h:outputLabel value="#{msgs.description}" />
+				<p:textEditor widgetVar="editor1" value="#{universitiesController.universities.description}" height="300" />
+		        <h:outputLabel  />
+
+			   </h:panelGrid>	
+			    <div style="display: none;">
+					<h:commandButton id="saveButton" value="#{msgs.save}" 
+							actionListener="#{universitiesController.save()}" class="button" />	
+			    </div>
+		    </h:form>
+			
+			<h:panelGrid columns="2" styleClass="field-groups" columnClasses="field-group-label,field-group-content" rowClasses="field-group" style="min-width: 605px;">
+				<h:outputText value="#{msgs.pictures}" />
+				<ui:include src="/WEB-INF/templates/upload/upload.xhtml"/>
+	        </h:panelGrid>		
+			   
+		    <h:form id="formBtn">
+				<div class="m-top">
+					<p:commandButton id="save"  onclick="document.getElementById('mainForm:saveButton').click();PF('block').show();;" value="#{msgs.save}" 
+					  oncomplete="PF('block').hide()" styleClass="button light-blue"/>
+					<p:commandButton value="#{msgs.cancel}" action="#{universitiesController.cancel()}" immediate="true"  
+					  styleClass="button red m-left"/>
+				</div>
+			</h:form>
+		    
+		    <p:blockUI block="formBtn" widgetVar="block" >
+		      #{msgs.loading}<br />
+		      <p:graphicImage library="img" name="ajaxloadingbar.gif"/>
+	        </p:blockUI>
+			
 	</ui:define>	
 </ui:composition>

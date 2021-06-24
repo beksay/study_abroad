@@ -2,32 +2,33 @@ package org.infosystema.study_abroad.controller.dict;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.transaction.SystemException;
 
 import org.infosystema.study_abroad.beans.FilterExample;
+import org.infosystema.study_abroad.controller.FileUploadController;
 import org.infosystema.study_abroad.conversiation.ConversationUniversities;
+import org.infosystema.study_abroad.dto.AttachmentBinaryDTO;
+import org.infosystema.study_abroad.model.Attachment;
 import org.infosystema.study_abroad.model.Universities;
 import org.infosystema.study_abroad.model.UniversityType;
 import org.infosystema.study_abroad.service.UniversitiesService;
 import org.infosystema.study_abroad.service.UniversityTypeService;
-import org.infosystema.study_abroad.util.web.Messages;
+import org.infosystema.study_abroad.util.Util;
 
 @Named
 @ViewScoped
 public class UniversitiesController implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@EJB
 	private UniversitiesService universitiesService;
@@ -37,19 +38,22 @@ public class UniversitiesController implements Serializable {
 	private ConversationUniversities conversation;
 	@Inject
 	private CountriesController controller;
+	@Inject
+	private FileUploadController uploadController;
 
 	private Universities universities;
 
 	@PostConstruct
 	public void init() {
-		universities = conversation.getUniversities();
 		if (universities == null)
 			universities = new Universities();
+		universities = conversation.getUniversities();
 	}
 
 	public String add() {
 		universities = new Universities();
 		conversation.setUniversities(universities);
+		uploadController.setFiles(new ArrayList<AttachmentBinaryDTO>());
 		return form();
 	}
 
@@ -60,34 +64,30 @@ public class UniversitiesController implements Serializable {
 	}
 
 	public String edit(Universities universities) {
+		universities = universitiesService.getByIdWithFields(universities.getId(), new String[]{"attachments"});
 		this.universities = universities;
 		conversation.setUniversities(universities);
+		uploadController.setFiles(Util.getFiles(universities.getAttachments()));
 		return form();
 	}
 
 	public String save() {
-		if (universities == null) {
-			FacesContext.getCurrentInstance().addMessage("form",
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, Messages.getMessage("invalidData"), null));
-			return null;
-		}
 
-		if (!FacesContext.getCurrentInstance().getMessageList().isEmpty())
-			return null;
+		Set<Attachment> attachments = new HashSet<>();
 		try {
-			if (universities.getId() == null) {
-				universities.setCountries(controller.getCountries());
-				universitiesService.persist(universities);
-			} else {
-				universitiesService.merge(universities);
-			}
-		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					Messages.getMessage("saveError"), Messages.getMessage("saveError")));
+			attachments.addAll(uploadController.convert());
+		} catch (SystemException e) {
 			e.printStackTrace();
-			return null;
 		}
-		conversation.setUniversities(null);
+		
+		universities.setAttachments(attachments);
+		
+		if (universities.getId() == null) {
+			universities.setCountries(controller.getCountries());
+			universitiesService.persist(universities);
+		} else {
+			universitiesService.merge(universities);
+		}
 
 		return cancel();
 
@@ -111,6 +111,7 @@ public class UniversitiesController implements Serializable {
 	}
 
 	private String list() {
+		System.out.println("=======BACK=======");
 		return "/view/dictionaries/universities_list.xhtml?faces-redirect=true";
 	}
 

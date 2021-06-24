@@ -34,15 +34,6 @@
 			    <p:column headerText="#{msgs.name}">
 			        <h:outputText value="#{entity.name}" />
 			    </p:column>
-			    <p:column headerText="#{msgs.enName}">
-			        <h:outputText value="#{entity.enName}" />
-			    </p:column>
-			    <p:column headerText="#{msgs.kgName}">
-			        <h:outputText value="#{entity.kgName}" />
-			    </p:column>
-			    <p:column headerText="#{msgs.symbol}">
-			        <h:outputText value="#{entity.symbol}" />
-			    </p:column>
 			    <p:column headerText="#{msgs.active}">
 			        <h:outputText value="#{msgs.yes}" rendered="#{entity.active==true}"/>
 			        <h:outputText value="#{msgs.no}" rendered="#{entity.active==false}"/>

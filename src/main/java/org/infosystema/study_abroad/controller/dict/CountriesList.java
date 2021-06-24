@@ -44,7 +44,7 @@ public class CountriesList implements Serializable {
 	public void filterData(){
 		List<FilterExample> filters = new ArrayList<>();
 		if (searchString != null && searchString.length()>0) {
-			filters.add(new FilterExample("name", '%' + searchString + '%', InequalityConstants.LIKE));
+			filters.add(new FilterExample("name", '%' + searchString.toLowerCase() + '%', InequalityConstants.LIKE));
 		}
 		model = new CountriesDataModel(filters, service);	
 	}

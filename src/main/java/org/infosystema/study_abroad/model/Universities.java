@@ -1,10 +1,16 @@
 package org.infosystema.study_abroad.model;
 
+import java.util.Set;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -27,6 +33,7 @@ public class Universities extends AbstractEntity<Integer>  {
 	private String city;
 	private Integer foundYear;
 	private String description;
+	private Set<Attachment> attachments;
 	
 	public Universities() {}
 	
@@ -64,7 +71,7 @@ public class Universities extends AbstractEntity<Integer>  {
 		this.foundYear = foundYear;
 	}
 
-	@Column(length = 5000)
+	@Column(length = 10000)
 	public String getDescription() {
 		return description;
 	}
@@ -91,6 +98,19 @@ public class Universities extends AbstractEntity<Integer>  {
 
 	public void setUniversityType(UniversityType universityType) {
 		this.universityType = universityType;
+	}
+	
+	@ManyToMany(cascade={CascadeType.REMOVE}, fetch=FetchType.LAZY)
+	@JoinTable(name="university_attachment", 
+		joinColumns=@JoinColumn(name="university_id"),
+		inverseJoinColumns=@JoinColumn(name="attachment_id")
+	)
+	public Set<Attachment> getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(Set<Attachment> attachments) {
+		this.attachments = attachments;
 	}
 	
 }
