@@ -20,7 +20,6 @@ import org.apache.commons.io.IOUtils;
 import org.infosystema.study_abroad.beans.FilterExample;
 import org.infosystema.study_abroad.beans.InequalityConstants;
 import org.infosystema.study_abroad.beans.Message;
-import org.infosystema.study_abroad.beans.SortEnum;
 import org.infosystema.study_abroad.conversiation.ConversationUser;
 import org.infosystema.study_abroad.enums.UserStatus;
 import org.infosystema.study_abroad.model.Role;
@@ -74,7 +73,15 @@ public class UserAction implements Serializable {
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, Messages.getMessage("invalidData"), null));
 			return null;
 		}
+		List<User> users = service.findByProperty("email", user.getEmail());
+    	if(users.size()>0){
+    		FacesContext.getCurrentInstance().addMessage("form", new FacesMessage( FacesMessage.SEVERITY_ERROR,  Messages.getMessage("emailIsAlreadyExists"), null) );
+			return null;
+    	}
+    	
 		user.setStatus(UserStatus.ACTIVE);
+		Role role = roleService.findById(2, false);
+		user.setRole(role);
 		if (!FacesContext.getCurrentInstance().getMessageList().isEmpty())
 			return null;
 		try {
@@ -97,24 +104,6 @@ public class UserAction implements Serializable {
 
 	public String sendPassword(User user) throws Exception {
 
-		List<User> users = service.findByProperty("email", user.getEmail());
-		if (users.isEmpty()) {
-			FacesContext.getCurrentInstance().addMessage("login-form",
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, Messages.getMessage("usernameIsIncorrect"), null));
-			return null;
-		}
-
-		List<FilterExample> examples = new ArrayList<>();
-		examples.add(new FilterExample("email", user.getEmail(), InequalityConstants.EQUAL));
-
-		List<User> userList = service.findByExample(0, 1, SortEnum.ASCENDING, examples, "id");
-
-		if (userList.isEmpty()) {
-			FacesContext.getCurrentInstance().addMessage("login-form", new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					Messages.getMessage("usernameOrEmailIncorrect"), null));
-			return null;
-		}
-
 		InputStream stream = this.getClass().getClassLoader().getResourceAsStream("user.template");
 		String template = null;
 		try {
@@ -123,7 +112,7 @@ public class UserAction implements Serializable {
 			e.printStackTrace();
 		}
 
-		User theUser = userList.get(0);
+		User theUser = user;
 		theUser = service.findByProperty("id", theUser.getId()).get(0);
 
 		PasswordBuilder builder = new PasswordBuilder();
@@ -131,7 +120,7 @@ public class UserAction implements Serializable {
 
 		String thePassword = builder.build();
 
-		String body = MessageFormat.format(template, user.getEmail(), user.getEmail(), theUser.getEmail(),
+		String body = MessageFormat.format(template, user.getEmail(), user.getCompanyName(), theUser.getEmail(),
 				thePassword);
 
 		theUser.setPassword(loginUtil.getHashPassword(thePassword));
@@ -140,7 +129,7 @@ public class UserAction implements Serializable {
 
 		Message message = new Message();
 		message.setEmail(user.getEmail());
-		message.setSubject("АСУП");
+		message.setSubject("Study Abroad");
 		message.setContent(body);
 
 		MailSender.getInstance().asyncSend(message);

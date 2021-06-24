@@ -33,32 +33,20 @@
 			        <h:outputText value="#{index+1}" />
 			    </p:column>
 			    
-			    <p:column headerText="#{msgs.inn}">
-			        <h:outputText value="#{entity.inn}" />
-			    </p:column>
-			    
-			    <p:column headerText="#{msgs.fullName}">
-			        <h:outputText value="#{entity.fullname}" />
-			    </p:column>
-			    
-			    <p:column headerText="#{msgs.code}">
-			        <h:outputText value="#{entity.codes}" />
-			    </p:column>
-	
-			    <p:column headerText="#{msgs.username}">
-			        <h:outputText value="#{entity.username}" />
+			    <p:column headerText="#{msgs.companyName}">
+			        <h:outputText value="#{entity.companyName}" />
 			    </p:column>
 			    
 			    <p:column headerText="#{msgs.role}">
 			        <h:outputText value="#{entity.role.humanName}" />
 			    </p:column>
 			    
-			    <p:column headerText="#{msgs.subdivision}">
-			        <h:outputText value="#{entity.subdivision.name}" />
-			    </p:column>
-			    
 			    <p:column headerText="#{msgs.email}">
 			        <h:outputText value="#{entity.email}" />
+			    </p:column>
+	
+			    <p:column headerText="#{msgs.phone}">
+			        <h:outputText value="#{entity.phone}" />
 			    </p:column>
 			    
 			    <p:column headerText="#{msgs.status}">

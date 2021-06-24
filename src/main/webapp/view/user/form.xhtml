@@ -17,75 +17,20 @@
 			<h:panelGrid styleClass="form-table" columns="3">
 
 				<h:panelGroup>
-					<h:outputText value="#{msgs.inn}" />
+					<h:outputText value="#{msgs.companyName}" />
 					<i class="fa fa-asterisk reqField" aria-hidden="true"></i>
 				</h:panelGroup>
-				<h:inputText value="#{userAction.user.inn}" id="inn"
-					style="width:300px;" required="true"
-					requiredMessage="#{msgs.thisFieldIsRequired}" />
-				<p:message for="inn" />
+				<h:inputText value="#{userAction.user.companyName}" id="companyName"
+					style="width:300px;" required="true" requiredMessage="#{msgs.thisFieldIsRequired}" />
+				<p:message for="companyName" />
 
 				<h:panelGroup>
-					<h:outputText value="#{msgs.fullName}" />
+					<h:outputText value="#{msgs.phone}" />
 					<i class="fa fa-asterisk reqField" aria-hidden="true"></i>
 				</h:panelGroup>
-				<h:inputText value="#{userAction.user.fullname}" id="fullname"
-					style="width:300px;" required="true"
-					requiredMessage="#{msgs.thisFieldIsRequired}" />
-				<p:message for="fullname" />
-
-				<h:panelGroup>
-					<h:outputText value="#{msgs.position}" />
-					<i class="fa fa-asterisk reqField" aria-hidden="true"></i>
-				</h:panelGroup>
-				<h:inputText value="#{userAction.user.position}" id="position"
-					style="width:300px;" required="true"
-					requiredMessage="#{msgs.thisFieldIsRequired}" />
-				<p:message for="position" />
-
-				<h:panelGroup>
-					<h:outputText value="#{msgs.role}" />
-					<i class="fa fa-asterisk reqField" aria-hidden="true"></i>
-				</h:panelGroup>
-				<p:selectOneMenu id="role" value="#{userAction.user.role}"
-					effect="fold" editable="false" style="width:300px"
-					converter="cachedConverter" required="true"
-					requiredMessage="#{msgs.thisFieldIsRequired}">
-					<f:selectItem itemLabel="#{msgs.selectValue}" />
-					<f:selectItems value="#{userAction.roleList}" var="cs"
-						itemLabel="#{cs.humanName}" itemValue="#{cs}" />
-					<p:ajax event="itemSelect" process="@this" update="subdivision" />
-				</p:selectOneMenu>
-				<p:message for="role" />
-
-				<h:panelGroup>
-					<h:outputText value="#{msgs.subdivision}" />
-					<i class="fa fa-asterisk reqField" aria-hidden="true"></i>
-				</h:panelGroup>
-				<h:selectOneMenu id="subdivision"
-					value="#{userAction.user.subdivision}" effect="fold"
-					editable="true" style="width:300px" converter="cachedConverter2"
-					required="true" requiredMessage="#{msgs.thisFieldIsRequired}">
-					<f:selectItem itemLabel="#{msgs.selectValue}" />
-					<f:selectItems value="#{userAction.subdivisionList}" var="cs"
-						itemLabel="#{cs.name}" itemValue="#{cs}" />
-				</h:selectOneMenu>
-				<p:message for="subdivision" />
-
-				<h:panelGroup>
-					<h:outputText value="#{msgs.username}" />
-					<i class="fa fa-asterisk reqField" aria-hidden="true"></i>
-				</h:panelGroup>
-				<h:inputText value="#{userAction.user.username}" id="username"
-					style="width:300px;" required="true"
-					requiredMessage="#{msgs.thisFieldIsRequired}" />
-				<p:message for="username" />
-
-				<h:outputText value="#{msgs.code}" />
-				<h:inputText value="#{userAction.user.codes}" id="code"
-					style="width:300px;" required="#{userAction.user.role.id eq 2}"
-					maxlength="2" requiredMessage="#{msgs.thisFieldIsRequired}" />
-				<p:message for="code" />
+				<h:inputText value="#{userAction.user.phone}" id="phone"
+					style="width:300px;" required="true" requiredMessage="#{msgs.thisFieldIsRequired}" />
+				<p:message for="phone" />
 
 				<h:panelGroup>
 					<h:outputText value="#{msgs.email}" />
@@ -98,136 +43,11 @@
 				</h:inputText>
 				<p:message for="email" />
 			</h:panelGrid>
-			<br />
-
-			<p:dataTable var="entity" value="#{userAction.logList}"
-				rendered="#{userAction.user.id ne null}" rowIndexVar="index"
-				tableStyleClass="display-table" id="table"
-				emptyMessage="#{msgs.noRecordsFound}">
-
-				<f:facet name="header">
-				#{msgs.logs}
-				</f:facet>
-
-				<p:column style="width:2rem">
-					<p:rowToggler />
-				</p:column>
-
-				<p:column headerText="№">
-					<h:outputText value="#{index+1}" />
-				</p:column>
-
-				<p:column headerText="#{msgs.status}">
-					<h:outputText value="#{enums[entity.action]}" />
-				</p:column>
-
-				<p:column headerText="#{msgs.changedFields}">
-					<p:outputLabel value="#{msgs.inn}"
-						rendered="#{entity.newInn ne null}" />
-					<div style="white-space: pre-wrap" />
-					<p:outputLabel value="#{msgs.fullName}"
-						rendered="#{entity.newFullname ne null}" />
-					<div style="white-space: pre-wrap" />
-					<p:outputLabel value="#{msgs.position}"
-						rendered="#{entity.newPosition ne null}" />
-					<div style="white-space: pre-wrap" />
-					<p:outputLabel value="#{msgs.role}"
-						rendered="#{entity.newRole ne null}" />
-					<div style="white-space: pre-wrap" />
-					<p:outputLabel value="#{msgs.subdivision}"
-						rendered="#{entity.newSubdivision ne null}" />
-					<div style="white-space: pre-wrap" />
-					<p:outputLabel value="#{msgs.username}"
-						rendered="#{entity.newUsername ne null}" />
-					<div style="white-space: pre-wrap" />
-					<p:outputLabel value="#{msgs.code}"
-						rendered="#{entity.newCodes ne null}" />
-					<div style="white-space: pre-wrap" />
-					<p:outputLabel value="#{msgs.email}"
-						rendered="#{entity.newEmail ne null}" />
-					<div style="white-space: pre-wrap" />
-				</p:column>
-
-				<p:column headerText="#{msgs.date}">
-					<h:outputText value="#{entity.dateChanged}">
-						<f:convertDateTime pattern="dd-MM-yyyy" />
-					</h:outputText>
-				</p:column>
-
-				<p:column headerText="#{msgs.user}">
-					<h:outputText value="#{entity.userChanged.fullname}" />
-				</p:column>
-
-				<p:rowExpansion rendered="#{entity.action eq 'USER_CHANGED'}">
-					<p:panelGrid columns="3">
-
-						<p:outputLabel>#{msgs.changedFields}</p:outputLabel>
-						<p:outputLabel>#{msgs.oldValue}</p:outputLabel>
-						<p:outputLabel>#{msgs.newValue}</p:outputLabel>
-
-						<p:outputLabel rendered="#{entity.newInn ne null}">#{msgs.inn}</p:outputLabel>
-						<p:outputLabel rendered="#{entity.newInn ne null}">#{entity.oldInn}</p:outputLabel>
-						<p:outputLabel rendered="#{entity.newInn ne null}">#{entity.newInn}</p:outputLabel>
-
-						<p:outputLabel rendered="#{entity.newFullname ne null}">#{msgs.fullName}</p:outputLabel>
-						<p:outputLabel rendered="#{entity.newFullname ne null}">#{entity.oldFullname}</p:outputLabel>
-						<p:outputLabel rendered="#{entity.newFullname ne null}">#{entity.newFullname}</p:outputLabel>
-
-						<p:outputLabel rendered="#{entity.newPosition ne null}">#{msgs.position}</p:outputLabel>
-						<p:outputLabel rendered="#{entity.newPosition ne null}">#{entity.oldPosition}</p:outputLabel>
-						<p:outputLabel rendered="#{entity.newPosition ne null}">#{entity.newPosition}</p:outputLabel>
-
-						<p:outputLabel rendered="#{entity.newRole ne null}">#{msgs.role}</p:outputLabel>
-						<p:outputLabel rendered="#{entity.newRole ne null}">#{entity.oldRole.humanName}</p:outputLabel>
-						<p:outputLabel rendered="#{entity.newRole ne null}">#{entity.newRole.humanName}</p:outputLabel>
-
-						<p:outputLabel rendered="#{entity.newSubdivision ne null}">#{msgs.subdivision}</p:outputLabel>
-						<p:outputLabel rendered="#{entity.newSubdivision ne null}">#{entity.oldSubdivision.name}</p:outputLabel>
-						<p:outputLabel rendered="#{entity.newSubdivision ne null}">#{entity.newSubdivision.name}</p:outputLabel>
-
-						<p:outputLabel rendered="#{entity.newUsername ne null}">#{msgs.username}</p:outputLabel>
-						<p:outputLabel rendered="#{entity.newUsername ne null}">#{entity.oldUsername}</p:outputLabel>
-						<p:outputLabel rendered="#{entity.newUsername ne null}">#{entity.newUsername}</p:outputLabel>
-
-						<p:outputLabel rendered="#{entity.newCodes ne null}">#{msgs.code}</p:outputLabel>
-						<p:outputLabel rendered="#{entity.newCodes ne null}">#{entity.oldCodes}</p:outputLabel>
-						<p:outputLabel rendered="#{entity.newCodes ne null}">#{entity.newCodes}</p:outputLabel>
-
-						<p:outputLabel rendered="#{entity.newEmail ne null}">#{msgs.email}</p:outputLabel>
-						<p:outputLabel rendered="#{entity.newEmail ne null}">#{entity.oldEmail}</p:outputLabel>
-						<p:outputLabel rendered="#{entity.newEmail ne null}">#{entity.newEmail}</p:outputLabel>
-
-					</p:panelGrid>
-				</p:rowExpansion>
-			</p:dataTable>
-
+ 
 			<div class="m-top">
-
-				<p:commandButton value="#{msgs.resetPassword}"
-					rendered="#{userAction.user.id ne null}"
-					action="#{userAction.sendPassword(conversationUser.user)}"
-					styleClass="button light-blue">
-
-					<p:confirm header="#{msgs.resetPassword}"
-						message="#{msgs.confirmResetPassword}"
-						icon="pi pi-exclamation-triangle" />
-				</p:commandButton>
-
-				<h:commandButton value="#{msgs.save}" action="#{userAction.save()}"
-					styleClass="button light-blue m-left" />
-
-				<h:commandButton value="#{msgs.cancel}"
-					action="#{userAction.cancel()}" immediate="true"
-					styleClass="button red m-left" />
+               <h:commandButton value="#{msgs.save}" action="#{userAction.save()}" styleClass="button light-blue m-left" />
+               <h:commandButton value="#{msgs.cancel}" action="#{userAction.cancel()}" immediate="true"	styleClass="button red m-left" />
 			</div>
-
-			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
-				responsive="true" width="350">
-				<p:commandButton value="#{msgs.yes}" type="button"
-					styleClass="ui-confirmdialog-yes" />
-				<p:commandButton value="#{msgs.no}" type="button"
-					styleClass="ui-confirmdialog-no ui-button-flat" />
-			</p:confirmDialog>
 
 		</h:form>
 
