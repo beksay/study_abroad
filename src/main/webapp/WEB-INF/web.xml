@@ -53,7 +53,7 @@
 		</init-param>
 		<init-param>
 			<param-name>logged</param-name>
-			<param-value>/|/download|/view/main.xhtml|/view/empty.xhtml|/view/jasper_viewer.xhtml|/jasper|/view/user/change_password.xhtml.*|/view/jasper_viewer.xhtml|/inspector/user.*|/view/.*|/inspector/.*|/view/profile/.*|/view/report/.*|/applications/.*|/view/no_storage/.*|/view/storage/.*|/view/map/.*|/view/subdivision/.*</param-value>
+			<param-value>/|/download|/view/main.xhtml|/view/empty.xhtml|/view/jasper_viewer.xhtml|/jasper|/view/user/change_password.xhtml.*|/view/jasper_viewer.xhtml|/inspector/user.*|/view/.*|/view/profile/.*|/view/report/.*|/applications/.*|/view/mentors/.*|/view/storage/.*|/view/map/.*|/view/subdivision/.*</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>

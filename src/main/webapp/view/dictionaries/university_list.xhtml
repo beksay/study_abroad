@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/templates/layouts/private.xhtml">
+ 	<ui:define name="content">
+		<h2>#{msgs.universities}</h2> 
+		<h:form id ="filter-form">	
+	        <p:inputText value="#{universityList.searchString}" id="watermark"  >	
+	        	  <p:ajax listener="#{universityList.filterData()}" event="keyup" update="form"/>	               
+	        </p:inputText>
+	        <p:watermark for="watermark" value="Поиск" />
+			<p:commandButton ajax="true" update="form" value="#{msgs.search}" actionListener="#{universityList.filterData()}" styleClass="button green" />	 
+			<p:commandButton ajax="true" update="form" value="#{msgs.clear}" actionListener="#{universityList.clearData()}" styleClass="button blue" />    		
+		</h:form>
+		<h:form id ="form">
+			<p:dataTable var="entity" value="#{universityList.model}" paginator="true" rows="20" lazy="true" rowKey="#{entity.id}" rowIndexVar="index" tableStyleClass="display-table"
+	   			id="table" selectionMode="single" emptyMessage="#{msgs.noRecordsFound}" 
+	   			rowsPerPageTemplate="10,20,30,40,50" paginatorPosition="bottom" pageLinks="10"
+	   			currentPageReportTemplate="Всего : #{universityList.model.rowCount} из #{universityList.model.totalCount}  &#160;&#160;| #{msgs.amountPerPage}"
+	            paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport} {RowsPerPageDropdown}"
+	            selection="#{universityList.universities}"
+	            first="#{universityList.first}" >
+				<p:ajax event="page" listener="#{universityList.onPageChange}"/>  
+	            <p:column headerText="№">
+			        <h:outputText value="#{index+1}" />
+			    </p:column>
+			    <p:column headerText="#{msgs.universityType}">
+			        <h:outputText value="#{entity.universityType.name}" />
+			    </p:column>
+			    <p:column headerText="#{msgs.name}"> 
+			        <h:outputText value="#{entity.name}" />
+			    </p:column>
+			    <p:column headerText="#{msgs.city}">
+			        <h:outputText value="#{entity.city}" />
+			    </p:column>
+			    <p:column headerText="#{msgs.country}">
+			        <h:outputText value="#{entity.countries.name}" />
+			    </p:column>
+			</p:dataTable>
+		</h:form>
+		<p:blockUI block="form:table" trigger="form:table" >
+			#{msgs.loading}<br />
+		    <p:graphicImage library="img" name="ajaxloadingbar.gif"/>
+		</p:blockUI>	
+
+		<div class="clear"></div>			
+				
+	</ui:define>	
+	
+</ui:composition>

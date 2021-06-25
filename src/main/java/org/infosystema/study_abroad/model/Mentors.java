@@ -1,14 +1,10 @@
 package org.infosystema.study_abroad.model;
 
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -23,8 +19,8 @@ import javax.persistence.Transient;
  */
 
 @Entity
-@Table(name="person")
-public class Person extends AbstractEntity<Integer> {
+@Table(name="mentors")
+public class Mentors extends AbstractEntity<Integer> {
 	private static final long serialVersionUID = 1L;
 	private String pin;
 	private Date dateCreated;
@@ -35,15 +31,9 @@ public class Person extends AbstractEntity<Integer> {
 	private String city;
 	private String address;
 	private String phone;
-	private Mentors mentor;
-	private Dictionary englishLevel;
 	private Date birthDate;
 	private Attachment profile;
 	private User company;
-	private String toefl;
-	private String ielts;
-
-	private Set<Dictionary> languages;
 	
 	public String getPin() {
 		return pin;
@@ -116,16 +106,6 @@ public class Person extends AbstractEntity<Integer> {
 	}
 
 	@ManyToOne
-	@JoinColumn (name="mentor_id")
-	public Mentors getMentor() {
-		return mentor;
-	}
-	
-	public void setMentor(Mentors mentor) {
-		this.mentor = mentor;
-	}
-
-	@ManyToOne
 	@JoinColumn (name="company_id")
 	public User getCompany() {
 		return company;
@@ -170,45 +150,6 @@ public class Person extends AbstractEntity<Integer> {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-
-	@ManyToOne
-	@JoinColumn (name="english_level_id")
-	public Dictionary getEnglishLevel() {
-		return englishLevel;
-	}
-	
-	public void setEnglishLevel(Dictionary englishLevel) {
-		this.englishLevel = englishLevel;
-	}
-
-	public String getToefl() {
-		return toefl;
-	}
-
-	public void setToefl(String toefl) {
-		this.toefl = toefl;
-	}
-
-	public String getIelts() {
-		return ielts;
-	}
-
-	public void setIelts(String ielts) {
-		this.ielts = ielts;
-	}
-
-	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(
-	  name = "person_languages", 
-	  joinColumns = @JoinColumn(name = "person_id"), 
-	  inverseJoinColumns = @JoinColumn(name = "dictionary_id"))	
-	public Set<Dictionary> getLanguages() {
-		return languages;
-	}
-
-	public void setLanguages(Set<Dictionary> languages) {
-		this.languages = languages;
 	}
 	
 }

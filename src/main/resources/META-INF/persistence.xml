@@ -14,27 +14,11 @@
 		<class>org.infosystema.study_abroad.model.DictionaryType</class>
 		<class>org.infosystema.study_abroad.model.Role</class>
 		<class>org.infosystema.study_abroad.model.User</class>
-		<class>org.infosystema.study_abroad.model.app.AdditionalInfo</class>
-		<class>org.infosystema.study_abroad.model.app.Applications</class>
-		<class>org.infosystema.study_abroad.model.app.AppModule</class>
-		<class>org.infosystema.study_abroad.model.app.Documents</class>
-		<class>org.infosystema.study_abroad.model.app.DocumentsStep</class>
-		<class>org.infosystema.study_abroad.model.app.Exporters</class>
-		<class>org.infosystema.study_abroad.model.app.Goods</class>
-		<class>org.infosystema.study_abroad.model.app.GoodStep</class>
-		<class>org.infosystema.study_abroad.model.app.Importers</class>
-		<class>org.infosystema.study_abroad.model.app.Transportations</class>
-		<class>org.infosystema.study_abroad.model.app.Inspection</class>
-		<class>org.infosystema.study_abroad.model.app.Expertises</class>
-		<class>org.infosystema.study_abroad.model.app.Disinfection</class>
-		<class>org.infosystema.study_abroad.model.app.ExpertisesGoods</class>
-		<class>org.infosystema.study_abroad.model.app.ExpertisesResult</class>
-		<class>org.infosystema.study_abroad.model.app.DisinfectionResult</class>
-		<class>org.infosystema.study_abroad.model.app.Certificate</class>
 		<class>org.infosystema.study_abroad.model.Person</class>
 		<class>org.infosystema.study_abroad.model.Countries</class>
 		<class>org.infosystema.study_abroad.model.Universities</class>
 		<class>org.infosystema.study_abroad.model.UniversityType</class>
+		<class>org.infosystema.study_abroad.model.Mentors</class>
 
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>

@@ -28,6 +28,7 @@ public class User extends AbstractEntity<Integer>  {
 	private Person person;
 	private String companyName;
 	private String phone;
+	private User company;
 	
 	public User() {
 	}
@@ -58,6 +59,16 @@ public class User extends AbstractEntity<Integer>  {
 	
 	public void setPerson(Person person) {
 		this.person = person;
+	}
+	
+	@ManyToOne
+    @JoinColumn(name="company_id")
+	public User getCompany() {
+		return company;
+	}
+	
+	public void setCompany(User company) {
+		this.company = company;
 	}
 	
 	@Enumerated(EnumType.ORDINAL)

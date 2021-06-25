@@ -39,10 +39,14 @@
 			<div class="seperator"></div>
 			<br/>
 			<p:panelMenu styleClass="m-left menu-header" >
-		        <p:submenu label="#{msgs.dictionaries}"  expanded="false" styleClass="menu-submenu" 
-		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}">
-		       		<p:menuitem value="#{msgs.dictionaries}" outcome="/view/dictionaries/dict_type_list.xhtml"  icon="fa fa-book" styleClass="menu-item" />
-		       		<p:menuitem value="#{msgs.countries}" outcome="/view/dictionaries/countries_list.xhtml"  icon="fa fa-map-marker" styleClass="menu-item" />
+		        <p:submenu label="#{msgs.dictionaries}"  expanded="false" styleClass="menu-submenu"
+		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin') or loginUtil.userHasRole(loginUtil.currentUser,'company')}">
+		       		<p:menuitem value="#{msgs.dictionaries}" outcome="/view/dictionaries/dict_type_list.xhtml"  icon="fa fa-book" styleClass="menu-item" 
+		       		    rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}"/>
+		       		<p:menuitem value="#{msgs.universities}" outcome="/view/dictionaries/university_list.xhtml"  icon="fa fa-university" styleClass="menu-item" 
+		       		    rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'company')}"/>
+		       		<p:menuitem value="#{msgs.mentors}" outcome="/view/mentors/mentors_list.xhtml"  icon="fa fa-bell" styleClass="menu-item" 
+		       		    rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'company')}"/>    
 		        </p:submenu>
 		        <p:submenu label="#{msgs.users}"  expanded="false" styleClass="menu-submenu"
 		             rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}">

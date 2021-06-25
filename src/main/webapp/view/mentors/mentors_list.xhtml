@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/templates/layouts/private.xhtml">
+ 	<ui:define name="content">
+		<h2>#{msgs.mentors}</h2> 
+		<h:form id ="filter-form">	
+	        <p:inputText value="#{mentorsList.searchString}" id="watermark"  >	
+	        	  <p:ajax listener="#{mentorsList.filterData()}" event="keyup" update="form"/>	               
+	        </p:inputText>
+	        <p:watermark for="watermark" value="Поиск" />
+			<p:commandButton ajax="true" update="form" value="#{msgs.search}"  style="display:none;"
+			    actionListener="#{mentorsList.filterData()}" styleClass="button green" />	    
+			<h:commandLink value="#{msgs.add}" action="#{mentorsController.add()}" styleClass="button green f-right"/>   		
+		</h:form>
+		<h:form id ="form">
+			<p:dataTable var="entity" value="#{mentorsList.model}" paginator="true" rows="20" lazy="true" rowKey="#{entity.id}" rowIndexVar="index" tableStyleClass="display-table"
+	   			id="table" selectionMode="single" emptyMessage="#{msgs.noRecordsFound}" 
+	   			rowsPerPageTemplate="10,20,30,40,50" paginatorPosition="bottom" pageLinks="10"
+	   			currentPageReportTemplate="Всего : #{mentorsList.model.rowCount} из #{mentorsList.model.totalCount}  &#160;&#160;| #{msgs.amountPerPage}"
+	            paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport} {RowsPerPageDropdown}"
+	            selection="#{mentorsController.mentors}"
+	            first="#{mentorsList.first}" >
+				<p:ajax event="page" listener="#{mentorsList.onPageChange}"/>  
+	            <p:column headerText="№">
+			        <h:outputText value="#{index+1}" />
+			    </p:column>
+			    <p:column headerText="#{msgs.pin}">
+			        <h:outputText value="#{entity.pin}" />
+			    </p:column>
+			    <p:column headerText="#{msgs.fullname}">
+			        <h:outputText value="#{entity.fullname}" />
+			    </p:column>
+			    <p:column headerText="#{msgs.address}">
+			        <h:outputText value="#{entity.country.name}" /><br />
+			        <h:outputText value="#{entity.city}" /><br />
+			        <h:outputText value="#{entity.address}" />
+			    </p:column>
+			    <p:column headerText="#{msgs.birthDate}">
+			        <h:outputText value="#{entity.birthDate}" >
+			           <f:convertDateTime pattern="dd-MM-yyyy" />
+				    </h:outputText>
+			    </p:column>
+			    <p:column headerText="#{msgs.operation}" exportable="false" style="width:100px;">
+                    <h:commandButton action="#{mentorsController.edit(entity)}"  styleClass="btn-icon edit" title="#{msgs.edit}" />
+                    <h:commandButton action="#{mentorsController.delete(entity)}"  styleClass="btn-icon remove" title="#{msgs.delete}" />	 
+			    </p:column>
+			</p:dataTable>
+		</h:form>
+		<p:blockUI block="form:table" trigger="form:table" >
+			#{msgs.loading}<br />
+		    <p:graphicImage library="img" name="ajaxloadingbar.gif"/>
+		</p:blockUI>	
+
+		<div class="clear"></div>			
+				
+	</ui:define>	
+	
+</ui:composition>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/templates/layouts/private.xhtml">
+ 	<ui:define name="content">
+ 		
+		<h2>#{msgs.mentorsForm}</h2> 
+		<br/><br/>	        
+		<h:form id="add-card-form" prependId="false">
+			<h:panelGroup id="messages">
+				<p:growl globalOnly="true" />
+			</h:panelGroup>
+		    <h:panelGrid styleClass="form-table" columns="3">
+		    	
+				<h:panelGroup>
+	                <h:outputText value="#{msgs.pin}" />
+	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
+                </h:panelGroup>
+				<h:inputText value="#{mentorsController.mentors.pin}" id="pin" maxlength="150" style="width:300px;"  required="true"
+					requiredMessage="#{msgs.thisFieldIsRequired}"/>
+				<p:message for="pin" />
+				
+				<h:panelGroup>
+	                <h:outputText value="#{msgs.firstname}" />
+	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
+                </h:panelGroup>
+				<h:inputText value="#{mentorsController.mentors.firstname}" id="firstname" maxlength="150" style="width:300px;"  
+				    required="true" requiredMessage="#{msgs.thisFieldIsRequired}"/>
+				<p:message for="firstname" />
+				
+				<h:panelGroup>
+	                <h:outputText value="#{msgs.lastname}" />
+	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
+                </h:panelGroup>
+				<h:inputText value="#{mentorsController.mentors.lastname}" id="lastname" maxlength="150" style="width:300px;"  required="true"
+					requiredMessage="#{msgs.thisFieldIsRequired}"/>
+				<p:message for="lastname" />
+				
+				<h:outputText value="#{msgs.patronymic}" />
+				<h:inputText value="#{mentorsController.mentors.patronymic}" id="patronymic" maxlength="150" style="width:300px;"/>
+				<p:message for="patronymic" />
+		
+				<h:panelGroup>
+	                <h:outputText value="#{msgs.country}" />
+	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
+                </h:panelGroup>
+				<p:autoComplete id="countries" dropdown="true" var="type" scrollHeight="455"
+				itemValue="#{type}" itemLabel="#{type.name}" size="33" value="#{mentorsController.mentors.country}"
+				converter="cachedConverter" completeMethod="#{mentorsController.getCountryList}" required="true" requiredMessage="#{msgs.thisFieldIsRequired}">
+				</p:autoComplete>
+				<p:message for="countries" />
+				
+				<h:outputText value="#{msgs.city}" />
+				<h:inputText value="#{mentorsController.mentors.city}" id="city" maxlength="150" style="width:300px;"/>
+				<p:message for="city" />
+				
+				<h:outputText value="#{msgs.address}" />
+				<h:inputText value="#{mentorsController.mentors.address}" id="address" maxlength="150" style="width:300px;"/>
+				<p:message for="address" />
+				
+				<h:panelGroup>
+	                <h:outputText value="#{msgs.phone}" />
+	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
+                </h:panelGroup>
+				<h:inputText value="#{mentorsController.mentors.phone}" id="phone" maxlength="150" style="width:300px;"  required="true"
+					requiredMessage="#{msgs.thisFieldIsRequired}"/>
+				<p:message for="phone" />
+				
+				<h:panelGroup>
+	                <h:outputText value="#{msgs.birthDate}" />
+	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
+                </h:panelGroup>
+                <p:calendar value="#{mentorsController.mentors.birthDate}" id="birthDate"  showOn="button" pattern="dd-MM-yyyy" 
+                    required="true" requiredMessage="#{msgs.thisFieldIsRequired}" /> 
+                <p:message for="birthDate" />	
+                
+				
+		    </h:panelGrid>	
+		   
+		    <div class="m-top">
+		    	<h:commandButton value="#{msgs.save}" action="#{mentorsController.save()}" styleClass="button light-blue"/>
+		    	<h:commandButton value="#{msgs.cancel}" action="#{mentorsController.cancel()}" immediate="true" styleClass="button red m-left"/>
+		   	</div>
+		    
+		</h:form>
+			
+		<div class="clear"></div>	
+				
+	</ui:define>	
+</ui:composition>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/layouts/private.xhtml">
+	<ui:define name="content">
+
+		<h2>#{msgs.addUser}</h2>
+		<br />
+		<br />
+		<h:form id="add-card-form" prependId="false">
+			<h:panelGroup id="messages">
+				<p:growl globalOnly="true" />
+			</h:panelGroup>
+			<h:panelGrid styleClass="form-table" columns="3">
+
+				<h:panelGroup>
+					<h:outputText value="#{msgs.companyName}" />
+					<i class="fa fa-asterisk reqField" aria-hidden="true"></i>
+				</h:panelGroup>
+				<h:inputText value="#{userAction.user.companyName}" id="companyName"
+					style="width:300px;" required="true" requiredMessage="#{msgs.thisFieldIsRequired}" />
+				<p:message for="companyName" />
+
+				<h:panelGroup>
+					<h:outputText value="#{msgs.phone}" />
+					<i class="fa fa-asterisk reqField" aria-hidden="true"></i>
+				</h:panelGroup>
+				<h:inputText value="#{userAction.user.phone}" id="phone"
+					style="width:300px;" required="true" requiredMessage="#{msgs.thisFieldIsRequired}" />
+				<p:message for="phone" />
+
+				<h:panelGroup>
+					<h:outputText value="#{msgs.email}" />
+					<i class="fa fa-asterisk reqField" aria-hidden="true"></i>
+				</h:panelGroup>
+				<h:inputText value="#{userAction.user.email}" id="email"
+					validator="#{emailValidator.validate}" required="true"
+					requiredMessage="#{msgs.thisFieldIsRequired}" style="width:300px">
+					<f:ajax render="email-error @this" event="blur" />
+				</h:inputText>
+				<p:message for="email" />
+			</h:panelGrid>
+ 
+			<div class="m-top">
+               <h:commandButton value="#{msgs.save}" action="#{userAction.save()}" styleClass="button light-blue m-left" />
+               <h:commandButton value="#{msgs.cancel}" action="#{userAction.cancel()}" immediate="true"	styleClass="button red m-left" />
+			</div>
+
+		</h:form>
+
+		<div class="clear"></div>
+
+	</ui:define>
+</ui:composition>
