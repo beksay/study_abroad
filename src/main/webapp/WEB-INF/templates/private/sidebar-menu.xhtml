@@ -49,8 +49,11 @@
 		       		    rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'company')}"/>    
 		        </p:submenu>
 		        <p:submenu label="#{msgs.users}"  expanded="false" styleClass="menu-submenu"
-		             rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}">
-		            <p:menuitem value="#{msgs.users}" outcome="/view/user/list.xhtml"  icon="fa fa-book" styleClass="menu-item" />
+		             rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin') or loginUtil.userHasRole(loginUtil.currentUser,'company')}">
+		            <p:menuitem value="#{msgs.users}" outcome="/view/user/list.xhtml"  icon="fa fa-book" styleClass="menu-item" 
+		              rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}"/>
+		            <p:menuitem value="#{msgs.students}" outcome="/view/user/student_list.xhtml"  icon="fa fa-user" styleClass="menu-item" 
+		              rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'company')}"/>  
 		        </p:submenu>
 		        <p:submenu label="#{msgs.apps}"  expanded="false" styleClass="menu-submenu"
 		               rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'inspector') or loginUtil.userHasRole(loginUtil.currentUser,'disinfection') or loginUtil.userHasRole(loginUtil.currentUser,'expertise')}">
