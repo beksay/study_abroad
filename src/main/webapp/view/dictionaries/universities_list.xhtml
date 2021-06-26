@@ -18,7 +18,7 @@
 		</h:form>
 		<h:form id ="form">
 			<p:dataTable var="entity" value="#{universitiesList.model}" paginator="true" rows="20" lazy="true" rowKey="#{entity.id}" rowIndexVar="index" tableStyleClass="display-table"
-	   			id="table" selectionMode="single" emptyMessage="#{msgs.noRecordsFound}" 
+	   			id="table" selectionMode="single" emptyMessage="#{msgs.noRecordsFound}" sortOrder="DESCENDING"
 	   			rowsPerPageTemplate="10,20,30,40,50" paginatorPosition="bottom" pageLinks="10"
 	   			currentPageReportTemplate="Всего : #{universitiesList.model.rowCount} из #{universitiesList.model.totalCount}  &#160;&#160;| #{msgs.amountPerPage}"
 	            paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport} {RowsPerPageDropdown}"

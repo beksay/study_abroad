@@ -43,6 +43,8 @@
 		            rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin') or loginUtil.userHasRole(loginUtil.currentUser,'company')}">
 		       		<p:menuitem value="#{msgs.dictionaries}" outcome="/view/dictionaries/dict_type_list.xhtml"  icon="fa fa-book" styleClass="menu-item" 
 		       		    rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}"/>
+		       		<p:menuitem value="#{msgs.countries}" outcome="/view/dictionaries/countries_list.xhtml"  icon="fa fa-flag" styleClass="menu-item" 
+		       		    rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'admin')}"/>
 		       		<p:menuitem value="#{msgs.universities}" outcome="/view/dictionaries/university_list.xhtml"  icon="fa fa-university" styleClass="menu-item" 
 		       		    rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'company')}"/>
 		       		<p:menuitem value="#{msgs.mentors}" outcome="/view/mentors/mentors_list.xhtml"  icon="fa fa-bell" styleClass="menu-item" 
@@ -55,22 +57,12 @@
 		            <p:menuitem value="#{msgs.students}" outcome="/view/students/student_list.xhtml"  icon="fa fa-user" styleClass="menu-item" 
 		              rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'company')}"/>  
 		        </p:submenu>
-		        <p:submenu label="#{msgs.apps}"  expanded="false" styleClass="menu-submenu"
-		               rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'inspector') or loginUtil.userHasRole(loginUtil.currentUser,'disinfection') or loginUtil.userHasRole(loginUtil.currentUser,'expertise')}">
-		       		<p:menuitem value="#{msgs.applications}" outcome="/view/applications/applications_journal.xhtml"  icon="fa fa-book" styleClass="menu-item" 
-		       		   rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'inspector')}"/>
-		       		<p:menuitem value="#{msgs.inspection}" outcome="/view/applications/inspection/inspection_journal.xhtml"  icon="fa fa-book" styleClass="menu-item" 
-		       		   rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'inspector')}"/>
-		       		<p:menuitem value="#{msgs.disinfection}" outcome="/view/applications/disinfection/disinfection_journal.xhtml"  icon="fa fa-book" styleClass="menu-item" 
-		       		   rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'disinfection')}"/>
-		       		<p:menuitem value="#{msgs.expertises}" outcome="/view/applications/expertises/expertises_journal.xhtml"  icon="fa fa-book" styleClass="menu-item" 
-		       		   rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'expertise')}"/>
-		       		<p:menuitem value="#{msgs.certificate}" outcome="/view/applications/certificate/certificate_journal.xhtml"  icon="fa fa-book" styleClass="menu-item" 
-		       		   rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'inspector')}"/>
+		        <p:submenu label="#{msgs.docs}"  expanded="false" styleClass="menu-submenu"
+		               rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'student')}">
+		       		<p:menuitem value="#{msgs.docList}" outcome="/view/documents/documents_list.xhtml"  icon="fa fa-book" styleClass="menu-item" />
 		        </p:submenu>
 		    </p:panelMenu>	
 	     </h:panelGroup>
-	    
 	</h:form>
 	<br/>
 	<div class="seperator"></div>

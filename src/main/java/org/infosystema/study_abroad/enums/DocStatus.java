@@ -6,7 +6,8 @@ package org.infosystema.study_abroad.enums;
  *
  */
 
-public enum MemberType {
-	IMPORT,
-	EXPORT
+public enum DocStatus {
+	NEW,
+	ACCEPTED,
+	REJECTED
 }

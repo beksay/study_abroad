@@ -439,7 +439,7 @@ div.user {
 .user-name {
 	margin-left: 5px;
 	line-height: 2.4;
-	width: 115px;
+	width: auto;
 	height: 30px;
 	color: #f5f5f5;
 }

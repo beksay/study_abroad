@@ -22,12 +22,12 @@
 
 		<h:form id ="form">
 			<p:dataTable var="entity" value="#{usersList.model}" paginator="true" rows="20" lazy="true" rowKey="#{entity.id}" rowIndexVar="index" tableStyleClass="display-table"
-	   			id="table" selectionMode="single" emptyMessage="#{msgs.noRecordsFound}" 
+	   			id="table" selectionMode="single" emptyMessage="#{msgs.noRecordsFound}" sortOrder="DESCENDING"
 	   			rowsPerPageTemplate="10,20,30,40,50" paginatorPosition="bottom" pageLinks="10"
 	   			currentPageReportTemplate="Всего : #{usersList.model.rowCount} из #{usersList.model.totalCount}  &#160;&#160;| #{msgs.amountPerPage}"
 	            paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport} {RowsPerPageDropdown}"
 	            selection="#{usersList.user}"
-	            first="#{usersList.first}" >
+	            first="#{usersList.first}" > 
 				<p:ajax event="page" listener="#{usersList.onPageChange}"/>  
 	            <p:column headerText="№">
 			        <h:outputText value="#{index+1}" />
