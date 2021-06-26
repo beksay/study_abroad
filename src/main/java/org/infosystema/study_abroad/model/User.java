@@ -25,7 +25,6 @@ public class User extends AbstractEntity<Integer>  {
 	private Role role;
 	private String email;
 	private UserStatus status;
-	private Person person;
 	private String companyName;
 	private String phone;
 	private User company;
@@ -49,16 +48,6 @@ public class User extends AbstractEntity<Integer>  {
 	
 	public void setRole(Role role) {
 		this.role = role;
-	}
-	
-	@ManyToOne
-    @JoinColumn(name="person_id")
-	public Person getPerson() {
-		return person;
-	}
-	
-	public void setPerson(Person person) {
-		this.person = person;
 	}
 	
 	@ManyToOne

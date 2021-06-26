@@ -42,6 +42,7 @@ public class Person extends AbstractEntity<Integer> {
 	private User company;
 	private String toefl;
 	private String ielts;
+	private User personUser;
 
 	private Set<Dictionary> languages;
 	
@@ -123,6 +124,16 @@ public class Person extends AbstractEntity<Integer> {
 	
 	public void setMentor(Mentors mentor) {
 		this.mentor = mentor;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name="person_user_id")
+	public User getPersonUser() {
+		return personUser;
+	}
+	
+	public void setPersonUser(User personUser) {
+		this.personUser = personUser;
 	}
 
 	@ManyToOne
