@@ -20,6 +20,7 @@
 		<class>org.infosystema.study_abroad.model.UniversityType</class>
 		<class>org.infosystema.study_abroad.model.Mentors</class>
 		<class>org.infosystema.study_abroad.model.docs.Documents</class>
+		<class>org.infosystema.study_abroad.model.docs.Applications</class>
 
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
