@@ -34,6 +34,7 @@ public class Universities extends AbstractEntity<Integer>  {
 	private Integer foundYear;
 	private String description;
 	private Set<Attachment> attachments;
+	private User company;
 	
 	public Universities() {}
 	
@@ -88,6 +89,16 @@ public class Universities extends AbstractEntity<Integer>  {
 
 	public void setCountries(Countries countries) {
 		this.countries = countries;
+	}
+	
+	@ManyToOne
+    @JoinColumn(name = "company_id")
+	public User getCompany() {
+		return company;
+	}
+	
+	public void setCompany(User company) {
+		this.company = company;
 	}
 
 	@ManyToOne

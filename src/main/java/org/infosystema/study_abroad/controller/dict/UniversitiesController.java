@@ -24,6 +24,7 @@ import org.infosystema.study_abroad.model.UniversityType;
 import org.infosystema.study_abroad.service.UniversitiesService;
 import org.infosystema.study_abroad.service.UniversityTypeService;
 import org.infosystema.study_abroad.util.Util;
+import org.infosystema.study_abroad.util.web.LoginUtil;
 
 @Named
 @ViewScoped
@@ -40,6 +41,8 @@ public class UniversitiesController implements Serializable {
 	private CountriesController controller;
 	@Inject
 	private FileUploadController uploadController;
+	@Inject
+	private LoginUtil loginUtil;
 
 	private Universities universities;
 
@@ -81,7 +84,7 @@ public class UniversitiesController implements Serializable {
 		}
 		
 		universities.setAttachments(attachments);
-		
+		universities.setCompany(loginUtil.getCurrentUser());
 		if (universities.getId() == null) {
 			universities.setCountries(controller.getCountries());
 			universitiesService.persist(universities);

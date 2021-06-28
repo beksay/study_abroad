@@ -73,7 +73,7 @@
 	                <h:outputText value="#{msgs.birthDate}" />
 	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
                 </h:panelGroup>
-                <p:calendar value="#{mentorsController.mentors.birthDate}" id="birthDate"  showOn="button" pattern="dd-MM-yyyy" 
+                <p:calendar value="#{mentorsController.mentors.birthDate}" id="birthDate"  showOn="button" pattern="dd-MM-yyyy"  navigator="true" yearRange="c-60:c+2"
                     required="true" requiredMessage="#{msgs.thisFieldIsRequired}" /> 
                 <p:message for="birthDate" />	
                 
