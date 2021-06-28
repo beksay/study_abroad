@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/templates/layouts/private.xhtml">
+ 	<ui:define name="content">
+		<h2>#{msgs.docList}</h2> 
+		<h:form id ="filter-form">	
+	        <p:inputText value="#{docList.searchString}" id="watermark"  >	
+	        	  <p:ajax listener="#{docList.filterData()}" event="keyup" update="form"/>	               
+	        </p:inputText>
+	        <p:watermark for="watermark" value="Поиск" />
+			<p:commandButton ajax="true" update="form" value="#{msgs.search}"  style="display:none;"
+			    actionListener="#{docList.filterData()}" styleClass="button green" />	      		
+		</h:form>
+		<h:form id ="form"> 
+			<p:dataTable var="entity" value="#{docList.model}" paginator="true" rows="20" lazy="true" rowKey="#{entity.id}" rowIndexVar="index" tableStyleClass="display-table"
+	   			id="table" selectionMode="single" emptyMessage="#{msgs.noRecordsFound}" sortOrder="DESCENDING"
+	   			rowsPerPageTemplate="10,20,30,40,50" paginatorPosition="bottom" pageLinks="10"
+	   			currentPageReportTemplate="Всего : #{docList.model.rowCount} из #{docList.model.totalCount}  &#160;&#160;| #{msgs.amountPerPage}"
+	            paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport} {RowsPerPageDropdown}"
+	            selection="#{documentsController.documents}"
+	            first="#{docList.first}" >
+				<p:ajax event="page" listener="#{docList.onPageChange}"/>  
+	            <p:column headerText="№">
+			        <h:outputText value="#{index+1}" />
+			    </p:column>
+			    <p:column headerText="#{msgs.docName}">
+			        <h:outputText value="#{entity.document.name}" />
+			    </p:column>
+			    <p:column headerText="#{msgs.students}">
+			        <h:outputText value="#{documentsController.getPerson(entity.user).get(0).fullname}" />
+			    </p:column>
+			    <p:column headerText="#{msgs.phone}">
+			        <h:outputText value="#{entity.user.phone}" />
+			    </p:column>
+			    <p:column headerText="#{msgs.status}">
+			        <h:outputText value="#{enums[entity.status]}" />
+			    </p:column>
+			    <p:column headerText="#{msgs.dateCreated}">
+			        <h:outputText value="#{entity.date}" >
+			           <f:convertDateTime pattern="dd-MM-yyyy" />
+				    </h:outputText>
+			    </p:column>
+			    <p:column headerText="#{msgs.operation}" exportable="false" style="width:100px;">
+			    </p:column>
+			</p:dataTable>
+		</h:form>
+		<p:blockUI block="form:table" trigger="form:table" >
+			#{msgs.loading}<br />
+		    <p:graphicImage library="img" name="ajaxloadingbar.gif"/>
+		</p:blockUI>	
+
+		<div class="clear"></div>			
+				
+	</ui:define>	
+	
+</ui:composition>

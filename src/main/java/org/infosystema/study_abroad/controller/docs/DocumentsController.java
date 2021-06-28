@@ -23,9 +23,12 @@ import org.infosystema.study_abroad.dto.AttachmentBinaryDTO;
 import org.infosystema.study_abroad.enums.DocStatus;
 import org.infosystema.study_abroad.model.Attachment;
 import org.infosystema.study_abroad.model.Dictionary;
+import org.infosystema.study_abroad.model.Person;
+import org.infosystema.study_abroad.model.User;
 import org.infosystema.study_abroad.model.docs.Documents;
 import org.infosystema.study_abroad.service.DictionaryService;
 import org.infosystema.study_abroad.service.DocumentsService;
+import org.infosystema.study_abroad.service.PersonService;
 import org.infosystema.study_abroad.util.Util;
 import org.infosystema.study_abroad.util.web.LoginUtil;
 
@@ -38,6 +41,8 @@ public class DocumentsController implements Serializable {
 	private DocumentsService docService;
 	@EJB
 	private DictionaryService dictService;
+	@EJB
+	private PersonService personService;
 	@Inject
 	private ConversationDocs conversation;
 	@Inject
@@ -97,6 +102,10 @@ public class DocumentsController implements Serializable {
 		Long count = dictService.countByExample(examples);
 		return dictService.findByExample(0, Math.toIntExact(count), examples).stream()
 				.filter(t -> t.getName().toLowerCase().startsWith(query.toLowerCase())).collect(Collectors.toList());
+	}
+	
+	public List<Person> getPerson(User user) {
+		return personService.findByProperty("personUser", user);
 	}
 
 	public String delete(Documents c) {
