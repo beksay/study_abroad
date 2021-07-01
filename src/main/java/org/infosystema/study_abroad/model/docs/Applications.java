@@ -30,6 +30,7 @@ import org.infosystema.study_abroad.model.User;
 @Table(name="applications")
 public class Applications extends AbstractEntity<Integer> {
 	private static final long serialVersionUID = 1L;
+	private ApplicationSubmission module;
 	private Countries countries;
 	private UniversityType universityType;
 	private Universities universities;
@@ -37,6 +38,16 @@ public class Applications extends AbstractEntity<Integer> {
 	private Date dateModify;
 	private DocStatus status;
 	private User user;
+	
+	@ManyToOne
+	@JoinColumn (name="module_id")
+	public ApplicationSubmission getModule() {
+		return module;
+	}
+	
+	public void setModule(ApplicationSubmission module) {
+		this.module = module;
+	}
 	
 	@ManyToOne
 	@JoinColumn (name="user_id")

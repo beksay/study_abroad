@@ -4,8 +4,8 @@ import javax.enterprise.context.ConversationScoped;
 import javax.inject.Named;
 
 import org.infosystema.study_abroad.annotation.Logged;
-import org.infosystema.study_abroad.model.Person;
 import org.infosystema.study_abroad.model.User;
+import org.infosystema.study_abroad.model.docs.Person;
 
 /**
  * 

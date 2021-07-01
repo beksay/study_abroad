@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.infosystema.study_abroad.beans.FilterExample;
 import org.infosystema.study_abroad.beans.InequalityConstants;
 import org.infosystema.study_abroad.data.PersonDataModel;
-import org.infosystema.study_abroad.model.Person;
+import org.infosystema.study_abroad.model.docs.Person;
 import org.infosystema.study_abroad.service.PersonService;
 import org.infosystema.study_abroad.util.web.LoginUtil;
 import org.primefaces.component.datatable.DataTable;

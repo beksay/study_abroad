@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.infosystema.study_abroad.beans.FilterExample;
 import org.infosystema.study_abroad.beans.SortEnum;
-import org.infosystema.study_abroad.model.Person;
+import org.infosystema.study_abroad.model.docs.Person;
 import org.infosystema.study_abroad.service.PersonService;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;

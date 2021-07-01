@@ -1,6 +1,6 @@
 package org.infosystema.study_abroad.dao;
 
-import org.infosystema.study_abroad.model.Person;
+import org.infosystema.study_abroad.model.docs.Person;
 
 /**
  * 

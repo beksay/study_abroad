@@ -36,11 +36,22 @@ import org.infosystema.study_abroad.model.User;
 @Table(name="documents")
 public class Documents extends AbstractEntity<Integer>  {
 	private static final long serialVersionUID = 1L;
+	private DocumentsStep module;
 	private Dictionary document;
 	private Date date;
 	private DocStatus status;
 	private Set<Attachment> attachments;
 	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name="module_id")
+	public DocumentsStep getModule() {
+		return module;
+	}
+	
+	public void setModule(DocumentsStep module) {
+		this.module = module;
+	}
 	
 	@ManyToOne
 	@JoinColumn (name="document_id")

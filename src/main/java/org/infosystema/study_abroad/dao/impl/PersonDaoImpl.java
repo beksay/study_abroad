@@ -4,7 +4,7 @@ import javax.enterprise.event.Event;
 import javax.persistence.EntityManager;
 
 import org.infosystema.study_abroad.dao.PersonDao;
-import org.infosystema.study_abroad.model.Person;
+import org.infosystema.study_abroad.model.docs.Person;
 
 /****
  * 

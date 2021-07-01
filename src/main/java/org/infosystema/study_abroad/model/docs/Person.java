@@ -1,4 +1,4 @@
-package org.infosystema.study_abroad.model;
+package org.infosystema.study_abroad.model.docs;
 
 import java.util.Date;
 import java.util.Set;
@@ -14,6 +14,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+
+import org.infosystema.study_abroad.model.AbstractEntity;
+import org.infosystema.study_abroad.model.Attachment;
+import org.infosystema.study_abroad.model.Countries;
+import org.infosystema.study_abroad.model.Dictionary;
+import org.infosystema.study_abroad.model.Mentors;
+import org.infosystema.study_abroad.model.User;
 
 
 /**

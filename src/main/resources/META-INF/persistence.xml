@@ -14,13 +14,29 @@
 		<class>org.infosystema.study_abroad.model.DictionaryType</class>
 		<class>org.infosystema.study_abroad.model.Role</class>
 		<class>org.infosystema.study_abroad.model.User</class>
-		<class>org.infosystema.study_abroad.model.Person</class>
+		<class>org.infosystema.study_abroad.model.docs.Person</class>
 		<class>org.infosystema.study_abroad.model.Countries</class>
 		<class>org.infosystema.study_abroad.model.Universities</class>
 		<class>org.infosystema.study_abroad.model.UniversityType</class>
 		<class>org.infosystema.study_abroad.model.Mentors</class>
 		<class>org.infosystema.study_abroad.model.docs.Documents</class>
 		<class>org.infosystema.study_abroad.model.docs.Applications</class>
+		<class>org.infosystema.study_abroad.model.docs.ApplicationFee</class>
+		<class>org.infosystema.study_abroad.model.docs.ApplicationSubmission</class>
+		<class>org.infosystema.study_abroad.model.docs.ContractSigned</class>
+		<class>org.infosystema.study_abroad.model.docs.DocumentsStep</class>
+		<class>org.infosystema.study_abroad.model.docs.Ds160</class>
+		<class>org.infosystema.study_abroad.model.docs.EmbassyAppointment</class>
+		<class>org.infosystema.study_abroad.model.docs.ITwenty</class>
+		<class>org.infosystema.study_abroad.model.docs.Module</class>
+		<class>org.infosystema.study_abroad.model.docs.MoneySimulation</class>
+		<class>org.infosystema.study_abroad.model.docs.Questions</class>
+		<class>org.infosystema.study_abroad.model.docs.Reasons</class>
+		<class>org.infosystema.study_abroad.model.docs.Visa</class>
+		<class>org.infosystema.study_abroad.model.docs.VisaDocument</class>
+		<class>org.infosystema.study_abroad.model.docs.VisaPreparation</class>
+		<class>org.infosystema.study_abroad.model.docs.VisaQuestion</class>
+		<class>org.infosystema.study_abroad.model.docs.VisaStep</class>
 
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>

@@ -9,7 +9,7 @@ import javax.ejb.TransactionManagementType;
 
 import org.infosystema.study_abroad.dao.PersonDao;
 import org.infosystema.study_abroad.dao.impl.PersonDaoImpl;
-import org.infosystema.study_abroad.model.Person;
+import org.infosystema.study_abroad.model.docs.Person;
 import org.infosystema.study_abroad.service.PersonService;
 
 /**
