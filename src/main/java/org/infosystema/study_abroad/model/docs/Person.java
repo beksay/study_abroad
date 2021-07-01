@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -15,6 +17,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.infosystema.study_abroad.enums.PersonStatus;
 import org.infosystema.study_abroad.model.AbstractEntity;
 import org.infosystema.study_abroad.model.Attachment;
 import org.infosystema.study_abroad.model.Countries;
@@ -50,6 +53,8 @@ public class Person extends AbstractEntity<Integer> {
 	private String toefl;
 	private String ielts;
 	private User personUser;
+	private PersonStatus status;
+	private Integer year;
 
 	private Set<Dictionary> languages;
 	
@@ -227,6 +232,23 @@ public class Person extends AbstractEntity<Integer> {
 
 	public void setLanguages(Set<Dictionary> languages) {
 		this.languages = languages;
+	}
+
+	@Enumerated(EnumType.ORDINAL)
+	public PersonStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(PersonStatus status) {
+		this.status = status;
+	}
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
 	}
 	
 }

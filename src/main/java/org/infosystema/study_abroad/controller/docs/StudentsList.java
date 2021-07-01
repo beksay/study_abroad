@@ -1,4 +1,4 @@
-package org.infosystema.study_abroad.controller.user;
+package org.infosystema.study_abroad.controller.docs;
 
 import java.io.Serializable;
 import java.util.ArrayList;

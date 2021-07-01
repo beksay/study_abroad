@@ -1,8 +1,7 @@
-package org.infosystema.study_abroad.controller.user;
+package org.infosystema.study_abroad.controller.docs;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -10,12 +9,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -23,28 +21,36 @@ import org.apache.commons.io.IOUtils;
 import org.infosystema.study_abroad.beans.FilterExample;
 import org.infosystema.study_abroad.beans.InequalityConstants;
 import org.infosystema.study_abroad.beans.Message;
+import org.infosystema.study_abroad.beans.SortEnum;
+import org.infosystema.study_abroad.controller.BasePersonController;
 import org.infosystema.study_abroad.conversiation.ConversationUser;
+import org.infosystema.study_abroad.enums.ScopeConstants;
 import org.infosystema.study_abroad.enums.UserStatus;
 import org.infosystema.study_abroad.model.Countries;
 import org.infosystema.study_abroad.model.Dictionary;
 import org.infosystema.study_abroad.model.Mentors;
 import org.infosystema.study_abroad.model.Role;
 import org.infosystema.study_abroad.model.User;
+import org.infosystema.study_abroad.model.docs.Module;
 import org.infosystema.study_abroad.model.docs.Person;
 import org.infosystema.study_abroad.service.CountriesService;
 import org.infosystema.study_abroad.service.DictionaryService;
 import org.infosystema.study_abroad.service.MentorsService;
+import org.infosystema.study_abroad.service.ModuleService;
 import org.infosystema.study_abroad.service.PersonService;
 import org.infosystema.study_abroad.service.RoleService;
 import org.infosystema.study_abroad.service.UserService;
 import org.infosystema.study_abroad.util.MailSender;
 import org.infosystema.study_abroad.util.PasswordBuilder;
+import org.infosystema.study_abroad.util.web.FacesScopeQualifier;
 import org.infosystema.study_abroad.util.web.LoginUtil;
 import org.infosystema.study_abroad.util.web.Messages;
+import org.infosystema.study_abroad.util.web.ScopeQualifier;
+import org.primefaces.event.SelectEvent;
 
 @Named
-@ViewScoped
-public class StudentController implements Serializable {
+@RequestScoped
+public class StudentController extends BasePersonController{
 
 	private static final long serialVersionUID = 7782278859703355392L;
 	@EJB
@@ -53,6 +59,8 @@ public class StudentController implements Serializable {
 	private UserService userService;
 	@EJB
 	private RoleService roleService;
+	@EJB
+	private ModuleService moduleService;
 	@EJB
 	private CountriesService countriesService;
 	@EJB
@@ -64,34 +72,22 @@ public class StudentController implements Serializable {
 	@Inject
 	private LoginUtil loginUtil;
 
-	private User user;
-	private Person person; 
 	private UIComponent emailField;
 
-	@PostConstruct
-	public void init() {
-		person=conversation.getPerson();
-		if (person==null) person= new Person();
-		user = conversation.getUser();
-		if (user == null) user = new User();
-	}
-
 	public String add() {
-		person = new Person();
-		conversation.setPerson(person);
+		conversation.setPerson(new Person());
+		conversation.setUser(new User());
 		return form();
 	}
 
 	public String edit(Person person) {
-		this.setUser(person.getPersonUser());
-		this.person = person;
-		conversation.setUser(user);
-		conversation.setPerson(person);
+		conversation.setPerson(service.getByIdWithFields(person.getId(), new String[] {"languages"}));
+		conversation.setUser(person.getPersonUser());
 		return form();
 	}
 
 	public String save() throws Exception {
-		List<User> users = userService.findByProperty("email", user.getEmail());
+		List<User> users = userService.findByProperty("email", conversation.getUser().getEmail());
     	if(users.size()>0){
     		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "электронная почта уже существует !!!",
 					"электронная почта уже существует !!!");
@@ -99,30 +95,33 @@ public class StudentController implements Serializable {
 			context.addMessage(emailField.getClientId(context), message);
     	}
     	
-    	person.setPersonUser(user);  
-		user.setStatus(UserStatus.ACTIVE);
-		Role role = roleService.findById(3, false);
-		user.setRole(role);
-		person.setCompany(loginUtil.getCurrentUser());
-		if(!FacesContext.getCurrentInstance().getMessageList().isEmpty()) return null;
-		if(person.getPersonUser().getId() == null ) {
-			userService.persist(person.getPersonUser());
-			sendPassword(person.getPersonUser());
-		}else {
-			userService.merge(person.getPersonUser());
+    	if(conversation.getPerson().getId()==null) {
+			Person person = personService.initialize(loginUtil.getCurrentUser(),conversation.getPerson());
+			ScopeQualifier qualifier = new FacesScopeQualifier();
+			qualifier.setValue(PERSON_KEY, person.getId(), ScopeConstants.SESSION_SCOPE);
 		}
-		
-		if (person.getId() == null) {
-			person.setDateCreated(new Date());
-			personService.persist(person);
-		} else {
-			personService.merge(person);
-		}
-		
-		conversation.setUser(null);
-		conversation.setPerson(null);
     	
-		return cancel();
+    	conversation.getPerson().setPersonUser(conversation.getUser());
+        conversation.getUser().setStatus(UserStatus.ACTIVE);
+		Role role = roleService.findById(3, false);
+		conversation.getUser().setRole(role);
+        conversation.getPerson().setCompany(loginUtil.getCurrentUser());
+		if(!FacesContext.getCurrentInstance().getMessageList().isEmpty()) return null;
+		if(conversation.getPerson().getPersonUser().getId() == null ) {
+			userService.persist(conversation.getPerson().getPersonUser());
+			sendPassword(conversation.getPerson().getPersonUser());
+		}else {
+			userService.merge(conversation.getPerson().getPersonUser());
+		}
+		
+		if (conversation.getPerson().getId() == null) {
+			conversation.getPerson().setDateCreated(new Date());
+			personService.persist(conversation.getPerson());
+		} else {
+			personService.merge(conversation.getPerson());
+		}
+    	
+		return "/view/person/details/main.xhtml";
 	}
 
 	public String sendPassword(User user) throws Exception {
@@ -161,6 +160,36 @@ public class StudentController implements Serializable {
 				new FacesMessage(FacesMessage.SEVERITY_INFO, Messages.getMessage("messagesSend"), null));
 
 		return null;
+	}
+	
+	public void onRowSelect(SelectEvent event) throws IOException {
+		conversation.setPerson((Person) event.getObject());
+		
+		conversation.setPerson(service.getByIdWithFields(conversation.getPerson().getId(), new String[] {"languages"}));
+		
+		ScopeQualifier qualifier = new FacesScopeQualifier();
+		qualifier.setValue(PERSON_KEY, conversation.getPerson().getId(), ScopeConstants.SESSION_SCOPE);
+		
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/study_abroad/view/person/details/main.xhtml?cid="+conversation.getId());
+        
+    }
+	
+	public List<Module> getModules() {
+		ScopeQualifier qualifier = new FacesScopeQualifier();
+		Integer id = qualifier.getValue(PERSON_KEY, ScopeConstants.SESSION_SCOPE);
+		List<Module> modules = qualifier.getValue(id + "_", ScopeConstants.REQUEST_SCOPE);
+		
+		if(modules == null) {
+			List<FilterExample> list = new ArrayList<>();
+			list.add(new FilterExample("person.id", id, InequalityConstants.EQUAL));
+			modules = moduleService.findByExample(0, 200, SortEnum.ASCENDING, list, "index");
+			
+			qualifier.setValue(id + "_", modules, ScopeConstants.REQUEST_SCOPE);
+		}
+		
+		System.out.println("modules = " + modules + " id = " + id);
+		
+		return modules;
 	}
 
 	public List<Role> getRoleList() {
@@ -202,7 +231,8 @@ public class StudentController implements Serializable {
 	}
 
 	public String cancel() {
-		user = null;
+		conversation.setUser(null);
+		conversation.setPerson(null);
 		return list();
 	}
 
@@ -218,20 +248,12 @@ public class StudentController implements Serializable {
 		return "/view/main.xhtml";
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
+	public ConversationUser getConversation() {
+		return conversation;
 	}
 	
-	public Person getPerson() {
-		return person;
-	}
-	
-	public void setPerson(Person person) {
-		this.person = person;
+	public void setConversation(ConversationUser conversation) {
+		this.conversation = conversation;
 	}
 
 	public UIComponent getEmailField() {

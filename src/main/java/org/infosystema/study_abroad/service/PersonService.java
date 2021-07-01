@@ -2,6 +2,7 @@ package org.infosystema.study_abroad.service;
 
 import javax.ejb.Local;
 
+import org.infosystema.study_abroad.model.User;
 import org.infosystema.study_abroad.model.docs.Person;
 
 /**
@@ -12,5 +13,7 @@ import org.infosystema.study_abroad.model.docs.Person;
 
 @Local
 public interface PersonService extends GenericService<Person, Integer> {
+	
+	Person initialize(User user, Person person);
 
 }
