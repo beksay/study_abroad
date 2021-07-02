@@ -18,7 +18,7 @@
 					<h:outputText value="#{msgs.pin}" />
 					<i class="fa fa-asterisk reqField" aria-hidden="true"></i>
 				</h:panelGroup>
-				<h:inputText value="#{studentController.person.pin}" id="pin"
+				<h:inputText value="#{conversationUser.person.pin}" id="pin"
 					style="width:300px;" required="true" requiredMessage="#{msgs.thisFieldIsRequired}" />
 				<p:message for="pin" />
 				
@@ -26,7 +26,7 @@
 	                <h:outputText value="#{msgs.firstname}" />
 	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
                 </h:panelGroup>
-				<h:inputText value="#{studentController.person.firstname}" id="firstname" maxlength="150" style="width:300px;"  
+				<h:inputText value="#{conversationUser.person.firstname}" id="firstname" maxlength="150" style="width:300px;"  
 				    required="true" requiredMessage="#{msgs.thisFieldIsRequired}"/>
 				<p:message for="firstname" />
 				
@@ -34,19 +34,19 @@
 	                <h:outputText value="#{msgs.lastname}" />
 	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
                 </h:panelGroup>
-				<h:inputText value="#{studentController.person.lastname}" id="lastname" maxlength="150" style="width:300px;"  required="true"
+				<h:inputText value="#{conversationUser.person.lastname}" id="lastname" maxlength="150" style="width:300px;"  required="true"
 					requiredMessage="#{msgs.thisFieldIsRequired}"/>
 				<p:message for="lastname" />
 				
 				<h:outputText value="#{msgs.patronymic}" />
-				<h:inputText value="#{studentController.person.patronymic}" id="patronymic" maxlength="150" style="width:300px;"/>
+				<h:inputText value="#{conversationUser.person.patronymic}" id="patronymic" maxlength="150" style="width:300px;"/>
 				<p:message for="patronymic" />
 				
 				<h:panelGroup>
 	                <h:outputText value="#{msgs.birthDate}" />
 	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
                 </h:panelGroup>
-                <p:calendar value="#{studentController.person.birthDate}" id="birthDate"  showOn="button" pattern="dd-MM-yyyy" navigator="true" yearRange="c-60:c+2"/> 
+                <p:calendar value="#{conversationUser.person.birthDate}" id="birthDate"  showOn="button" pattern="dd-MM-yyyy" navigator="true" yearRange="c-60:c+2"/> 
                 <p:message for="birthDate" />	  
 				
 				<h:panelGroup>
@@ -54,17 +54,17 @@
 	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
                 </h:panelGroup>
 				<p:autoComplete id="countries" dropdown="true" var="type" scrollHeight="455"
-				itemValue="#{type}" itemLabel="#{type.name}" size="33" value="#{studentController.person.country}"
+				itemValue="#{type}" itemLabel="#{type.name}" size="33" value="#{conversationUser.person.country}"
 				converter="cachedConverter" completeMethod="#{studentController.getCountryList}" required="true" requiredMessage="#{msgs.thisFieldIsRequired}">
 				</p:autoComplete>
 				<p:message for="countries" />
 				
 				<h:outputText value="#{msgs.city}" />
-				<h:inputText value="#{studentController.person.city}" id="city" maxlength="150" style="width:300px;"/>
+				<h:inputText value="#{conversationUser.person.city}" id="city" maxlength="150" style="width:300px;"/>
 				<p:message for="city" />
 				
 				<h:outputText value="#{msgs.address}" />
-				<h:inputText value="#{studentController.person.address}" id="address" maxlength="150" style="width:300px;"/>
+				<h:inputText value="#{conversationUser.person.address}" id="address" maxlength="150" style="width:300px;"/>
 				<p:message for="address" />
 				
 				<h:panelGroup>
@@ -72,7 +72,7 @@
 	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
                 </h:panelGroup>
 				<p:autoComplete id="mentor" dropdown="true" var="type" scrollHeight="455"
-				itemValue="#{type}" itemLabel="#{type.fullname}" size="33" value="#{studentController.person.mentor}"
+				itemValue="#{type}" itemLabel="#{type.fullname}" size="33" value="#{conversationUser.person.mentor}"
 				converter="cachedConverter" completeMethod="#{studentController.getMentorsList}" required="true" requiredMessage="#{msgs.thisFieldIsRequired}">
 				</p:autoComplete>
 				<p:message for="mentor" />
@@ -82,24 +82,24 @@
 	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
                 </h:panelGroup>
 				<p:autoComplete id="englishLevel" dropdown="true" var="type" scrollHeight="455"
-				itemValue="#{type}" itemLabel="#{type.name}" size="33" value="#{studentController.person.englishLevel}"
+				itemValue="#{type}" itemLabel="#{type.name}" size="33" value="#{conversationUser.person.englishLevel}"
 				converter="cachedConverter" completeMethod="#{studentController.getEnglishLevelList}" required="true" requiredMessage="#{msgs.thisFieldIsRequired}">
 				</p:autoComplete>
 				<p:message for="englishLevel" />
 				
 				<h:outputText value="#{msgs.toefl}" />
-				<h:inputText value="#{studentController.person.toefl}" id="toefl" maxlength="150" style="width:300px;"/>
+				<h:inputText value="#{conversationUser.person.toefl}" id="toefl" maxlength="150" style="width:300px;"/>
 				<p:message for="toefl" />
 				
 				<h:outputText value="#{msgs.ielts}" />
-				<h:inputText value="#{studentController.person.ielts}" id="ielts" maxlength="150" style="width:300px;"/>
+				<h:inputText value="#{conversationUser.person.ielts}" id="ielts" maxlength="150" style="width:300px;"/>
 				<p:message for="ielts" />
 
 				<h:panelGroup>
 					<h:outputText value="#{msgs.phone}" />
 					<i class="fa fa-asterisk reqField" aria-hidden="true"></i>
 				</h:panelGroup>
-				<h:inputText value="#{studentController.user.phone}" id="phone"
+				<h:inputText value="#{conversationUser.user.phone}" id="phone"
 					style="width:300px;" required="true" requiredMessage="#{msgs.thisFieldIsRequired}" />
 				<p:message for="phone" />
 
@@ -107,7 +107,7 @@
 					<h:outputText value="#{msgs.email}" />
 					<i class="fa fa-asterisk reqField" aria-hidden="true"></i>
 				</h:panelGroup>
-				<h:inputText value="#{studentController.user.email}" id="email"
+				<h:inputText value="#{conversationUser.user.email}" id="email"
 					validator="#{emailValidator.validate}" required="true" binding="#{studentController.emailField}"
 					requiredMessage="#{msgs.thisFieldIsRequired}" style="width:300px">
 					<f:ajax render="email-error @this" event="blur" />

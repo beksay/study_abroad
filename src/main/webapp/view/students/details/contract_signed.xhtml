@@ -7,25 +7,14 @@
     template="/WEB-INF/templates/layouts/private.xhtml">
  	<ui:define name="content">
  		
-		<h2>#{msgs.docForm} </h2>        
+		<h2>Contract Signed</h2>        
 		<h:form id="mainForm">
 		    <h:panelGrid styleClass="form-table" columns="3">
-		    
-		        <h:panelGroup>
-	                <h:outputText value="#{msgs.docName}" />
-	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
-                </h:panelGroup>
-				<p:autoComplete id="docName" dropdown="true" var="type" scrollHeight="455"
-					itemValue="#{type}" itemLabel="#{type.name}" size="33" value="#{documentsController.documents.document}"
-					converter="cachedConverter" completeMethod="#{documentsController.getDocumentsList}"
-					required="true" requiredMessage="#{msgs.thisFieldIsRequired}">
-				</p:autoComplete>
-				<p:message for="docName" />
-				
+		
 			   </h:panelGrid>	
 			    <div style="display: none;">
 					<h:commandButton id="saveButton" value="#{msgs.save}" 
-							action="#{documentsController.save()}" class="button" />	
+							action="#{contractSignedController.save()}" class="button" />	
 			    </div>
 		    </h:form>
 			
@@ -38,7 +27,7 @@
 				<div class="m-top">
 					<p:commandButton id="save" onclick="document.getElementById('mainForm:saveButton').click(); PF('block').show();" value="#{msgs.save}" 
 					  styleClass="button light-blue" type="button"/>
-					<p:commandButton value="#{msgs.cancel}" action="#{documentsController.cancel()}" immediate="true"  
+					<p:commandButton value="#{msgs.cancel}" action="#{contractSignedController.cancel()}" immediate="true"  
 					  styleClass="button red m-left"/>
 				</div>
 			</h:form>

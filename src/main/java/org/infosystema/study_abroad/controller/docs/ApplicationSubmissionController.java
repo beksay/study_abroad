@@ -1,6 +1,5 @@
 package org.infosystema.study_abroad.controller.docs;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,37 +7,37 @@ import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.infosystema.study_abroad.beans.FilterExample;
 import org.infosystema.study_abroad.beans.InequalityConstants;
-import org.infosystema.study_abroad.conversiation.ConversationApp;
-import org.infosystema.study_abroad.enums.DocStatus;
+import org.infosystema.study_abroad.controller.Conversational;
+import org.infosystema.study_abroad.enums.ModuleStatus;
 import org.infosystema.study_abroad.model.Countries;
 import org.infosystema.study_abroad.model.Universities;
 import org.infosystema.study_abroad.model.UniversityType;
+import org.infosystema.study_abroad.model.docs.ApplicationSubmission;
 import org.infosystema.study_abroad.model.docs.Applications;
+import org.infosystema.study_abroad.model.docs.Person;
+import org.infosystema.study_abroad.service.ApplicationSubmissionService;
 import org.infosystema.study_abroad.service.ApplicationsService;
 import org.infosystema.study_abroad.service.CountriesService;
 import org.infosystema.study_abroad.service.UniversitiesService;
 import org.infosystema.study_abroad.service.UniversityTypeService;
 import org.infosystema.study_abroad.util.web.LoginUtil;
-import org.infosystema.study_abroad.util.web.Messages;
+
 
 @Named
-@ViewScoped
-public class ApplicationsController implements Serializable {
+@ConversationScoped
+public class ApplicationSubmissionController extends Conversational {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 5959661098638400326L;
 	@EJB
-	private ApplicationsService appService;
+	private ApplicationsService service;
+	@EJB
+	private ApplicationSubmissionService moduleService;
 	@EJB
 	private CountriesService countryService;
 	@EJB
@@ -46,74 +45,68 @@ public class ApplicationsController implements Serializable {
 	@EJB
 	private UniversitiesService universityService;
 	@Inject
-	private ConversationApp conversation;
-	@Inject
 	private LoginUtil loginUtil;
-
+	private ApplicationSubmission module;
+	private List<Applications> list;
 	private Applications applications;
-
+	
 	@PostConstruct
 	public void init() {
-		applications = conversation.getApplications();
-		if (applications == null)
-			applications = new Applications();
+		if (applications==null) applications= new Applications();
 	}
-
-	public String add() {
-		applications = new Applications();
-		conversation.setApplications(applications);
-		return form();
+	
+	public String edit(ApplicationSubmission module) {
+		this.module = module;		
+		list = service.findByProperty("module", module);
+		return "application_submission.xhtml";
 	}
-
-	public String edit(Applications applications) {
-		this.applications = applications;
-		conversation.setApplications(applications);
-		return form();
+	
+	public List<Applications> getList() {
+		return list;
 	}
-
+	
+	public List<Applications> getApplicationsList(Person person) {
+		return service.findByProperty("module.person", person);
+	}
+	
 	public String save() {
-		if (applications == null) {
-			FacesContext.getCurrentInstance().addMessage("form",
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, Messages.getMessage("invalidData"), null));
-			return null;
-		}
-		try {
-			if (applications.getId() == null) {
-				applications.setStatus(DocStatus.NEW);
-				applications.setUser(loginUtil.getCurrentUser());
-				applications.setDateCreated(new Date());
-				appService.persist(applications);
+		if(applications.getId()==null) {
+			applications.setDateCreated(new Date());
+			applications.setUser(loginUtil.getCurrentUser());
+			applications.setModule(module);
+			applications = service.persist(applications);
+			
+			list.add(applications);
+			
+			if(list.isEmpty()) {
+				module.setStatus(ModuleStatus.NEW);
 			} else {
-				applications.setDateModify(new Date());
-				appService.merge(applications);
+				module.setStatus(ModuleStatus.FILLED);
 			}
-		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					Messages.getMessage("saveError"), Messages.getMessage("saveError")));
-			e.printStackTrace();
-			return null;
+			
+			module = moduleService.merge(module);
+		}else {
+			applications.setDateModify(new Date());
+			applications = service.merge(applications);
+			list = service.findByProperty("module", applications.getModule());
 		}
 
-		return cancel();
-
+		applications = new Applications();
+		
+		return "application_submission.xhtml";
 	}
-
-	public String delete(Applications c) {
-		appService.remove(c);
-		return cancel();
+	
+	public String editData(Applications applications) {
+		this.applications = service.findById(applications.getId(), false);
+		return "application_submission.xhtml";
 	}
-
-	public String cancel() { 
-		applications = null;
-		return list();
-	}
-
-	private String list() {
-		return "/view/documents/applications_list.xhtml?faces-redirect=true";
-	}
-
-	private String form() {
-		return "/view/documents/applications_form.xhtml";
+	
+	public String delete(Applications applications) {
+		
+		service.remove(applications);
+		
+		list = service.findByProperty("module", applications.getModule());
+		return "application_submission.xhtml";
 	}
 	
 	public List<Countries> getCountriesList(String query) {
@@ -142,6 +135,18 @@ public class ApplicationsController implements Serializable {
 		return universityService.findByExample(0, Math.toIntExact(count), examples).stream()
 				.filter(t -> t.getName().toLowerCase().startsWith(query.toLowerCase())).collect(Collectors.toList());
 	}
+	
+	public String cancel() {
+		return "main.xhtml";
+	}
+	
+	public ApplicationSubmission getModule() {
+		return module;
+	}
+	
+	public void setModule(ApplicationSubmission module) {
+		this.module = module;
+	}
 
 	public Applications getApplications() {
 		return applications;
@@ -150,5 +155,4 @@ public class ApplicationsController implements Serializable {
 	public void setApplications(Applications applications) {
 		this.applications = applications;
 	}
-
 }

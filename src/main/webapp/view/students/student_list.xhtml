@@ -27,6 +27,7 @@
 	            selection="#{studentsList.person}"
 	            first="#{studentsList.first}" >
 				<p:ajax event="page" listener="#{studentsList.onPageChange}"/>  
+				<p:ajax event="rowSelect" listener="#{studentController.onRowSelect}"/>
 	            <p:column headerText="№">
 			        <h:outputText value="#{index+1}" />
 			    </p:column>

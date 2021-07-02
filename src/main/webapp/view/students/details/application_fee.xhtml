@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/layouts/private.xhtml">
+ 	<ui:define name="content">
+        <h2>Application Fee</h2>       
+		 <h:form id="mainForm">
+		    <h:panelGrid columns="3">    
+		        <h:panelGroup>
+	                <h:outputLabel for="feeType" value="#{msgs.feeType}" />
+	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
+                </h:panelGroup>
+				<h:selectOneMenu id="feeType" value="#{applicationFeeController.moneySimulation.feeType}" effect="fold" 
+				      required="true" requiredMessage="#{msgs.thisFieldIsRequired}"
+				      editable="true" converter="enumConverter" style="width:455px">
+			          <f:selectItem itemLabel="#{msgs.selectValue}"/>
+	           	      <f:selectItems value="#{applicationFeeController.allFeeType}" var="type" itemLabel="#{enums[type.toString()]}" itemValue="#{type}"/>
+				</h:selectOneMenu>
+				<p:message for="feeType"/>
+				
+				<h:panelGroup>
+	                <h:outputLabel for="currencyType" value="#{msgs.currencyType}" />
+	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
+                </h:panelGroup>
+				<h:selectOneMenu id="currencyType" value="#{applicationFeeController.moneySimulation.currencyType}" effect="fold" 
+				      required="true" requiredMessage="#{msgs.thisFieldIsRequired}"
+				      editable="true" converter="enumConverter" style="width:455px">
+			          <f:selectItem itemLabel="#{msgs.selectValue}"/>
+	           	      <f:selectItems value="#{applicationFeeController.allCurrencyType}" var="type" itemLabel="#{enums[type.toString()]}" itemValue="#{type}"/>
+				</h:selectOneMenu>
+				<p:message for="currencyType"/>
+				
+				<h:panelGroup>
+	                <h:outputText value="#{msgs.amount}" />
+	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
+                </h:panelGroup>
+				<h:inputText value="#{applicationFeeController.moneySimulation.amount}" id="amount" maxlength="150" style="width:455px;" 
+				  required="true" requiredMessage="#{msgs.thisFieldIsRequired}"/>
+				<p:message for="amount" />
+		    </h:panelGrid>
+		    <div class="m-top">
+		    	<h:commandButton value="#{msgs.save}" action="#{applicationFeeController.save()}" styleClass="button light-blue"/>
+		    	<h:commandButton value="#{msgs.cancel}" action="#{applicationFeeController.cancel()}" immediate="true" styleClass="button red m-left"/>
+		   	</div>	 
+		</h:form>
+		<h:form>  			
+			<p:dataTable id="detailTable" var="entity" value="#{applicationFeeController.list}" paginator="false" rowIndexVar="index"
+		      lazy="false" emptyMessage="#{msgs.noRecordsFound}" sortOrder="DESCENDING">       
+		         <p:column headerText="#{msgs.number}" width="100">
+		        	<h:outputText value="#{index+1}" />
+		         </p:column> 
+		         <p:column headerText="#{msgs.feeType}">
+			        <h:outputText value="#{enums[entity.feeType]}" />
+		         </p:column>
+		         <p:column headerText="#{msgs.currencyType}">
+			        <h:outputText value="#{enums[entity.currencyType]}" />
+		         </p:column>
+		         <p:column headerText="#{msgs.amount}">
+			        <h:outputText value="#{entity.amount}" />
+		         </p:column>
+				 <p:column headerText="#{msgs.user}">
+			        <h:outputText value="#{entity.user.companyName}" />
+		         </p:column>
+				 <p:column headerText="#{msgs.date}">
+			        <h:outputText value="#{entity.dateCreated}">
+			            <f:convertDateTime pattern="dd-MM-yyyy" />
+					 </h:outputText>
+		         </p:column>
+		         <p:column styleClass="formeditor">
+			      	<p:commandButton immediate="true" action="#{applicationFeeController.delete(entity)}" update="@form"  icon="fa fa-remove"  />
+		         </p:column>
+	         </p:dataTable>
+		</h:form>
+		<div class="clear"></div>	
+    </ui:define>
+</ui:composition>

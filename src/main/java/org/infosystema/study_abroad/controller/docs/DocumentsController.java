@@ -1,6 +1,5 @@
 package org.infosystema.study_abroad.controller.docs;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -10,92 +9,115 @@ import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.SystemException;
 
 import org.infosystema.study_abroad.beans.FilterExample;
 import org.infosystema.study_abroad.beans.InequalityConstants;
+import org.infosystema.study_abroad.controller.Conversational;
 import org.infosystema.study_abroad.controller.FileUploadController;
-import org.infosystema.study_abroad.conversiation.ConversationDocs;
 import org.infosystema.study_abroad.dto.AttachmentBinaryDTO;
-import org.infosystema.study_abroad.enums.DocStatus;
+import org.infosystema.study_abroad.enums.ModuleStatus;
 import org.infosystema.study_abroad.model.Attachment;
 import org.infosystema.study_abroad.model.Dictionary;
-import org.infosystema.study_abroad.model.User;
 import org.infosystema.study_abroad.model.docs.Documents;
+import org.infosystema.study_abroad.model.docs.DocumentsStep;
 import org.infosystema.study_abroad.model.docs.Person;
 import org.infosystema.study_abroad.service.DictionaryService;
 import org.infosystema.study_abroad.service.DocumentsService;
-import org.infosystema.study_abroad.service.PersonService;
-import org.infosystema.study_abroad.util.Util;
+import org.infosystema.study_abroad.service.DocumentsStepService;
 import org.infosystema.study_abroad.util.web.LoginUtil;
 
-@Named
-@ViewScoped
-public class DocumentsController implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+@Named
+@ConversationScoped
+public class DocumentsController extends Conversational {
+
+	private static final long serialVersionUID = 5959661098638400326L;
 	@EJB
-	private DocumentsService docService;
+	private DocumentsService service;
+	@EJB
+	private DocumentsStepService moduleService;
 	@EJB
 	private DictionaryService dictService;
-	@EJB
-	private PersonService personService;
-	@Inject
-	private ConversationDocs conversation;
 	@Inject
 	private FileUploadController uploadController;
 	@Inject
 	private LoginUtil loginUtil;
-
+	private DocumentsStep module;
+	private List<Documents> list;
 	private Documents documents;
-
+	
 	@PostConstruct
 	public void init() {
-		if (documents == null) documents = new Documents();
-		documents = conversation.getDocuments();
+		if (documents==null) documents= new Documents();
 	}
-
-	public String add() {
-		documents = new Documents();
-		conversation.setDocuments(documents);
+	
+	public String edit(DocumentsStep module) {
+		this.module = module;		
+		list = service.findByPropertyWithFields("module", module, new String[] { "attachments" });
 		uploadController.setFiles(new ArrayList<AttachmentBinaryDTO>());
-		return form();
+		return "documents_form.xhtml";
 	}
-
-	public String edit(Documents documents) {
-		documents = docService.getByIdWithFields(documents.getId(), new String[]{"attachments"});
-		this.documents = documents;
-		conversation.setDocuments(documents);
-		uploadController.setFiles(Util.getFiles(documents.getAttachments()));
-		return form();
+	
+	public List<Documents> getList() {
+		return list;
 	}
-
+	
+	public List<Documents> getDocumentsList(Person person) {
+		return service.findByProperty("module.person", person);
+	}
+	
 	public String save() {
-
-		Set<Attachment> attachments = new HashSet<>();
-		try {
-			attachments.addAll(uploadController.convert());
-		} catch (SystemException e) {
-			e.printStackTrace();
-		}
-		documents.setAttachments(attachments);
-		documents.setUser(loginUtil.getCurrentUser());
-		if (documents.getId() == null) {
-			documents.setStatus(DocStatus.NEW);
+		if(documents.getId()==null) {
+			Set<Attachment> attachments = new HashSet<>();
+			try {
+				attachments.addAll(uploadController.convert());
+			} catch (SystemException e) {
+				e.printStackTrace();
+			}
 			documents.setDate(new Date());
-			docService.persist(documents);
-		} else {
-			docService.merge(documents);
+			documents.setUser(loginUtil.getCurrentUser());
+			documents.setAttachments(attachments);
+			documents.setModule(module);
+			documents = service.persist(documents);
+			
+			list.add(documents);
+			
+			if(list.isEmpty()) {
+				module.setStatus(ModuleStatus.NEW);
+			} else {
+				module.setStatus(ModuleStatus.FILLED);
+			}
+			
+			module = moduleService.merge(module);
+		}else {
+			documents = service.merge(documents);
+			list = service.findByPropertyWithFields("module", documents.getModule(), new String[] { "attachments" });
 		}
 
-		return cancel();
-
+		documents = new Documents();
+		
+		return "documents_form.xhtml";
 	}
-
-	public List<Dictionary> getDocumentsList(String query) {
+	
+	public String editData(Documents documents) {
+		this.documents = service.findById(documents.getId(), false);
+		return "documents_form.xhtml";
+	}
+	
+	public String delete(Documents documents) {
+		System.out.println("Documents ==" + documents);
+		
+		service.remove(documents);
+		
+		list = service.findByPropertyWithFields("module", documents.getModule(), new String[] { "attachments" });
+		return "documents_form.xhtml";
+	}
+	
+	public List<Dictionary> getDictDocumentsList(String query) {
 		List<FilterExample> examples = new ArrayList<>();
 		examples.add(new FilterExample("type.id", 2, InequalityConstants.EQUAL));
 		examples.add(new FilterExample("active", true, InequalityConstants.EQUAL));
@@ -104,26 +126,8 @@ public class DocumentsController implements Serializable {
 				.filter(t -> t.getName().toLowerCase().startsWith(query.toLowerCase())).collect(Collectors.toList());
 	}
 	
-	public List<Person> getPerson(User user) {
-		return personService.findByProperty("personUser", user);
-	}
-
-	public String delete(Documents c) {
-		docService.remove(c);
-		return cancel();
-	}
-
 	public String cancel() {
-		documents = null;
-		return list();
-	}
-
-	private String list() {
-		return "/view/documents/documents_list.xhtml?faces-redirect=true";
-	}
-
-	private String form() {
-		return "/view/documents/documents_form.xhtml";
+		return "main.xhtml";
 	}
 
 	public Documents getDocuments() {
@@ -133,5 +137,12 @@ public class DocumentsController implements Serializable {
 	public void setDocuments(Documents documents) {
 		this.documents = documents;
 	}
-
+	
+	public DocumentsStep getModule() {
+		return module;
+	}
+	
+	public void setModule(DocumentsStep module) {
+		this.module = module;
+	}
 }

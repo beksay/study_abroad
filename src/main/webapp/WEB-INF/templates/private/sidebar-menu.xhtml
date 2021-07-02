@@ -57,12 +57,6 @@
 		            <p:menuitem value="#{msgs.students}" outcome="/view/students/student_list.xhtml"  icon="fa fa-user" styleClass="menu-item" 
 		              rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'company')}"/>  
 		        </p:submenu>
-		        <p:submenu label="#{msgs.docs}"  expanded="false" styleClass="menu-submenu"
-		               rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'company') or loginUtil.userHasRole(loginUtil.currentUser,'student')}">
-		            <p:menuitem value="#{msgs.docList}" outcome="/view/documents/doc_list.xhtml"  icon="fa fa-book" styleClass="menu-item" rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'company')}"/>
-		       		<p:menuitem value="#{msgs.docList}" outcome="/view/documents/documents_list.xhtml"  icon="fa fa-book" styleClass="menu-item" rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'student')}"/>
-		       		<p:menuitem value="#{msgs.applications}" outcome="/view/documents/applications_list.xhtml"  icon="fa fa-clipboard" styleClass="menu-item" rendered="#{loginUtil.userHasRole(loginUtil.currentUser,'student')}"/>
-		        </p:submenu>
 		    </p:panelMenu>	
 	     </h:panelGroup>
 	</h:form>

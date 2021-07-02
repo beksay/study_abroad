@@ -121,7 +121,7 @@ public class StudentController extends BasePersonController{
 			personService.merge(conversation.getPerson());
 		}
     	
-		return "/view/person/details/main.xhtml";
+		return "/view/students/details/main.xhtml";
 	}
 
 	public String sendPassword(User user) throws Exception {
@@ -170,7 +170,7 @@ public class StudentController extends BasePersonController{
 		ScopeQualifier qualifier = new FacesScopeQualifier();
 		qualifier.setValue(PERSON_KEY, conversation.getPerson().getId(), ScopeConstants.SESSION_SCOPE);
 		
-        FacesContext.getCurrentInstance().getExternalContext().redirect("/study_abroad/view/person/details/main.xhtml?cid="+conversation.getId());
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/study_abroad/view/students/details/main.xhtml?cid="+conversation.getId());
         
     }
 	

@@ -39,8 +39,8 @@ public class Ds160 extends Module {
 	}
 
 	@ManyToMany(cascade={CascadeType.REMOVE}, fetch=FetchType.LAZY)
-	@JoinTable(name="i_twenty_attachment", 
-		joinColumns=@JoinColumn(name="i_twenty_id"),
+	@JoinTable(name="ds_160_attachment", 
+		joinColumns=@JoinColumn(name="ds_160_id"),
 		inverseJoinColumns=@JoinColumn(name="attachment_id")
 	)
 	public Set<Attachment> getAttachments() {
