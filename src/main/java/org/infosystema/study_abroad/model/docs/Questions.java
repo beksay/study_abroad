@@ -22,7 +22,7 @@ import org.infosystema.study_abroad.model.User;
  */
 
 @Entity
-@Table(name="money_simulation")
+@Table(name="questions")
 public class Questions extends AbstractEntity<Integer>  {
 	private static final long serialVersionUID = 1L;
 	private VisaQuestion module;

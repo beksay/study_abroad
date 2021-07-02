@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/layouts/private.xhtml">
+ 	<ui:define name="content">
+        <h2>Visa</h2>       
+		 <h:form id="mainForm">
+		    <h:panelGrid columns="3">    
+		        <h:panelGroup>
+	                <h:outputText value="#{msgs.visaDate}" />
+	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
+                </h:panelGroup> 
+                <p:calendar value="#{visaController.visa.date}" id="visaDate"  showOn="button" pattern="dd-MM-yyyy" 
+                       navigator="true" yearRange="c-5:c+5"/> 
+                <p:message for="visaDate" />
+		    </h:panelGrid>
+		    <div class="m-top">
+		    	<h:commandButton value="#{msgs.save}" action="#{visaController.save()}" styleClass="button light-blue"/>
+		    	<h:commandButton value="#{msgs.cancel}" action="#{visaController.cancel()}" immediate="true" styleClass="button red m-left"/>
+		   	</div>	 
+		</h:form>
+		<h:form>  			
+			<p:dataTable id="detailTable" var="entity" value="#{visaController.list}" paginator="false" rowIndexVar="index"
+		      lazy="false" emptyMessage="#{msgs.noRecordsFound}" sortOrder="DESCENDING">       
+		         <p:column headerText="#{msgs.number}" width="100">
+		        	<h:outputText value="#{index+1}" />
+		         </p:column> 
+		         <p:column headerText="#{msgs.visaDate}">
+			        <h:outputText value="#{entity.date}">
+			            <f:convertDateTime pattern="dd-MM-yyyy" />
+					 </h:outputText>
+		         </p:column>
+		         <p:column headerText="#{msgs.status}">
+			        <h:outputText value="#{enums[entity.visaStatus]}" />
+		         </p:column>
+				 <p:column headerText="#{msgs.user}">
+			        <h:outputText value="#{entity.user.companyName}" />
+		         </p:column>
+				 <p:column headerText="#{msgs.dateCreated}">
+			        <h:outputText value="#{entity.dateCreated}">
+			            <f:convertDateTime pattern="dd-MM-yyyy" />
+					 </h:outputText>
+		         </p:column>
+		         <p:column styleClass="formeditor">
+			      	<p:commandButton immediate="true" action="#{visaController.delete(entity)}" update="@form"  icon="fa fa-remove"  />
+		         </p:column>
+	         </p:dataTable>
+		</h:form>
+		<div class="clear"></div>	
+    </ui:define>
+</ui:composition>

@@ -57,12 +57,12 @@
 			        <h:commandLink value="Application Submission" action="#{applicationSubmissionController.edit(car)}" rendered="#{car.index eq 4}" />
 			        <h:commandLink value="I-20" action="#{iTwentyController.edit(car)}" rendered="#{car.index eq 5}" />
 			        <h:commandLink value="DS-160" action="#{ds160Controller.edit(car)}" rendered="#{car.index eq 6}" />
-			        <h:commandLink value="Embassy Appointment" rendered="#{car.index eq 7}" />
-			        <h:commandLink value="Visa Preparation" rendered="#{car.index eq 8}" />
-			        <h:commandLink value="Visa Documents" rendered="#{car.index eq 9}" />
-			        <h:commandLink value="Visa" rendered="#{car.index eq 10}" />
-			        <h:commandLink value="Visa Questions" rendered="#{car.index eq 11}" />
-			        <h:commandLink value="Reasons" rendered="#{car.index eq 12}" />
+			        <h:commandLink value="Embassy Appointment" action="#{embassyAppointmentController.edit(car)}" rendered="#{car.index eq 7}" />
+			        <h:commandLink value="Visa Preparation" action="#{visaPreparationController.edit(car)}" rendered="#{car.index eq 8}" />
+			        <h:commandLink value="Visa Documents" action="#{visaDocumentController.edit(car)}" rendered="#{car.index eq 9}" />
+			        <h:commandLink value="Visa" action="#{visaController.edit(car)}" rendered="#{car.index eq 10}" />
+			        <h:commandLink value="Visa Questions" action="#{visaQuestionController.edit(car)}" rendered="#{car.index eq 11}" />
+			        <h:commandLink value="Reasons" action="#{reasonsController.edit(car)}" rendered="#{car.index eq 12}" />
 			    </p:column>
 			 
 			    <p:column headerText="#{msgs.status}" >

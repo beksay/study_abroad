@@ -37,6 +37,7 @@ import org.infosystema.study_abroad.model.User;
 public class Documents extends AbstractEntity<Integer>  {
 	private static final long serialVersionUID = 1L;
 	private DocumentsStep module;
+	private VisaDocument visaModule;
 	private Dictionary document;
 	private Date date;
 	private DocStatus status;
@@ -51,6 +52,16 @@ public class Documents extends AbstractEntity<Integer>  {
 	
 	public void setModule(DocumentsStep module) {
 		this.module = module;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name="visa_module_id")
+	public VisaDocument getVisaModule() {
+		return visaModule;
+	}
+	
+	public void setVisaModule(VisaDocument visaModule) {
+		this.visaModule = visaModule;
 	}
 	
 	@ManyToOne

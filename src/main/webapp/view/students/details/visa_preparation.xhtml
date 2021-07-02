@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/templates/layouts/private.xhtml">
+ 	<ui:define name="content">
+ 		
+		<h2>Visa Preparation</h2>        
+		<h:form id="mainForm">
+		    <h:panelGrid styleClass="form-table" columns="3">
+		
+			   </h:panelGrid>	
+			    <div style="display: none;">
+					<h:commandButton id="saveButton" value="#{msgs.save}" 
+							action="#{visaPreparationController.save()}" class="button" />	
+			    </div>
+		    </h:form>
+			
+			<h:panelGrid columns="2" styleClass="field-groups" columnClasses="field-group-label,field-group-content" rowClasses="field-group" style="min-width: 605px;">
+				<h:outputText value="Case" />
+				<ui:include src="/WEB-INF/templates/upload/upload.xhtml"/>
+	        </h:panelGrid>		
+			   
+		    <h:form id="formBtn">
+				<div class="m-top">
+					<p:commandButton id="save" onclick="document.getElementById('mainForm:saveButton').click(); PF('block').show();" value="#{msgs.save}" 
+					  styleClass="button light-blue" type="button"/>
+					<p:commandButton value="#{msgs.cancel}" action="#{visaPreparationController.cancel()}" immediate="true"  
+					  styleClass="button red m-left"/>
+				</div>
+			</h:form>
+		    
+		    <p:blockUI block="formBtn" widgetVar="block" >
+		      #{msgs.loading}<br />
+		      <p:graphicImage library="img" name="ajaxloadingbar.gif"/>
+	        </p:blockUI>
+			
+	</ui:define>	
+</ui:composition>

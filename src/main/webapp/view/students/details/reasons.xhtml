@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/templates/layouts/private.xhtml">
+ 	<ui:define name="content">
+ 		
+		<h2>Reasons</h2>
+		<h:form id="add-card-form" prependId="false">
+			<h:panelGroup id="messages">
+				<p:growl globalOnly="true" />
+			</h:panelGroup>
+			<h:panelGrid styleClass="form-table" columns="3">
+
+				<h:panelGroup>
+	                <h:outputText value="#{msgs.reason}" />
+	                <i class="fa fa-asterisk reqField" aria-hidden="true"></i>
+                </h:panelGroup> 
+                <h:inputTextarea value="#{reasonsController.module.reasons}" cols="50" rows="10" id="reason" required="true" requiredMessage="#{msgs.isReq}"/>
+                <p:message for="reason" />	  
+	
+			</h:panelGrid>
+ 
+			<div class="m-top">
+               <h:commandButton value="#{msgs.save}" action="#{reasonsController.save()}" styleClass="button light-blue m-left" />
+               <h:commandButton value="#{msgs.cancel}" action="#{reasonsController.cancel()}" immediate="true"	styleClass="button red m-left" />
+			</div>
+
+		</h:form>
+
+		<div class="clear"></div>
+			
+	</ui:define>	
+</ui:composition>
