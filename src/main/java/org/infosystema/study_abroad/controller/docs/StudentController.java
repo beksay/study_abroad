@@ -87,14 +87,7 @@ public class StudentController extends BasePersonController{
 	}
 
 	public String save() throws Exception {
-		List<User> users = userService.findByProperty("email", conversation.getUser().getEmail());
-    	if(users.size()>0){
-    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "электронная почта уже существует !!!",
-					"электронная почта уже существует !!!");
-			FacesContext context = FacesContext.getCurrentInstance();
-			context.addMessage(emailField.getClientId(context), message);
-    	}
-    	
+
     	if(conversation.getPerson().getId()==null) {
 			Person person = personService.initialize(loginUtil.getCurrentUser(),conversation.getPerson());
 			ScopeQualifier qualifier = new FacesScopeQualifier();
@@ -108,6 +101,13 @@ public class StudentController extends BasePersonController{
         conversation.getPerson().setCompany(loginUtil.getCurrentUser());
 		if(!FacesContext.getCurrentInstance().getMessageList().isEmpty()) return null;
 		if(conversation.getPerson().getPersonUser().getId() == null ) {
+			List<User> users = userService.findByProperty("email", conversation.getUser().getEmail());
+	    	if(users.size()>0){
+	    		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "электронная почта уже существует !!!",
+						"электронная почта уже существует !!!");
+				FacesContext context = FacesContext.getCurrentInstance();
+				context.addMessage(emailField.getClientId(context), message);
+	    	}
 			userService.persist(conversation.getPerson().getPersonUser());
 			sendPassword(conversation.getPerson().getPersonUser());
 		}else {
