@@ -24,7 +24,7 @@
 		</h:form>
 		<h:form>  			
 			<p:dataTable id="detailTable" var="entity" value="#{visaController.list}" paginator="false" rowIndexVar="index"
-		      lazy="false" emptyMessage="#{msgs.noRecordsFound}" sortOrder="DESCENDING">       
+		      lazy="false" emptyMessage="#{msgs.noRecordsFound}" sortOrder="DESCENDING" tableStyleClass="display-table">       
 		         <p:column headerText="#{msgs.number}" width="100">
 		        	<h:outputText value="#{index+1}" />
 		         </p:column> 

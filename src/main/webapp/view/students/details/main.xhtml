@@ -7,69 +7,70 @@
     template="/WEB-INF/templates/layouts/private.xhtml">
  	<ui:define name="content">
 		<h2>#{conversationUser.person.fullname}</h2> 
-		<h:form id ="filter-form">
-		    <h:panelGrid columns="3">
-		        <h:panelGroup>
-		           <h:graphicImage library="img" name="silhuette.png" height="150"/>
-		        </h:panelGroup>
-		        <h:panelGrid columns="2">
-					<h:outputText value="#{msgs.pin} :" />
-					<h:outputText value="#{conversationUser.person.pin}" />
-					<h:outputText value="#{msgs.birthDate} :" />
-					<h:outputText value="#{conversationUser.person.birthDate}" >
-					   <f:convertDateTime pattern="dd-MM-yyyy" />
-					</h:outputText>
-					<h:outputText value="#{msgs.country}" />
-					<h:outputText value="#{conversationUser.person.country.name}" />
-					<h:outputText value="#{msgs.city}" />
-					<h:outputText value="#{conversationUser.person.city}" />
-					<h:outputText value="#{msgs.address}" />
-					<h:outputText value="#{conversationUser.person.address}" />
-	            </h:panelGrid> 
-		        <h:panelGrid columns="2">
-		            <h:outputText value="#{msgs.mentors}" />
-					<h:outputText value="#{conversationUser.person.mentor.fullname}" />
-					<h:outputText value="#{msgs.englishLevel}" />
-					<h:outputText value="#{conversationUser.person.englishLevel.name}" />
-					<h:outputText value="#{msgs.toefl}" />
-					<h:outputText value="#{conversationUser.person.toefl}" />
-					<h:outputText value="#{msgs.ielts}" />
-					<h:outputText value="#{conversationUser.person.ielts}" />
-					<h:outputText value="#{msgs.phone}" />
-					<h:outputText value="#{conversationUser.person.personUser.phone}" />
-					<h:outputText value="#{msgs.email}" />
-					<h:outputText value="#{conversationUser.person.personUser.email}" />
-		        </h:panelGrid>
-		    </h:panelGrid>	
-	         
-		</h:form>
-		<h:form>
-		
-		   <p:dataTable var="car" value="#{studentController.modules}">
-			    <p:column headerText="№" width="70">
-			        <h:outputText value="#{car.index}" /> 
-			    </p:column>
-			    
-			    <p:column headerText="Stages">
-			        <h:commandLink value="Contract Signed" action="#{contractSignedController.edit(car)}" rendered="#{car.index eq 1}" />
-			        <h:commandLink value="Documents" action="#{documentsController.edit(car)}" rendered="#{car.index eq 2}" />
-			        <h:commandLink value="Application Fee" action="#{applicationFeeController.edit(car)}" rendered="#{car.index eq 3}" />
-			        <h:commandLink value="Application Submission" action="#{applicationSubmissionController.edit(car)}" rendered="#{car.index eq 4}" />
-			        <h:commandLink value="I-20" action="#{iTwentyController.edit(car)}" rendered="#{car.index eq 5}" />
-			        <h:commandLink value="DS-160" action="#{ds160Controller.edit(car)}" rendered="#{car.index eq 6}" />
-			        <h:commandLink value="Embassy Appointment" action="#{embassyAppointmentController.edit(car)}" rendered="#{car.index eq 7}" />
-			        <h:commandLink value="Visa Preparation" action="#{visaPreparationController.edit(car)}" rendered="#{car.index eq 8}" />
-			        <h:commandLink value="Visa Documents" action="#{visaDocumentController.edit(car)}" rendered="#{car.index eq 9}" />
-			        <h:commandLink value="Visa" action="#{visaController.edit(car)}" rendered="#{car.index eq 10}" />
-			        <h:commandLink value="Visa Questions" action="#{visaQuestionController.edit(car)}" rendered="#{car.index eq 11}" />
-			        <h:commandLink value="Reasons" action="#{reasonsController.edit(car)}" rendered="#{car.index eq 12}" />
-			    </p:column>
-			 
-			    <p:column headerText="#{msgs.status}" >
-			    	<em class="fa #{car.status eq 'NEW' ? 'fa-circle-thin' : 'fa-check-square'}"></em>
-			    </p:column>
-			    
-			</p:dataTable>	
-		</h:form>			
+			<div class="studentMain">
+				<div class="studentDetail">
+					<h:form>
+					   <p:dataTable var="car" value="#{studentController.modules}" tableStyleClass="display-table">
+						    <p:column headerText="№" width="70">
+						        <h:outputText value="#{car.index}" /> 
+						    </p:column>
+						    <p:column headerText="Stages">
+						        <h:commandLink value="Contract Signed" action="#{contractSignedController.edit(car)}" rendered="#{car.index eq 1}" />
+						        <h:commandLink value="Documents" action="#{documentsController.edit(car)}" rendered="#{car.index eq 2}" />
+						        <h:commandLink value="Application Fee" action="#{applicationFeeController.edit(car)}" rendered="#{car.index eq 3}" />
+						        <h:commandLink value="Application Submission" action="#{applicationSubmissionController.edit(car)}" rendered="#{car.index eq 4}" />
+						        <h:commandLink value="I-20" action="#{iTwentyController.edit(car)}" rendered="#{car.index eq 5}" />
+						        <h:commandLink value="DS-160" action="#{ds160Controller.edit(car)}" rendered="#{car.index eq 6}" />
+						        <h:commandLink value="Embassy Appointment" action="#{embassyAppointmentController.edit(car)}" rendered="#{car.index eq 7}" />
+						        <h:commandLink value="Visa Preparation" action="#{visaPreparationController.edit(car)}" rendered="#{car.index eq 8}" />
+						        <h:commandLink value="Visa Documents" action="#{visaDocumentController.edit(car)}" rendered="#{car.index eq 9}" />
+						        <h:commandLink value="Visa" action="#{visaController.edit(car)}" rendered="#{car.index eq 10}" />
+						        <h:commandLink value="Visa Questions" action="#{visaQuestionController.edit(car)}" rendered="#{car.index eq 11}" />
+						        <h:commandLink value="Reasons" action="#{reasonsController.edit(car)}" rendered="#{car.index eq 12}" />
+						    </p:column>
+						 
+						    <p:column headerText="#{msgs.status}" >
+						    	<em class="fa #{car.status eq 'NEW' ? 'fa-circle-thin' : 'fa-check-square'}"></em>
+						    </p:column>
+						    
+						</p:dataTable>	
+					</h:form>
+				</div>
+				<div class="studentAvatar">
+				    <h:panelGrid columns="3">
+				        <h:panelGroup>
+				           <h:graphicImage library="images" name="student_avatar.png" height="150"/>
+				        </h:panelGroup>
+				        <h:panelGrid styleClass="studentTable" columns="2">
+							<h:outputText value="#{msgs.pin} :" />
+							<h:outputText value="#{conversationUser.person.pin}" />
+							<h:outputText value="#{msgs.birthDate} :" />
+							<h:outputText value="#{conversationUser.person.birthDate}" >
+							   <f:convertDateTime pattern="dd-MM-yyyy" />
+							</h:outputText>
+							<h:outputText value="#{msgs.country}" />
+							<h:outputText value="#{conversationUser.person.country.name}" />
+							<h:outputText value="#{msgs.city}" />
+							<h:outputText value="#{conversationUser.person.city}" />
+							<h:outputText value="#{msgs.address}" />
+							<h:outputText value="#{conversationUser.person.address}" />
+			            </h:panelGrid> 
+				        <h:panelGrid columns="2" styleClass="studentTable">
+				            <h:outputText value="#{msgs.mentors}" />
+							<h:outputText value="#{conversationUser.person.mentor.fullname}" />
+							<h:outputText value="#{msgs.englishLevel}" />
+							<h:outputText value="#{conversationUser.person.englishLevel.name}" />
+							<h:outputText value="#{msgs.toefl}" />
+							<h:outputText value="#{conversationUser.person.toefl}" />
+							<h:outputText value="#{msgs.ielts}" />
+							<h:outputText value="#{conversationUser.person.ielts}" />
+							<h:outputText value="#{msgs.phone}" />
+							<h:outputText value="#{conversationUser.person.personUser.phone}" />
+							<h:outputText value="#{msgs.email}" />
+							<h:outputText value="#{conversationUser.person.personUser.email}" />
+				        </h:panelGrid>
+				    </h:panelGrid>	
+				</div>
+			</div>
 	</ui:define>		
 </ui:composition>
